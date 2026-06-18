@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashley Quinn — Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #2B3E8B;
+    --white: #ffffff;
+    --white-60: rgba(255,255,255,0.82);
+    --white-30: rgba(255,255,255,0.75);
+    --white-15: rgba(255,255,255,0.15);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+    --max: 1400px;
+    --pad: max(2rem, calc((100vw - var(--max)) / 2));
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: linear-gradient(160deg, #1e3a8a 0%, #2d4eaa 25%, #3b5fc0 50%, #4a6aaa 70%, #5b5fa8 85%, #6b4f9e 100%);
+    background-attachment: fixed;
+    color: var(--white);
+    line-height: 1.65;
+    font-size: 17px;
+    font-weight: 300;
+  }
+
+  .logo-lockup {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem var(--pad) 0;
+  }
+
+  .logo-mark {
+    display: block;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+  }
+
+  .logo-name {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+
+  .hero {
+    padding: 4rem var(--pad) 80px;
+  }
+
+  .hero-intro {
+    font-family: var(--serif);
+    font-size: clamp(1.75rem, 3.5vw, 2.6rem);
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--white);
+    max-width: 800px;
+  }
+
+  .block {
+    padding: 3.5rem var(--pad);
+  }
+
+  .block-label {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--white-30);
+    margin-bottom: 2.5rem;
+  }
+
+  .block-body {
+    font-size: 1.2rem;
+    color: var(--white);
+    line-height: 1.8;
+    font-weight: 300;
+    max-width: 80%;
+  }
+
+  .block-body a {
+    color: var(--white);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .block-body a:hover { opacity: 0.7; }
+
+  .entries { display: flex; flex-direction: column; }
+
+  .entry {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--white-15);
+  }
+
+  .entry:first-child { padding-top: 0; }
+
+  .entry-date {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--white-60);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.35rem;
+  }
+
+  .entry-title {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+    line-height: 1.2;
+  }
+
+  .entry-desc {
+    font-size: 1.05rem;
+    color: var(--white);
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 680px;
+  }
+
+  .entry-desc a {
+    color: var(--white);
+    text-underline-offset: 3px;
+  }
+
+  .case-entries { display: flex; flex-direction: column; }
+
+  .case-entry {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--white-15);
+  }
+
+  .case-entry:first-child { padding-top: 0; }
+
+  .case-company {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--white-60);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .case-title {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .case-desc {
+    font-size: 1.05rem;
+    color: var(--white);
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 680px;
+    margin-bottom: 1.25rem;
+  }
+
+  .case-metrics-row {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--white-15);
+  }
+
+  .case-metric { display: flex; flex-direction: column; gap: 0.2rem; }
+
+  .case-metric-value {
+    font-family: var(--serif);
+    font-size: 1.7rem;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .case-metric-label {
+    font-size: 0.78rem;
+    color: var(--white-60);
+    font-weight: 400;
+    max-width: 160px;
+    line-height: 1.4;
+  }
+
+  .pillars { display: flex; flex-direction: column; }
+
+  .pillar-item {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--white-15);
+  }
+
+  .pillar-item:first-child { padding-top: 0; }
+
+  .pillar-name {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+
+  .pillar-desc {
+    font-size: 1.2rem;
+    color: var(--white);
+    line-height: 1.7;
+    font-weight: 300;
+    max-width: 80%;
+  }
+
+  .carousel-track-wrap {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 var(--pad) 3rem;
+    margin-top: -1rem;
+  }
+
+  .carousel-track-wrap::-webkit-scrollbar { display: none; }
+
+  .carousel-track {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+  }
+
+  .card {
+    width: calc((100vw - 2 * var(--pad)) / 2.5);
+    min-width: 300px;
+    max-width: 420px;
+    border: 1px solid var(--white-30);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  a.card { text-decoration: none; }
+
+  .card:hover { border-color: var(--white-60); }
+
+  .card-body {
+    padding: 1.25rem 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .card-company {
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--white);
+    letter-spacing: 0.01em;
+    text-transform: none;
+  }
+
+  .card-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.25;
+  }
+
+  .card-thumb {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: auto;
+  }
+
+  .card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .card-thumb-label {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white-30);
+  }
+
+  footer {
+    padding: 3rem var(--pad) 4rem;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    border-top: 1px solid var(--white-15);
+    margin-top: 1rem;
+  }
+
+  footer a {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+
+  footer a:hover { opacity: 1; }
+
+  .hero-links {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.75rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-link {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.75;
+    border-bottom: 1px solid var(--white-30);
+    padding-bottom: 2px;
+    transition: opacity 0.2s, border-color 0.2s;
+  }
+
+  .hero-link:hover { opacity: 1; border-color: var(--white); }
+
+  .fade {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade.in { opacity: 1; transform: none; }
+
+  .skip-link {
+    position: absolute; top: -40px; left: 0;
+    background: #fff; color: #1e3a8a;
+    padding: 0.5rem 1rem; text-decoration: none;
+    font-family: var(--sans); font-size: 0.9rem;
+    z-index: 100;
+  }
+  .skip-link:focus { top: 0; }
+
+  a:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade { opacity: 1; transform: none; transition: none; }
+  }
+
+  @media (max-width: 640px) {
+    :root { --pad: 1.5rem; }
+    .hero { padding-top: 100px; }
+    .logo-mark { width: 40px; height: 40px; }
+    .logo-name { font-size: 0.95rem; }
+    .case-metrics-row { gap: 1.5rem; }
+    footer { gap: 2rem; }
+  }
+</style>
+<noscript><style>.fade { opacity: 1; transform: none; }</style></noscript>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="logo-lockup">
+<svg class="logo-mark" viewBox="0 0 255 255" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none">
+  <path style="fill:none;stroke:#ffffff;stroke-miterlimit:10;" d="M90.2,120.3l1.4,0.3c1.1,0.2,2.1,0.5,3.1,0.9c1.2,0.5,2.4,1.1,3.6,1.8c0,0,12.4,8.4,4.7,14.4
+    c-7.7,6-12.4-4.9-13.8-8.9c-1.3-4,0.3-7.8,1.4-10.5c0.9-1.9,2.3-3.5,4-4.7c14.1,2.5,27.7,23.4,10.2,31.8
+    c-16.8,8-30.7-19.7-21-32.2c10.1-13,29.6-4.2,35.1,9.2c6.4,15.8-5.7,33.7-22.4,31.9c-30.1-3.3-32.2-51.7-0.4-54.6
+    c21.2-1.9,35.7,21.2,30.7,40.4c-6.7,25.3-38.8,29.1-53.7,8.6c-25.6-35.2,19.2-76.6,51-45.8c35,34-13.8,90.4-51.9,56.1
+    c-36.3-32.8,1.5-93.3,45.9-70c36.9,19.3,31.8,81.8-11.6,88.2c-40.6,6.1-71-42.9-50.2-77.2c24.1-39.9,83.1-24.5,92.9,18.7
+    c9.3,41.4-29,80-70.3,63.4c-37.6-15.1-50.1-69.9-20.2-98.4c34.1-32.4,87.4-8.3,97.5,33.2c10.9,44.6-28.4,87.1-73.9,73.9
+    c-39.7-11.5-60-59.6-41.2-95.9c19.2-37.1,73.5-45.3,103-15.6c28.9,29.1,30.4,82.3-3.7,108.3c-35.2,26.8-82.1,10.8-103.9-24.1
+    C15.7,129.8,26.5,82,61.6,62.6c39.2-21.6,89.8-2.8,106.4,38.6c15.6,38.8-0.4,85.6-40.2,101.8c-43.4,17.6-87.3-8.6-104.2-49.5
+    C6.5,112.2,29.7,65.8,70.8,50.4c44.8-16.8,92.6,12.1,107.1,55.3c12.2,36.4-2.8,84.1-38.5,101.8c-40.2,19.9-94.5,5.2-116.2-35.3
+    S7.7,87.6,42.9,57.3c31.7-27.3,80.6-22.9,112.5,1.4c34.7,26.5,43.5,77.4,25,115.9c-19.1,39.6-60.3,57-101.9,46.6
+    c-41.7-10.4-71.7-47.3-76.5-90.1s30.5-89.3,72-97.8c46.1-9.5,89.3,8.2,112.5,49.9c0,0,12.1,22.2,13.2,38.8c0,0,0.5,20.7,2.1,27.5
+    c1.6,6.8,7.6,40.6,21,50c8.6,6.3,17.8,11.7,27.5,16l3.2,1.1l-3.2,6.5l-3.5-1.5c0,0-16.2-6-20.7-8.6c-4.5-2.6-17.1-13.1-19.4-18.3
+    c-2.4-5.3-10.3-26.7-11-30.8s-3.7-22.9-3.9-25.8c-0.3-3-1.9-10.9-1.9-10.9"/>
+</svg>
+  <span class="logo-name">Ashley Marie Quinn</span>
+</div>
+
+<div class="hero fade" id="main">
+  <p class="hero-intro">Designer focused on strategy and systems. I thrive on complexity.</p>
+  <div class="hero-links">
+    <a href="mailto:hello@ashleymariequinn.com" class="hero-link">Get in touch</a>
+    <a href="https://cdn.prod.website-files.com/602b353625c89c0f7174454f/69cc0545c92c8b806f8bc15e_AshleyQuinn_Resume_2026.pdf" target="_blank" rel="noopener" class="hero-link">View my resume</a>
+  </div>
+</div>
+
+<div class="carousel-track-wrap">
+  <div class="carousel-track">
+
+    <a href="zip-supplier-relationships.html" class="card">
+      <div class="card-body">
+        <div class="card-company">Zip</div>
+        <h3 class="card-title">Supplier Relationships at Enterprise Scale</h3>
+      </div>
+      <div class="card-thumb"><span class="card-thumb-label">Thumbnail coming soon</span></div>
+    </a>
+
+    <a href="lattice-reviews.html" class="card">
+      <div class="card-body">
+        <div class="card-company">Lattice</div>
+        <h3 class="card-title">Reviews redesign: Setup by direction</h3>
+      </div>
+      <div class="card-thumb"><span class="card-thumb-label">Thumbnail coming soon</span></div>
+    </a>
+
+    <a href="lattice-pronouns.html" class="card">
+      <div class="card-body">
+        <div class="card-company">Lattice</div>
+        <h3 class="card-title">Pronouns</h3>
+      </div>
+      <div class="card-thumb"><span class="card-thumb-label">Thumbnail coming soon</span></div>
+    </a>
+
+    <a href="vendr-notifications.html" class="card">
+      <div class="card-body">
+        <div class="card-company">Vendr</div>
+        <h3 class="card-title">Multimodal notification system</h3>
+      </div>
+      <div class="card-thumb"><span class="card-thumb-label">Thumbnail coming soon</span></div>
+    </a>
+
+
+  </div>
+</div>
+
+<div class="block fade">
+  <h2 class="block-label">Currently</h2>
+  <hr class="divider">
+  <p class="block-body">
+    I am the Product Design Lead for the Procurement Products Group at <a href="https://ziphq.com" target="_blank" rel="noopener">Zip</a> where I lead design strategy and execution across Zip's core supplier lifecycle experience. As Group Lead I not only contribute to hands-on design work — I also work with my Product and Engineering counterparts to define strategy and vision across multiple teams.
+  </p>
+</div>
+
+<div class="block fade">
+  <h2 class="block-label">What I do</h2>
+  <hr class="divider">
+  <div class="pillars">
+    <div class="pillar-item">
+      <div class="pillar-name">Systems & platform thinking</div>
+      <p class="pillar-desc">A knack for zooming out and assessing how an experience intertwines with and impacts a product — approaching design holistically and empowering teammates by highlighting connections.</p>
+    </div>
+    <div class="pillar-item">
+      <div class="pillar-name">Strategy & collaboration</div>
+      <p class="pillar-desc">Using expertise in design thinking to craft frameworks that help teams achieve alignment on strategic objectives — leading dynamic ideation sessions that foster clarity and direction.</p>
+    </div>
+    <div class="pillar-item">
+      <div class="pillar-name">Design leadership</div>
+      <p class="pillar-desc">Greatest joy comes from helping teammates grow — whether through mentorship, implementing efficient practices to enhance team productivity, or setting ambitious visions for collective achievement.</p>
+    </div>
+  </div>
+</div>
+
+<footer class="fade">
+  <a href="mailto:hello@ashleymariequinn.com">Email</a>
+  <a href="https://www.linkedin.com/in/ashley-marie-quinn/" target="_blank" rel="noopener">LinkedIn</a>
+  <a href="https://cdn.prod.website-files.com/602b353625c89c0f7174454f/69cc0545c92c8b806f8bc15e_AshleyQuinn_Resume_2026.pdf" target="_blank" rel="noopener">Resume</a>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

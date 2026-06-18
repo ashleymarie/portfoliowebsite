@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supplier Relationships at Enterprise Scale — Ashley Quinn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #2B3E8B;
+    --white: #ffffff;
+    --white-60: rgba(255,255,255,0.82);
+    --white-30: rgba(255,255,255,0.75);
+    --white-15: rgba(255,255,255,0.15);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+    --max: 1080px;
+    --pad: max(2rem, calc((100vw - var(--max)) / 2));
+    --text-max: 640px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: linear-gradient(160deg, #1e3a8a 0%, #2d4eaa 25%, #3b5fc0 50%, #4a6aaa 70%, #5b5fa8 85%, #6b4f9e 100%);
+    background-attachment: fixed;
+    color: var(--white);
+    line-height: 1.65;
+    font-size: 17px;
+    font-weight: 300;
+  }
+
+  /* ── LOGO LOCKUP ── */
+  a.logo-lockup {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem var(--pad) 0;
+    text-decoration: none;
+  }
+
+  .logo-mark {
+    display: block;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+  }
+
+  .logo-name {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    padding: 4rem var(--pad) 3rem;
+  }
+
+  .page-meta {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white-60);
+    margin-bottom: 1.25rem;
+  }
+
+  .page-title {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    max-width: 900px;
+    margin-bottom: 2rem;
+  }
+
+  .page-summary {
+    font-size: 1.1rem;
+    color: var(--white-60);
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: var(--text-max);
+  }
+
+  /* ── HERO IMAGE — full bleed, right below title ── */
+  .hero-image {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    background: rgba(255,255,255,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow: hidden;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── SECTION — padded text block ── */
+  .section {
+    padding: 5rem var(--pad) 0;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .section-left { padding-top: 0.2rem; }
+  .section-right { display: flex; flex-direction: column; gap: 0; }
+
+  .section-label {
+    font-family: var(--serif);
+    font-size: clamp(1.2rem, 2vw, 1.75rem);
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--white-30);
+    margin-bottom: 2rem;
+  }
+
+  .body-text {
+    font-size: 1.05rem;
+    color: var(--white);
+    line-height: 1.8;
+    font-weight: 300;
+    max-width: var(--text-max);
+    margin-bottom: 1.25rem;
+  }
+
+  /* ── ALTERNATING ROW: text left, image right ── */
+  .split-row {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 4rem;
+    align-items: start;
+    padding: 5rem var(--pad) 0;
+  }
+
+  .split-row.flip {
+    grid-template-columns: 1.4fr 1fr;
+  }
+
+  .split-row.flip .split-text { order: 2; }
+  .split-row.flip .split-image { order: 1; }
+
+  .split-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 0.5rem;
+  }
+
+  .split-label {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white-60);
+  }
+
+  .split-title {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 2vw, 1.75rem);
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .split-body {
+    font-size: 1.05rem;
+    color: var(--white-60);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .split-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: rgba(255,255,255,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow: hidden;
+  }
+
+  .split-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── FULL-BLEED IMAGE ── */
+  .full-image-wrap {
+    padding: 5rem var(--pad) 0;
+  }
+
+  .full-image {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    background: rgba(255,255,255,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow: hidden;
+  }
+
+  .full-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .img-caption {
+    font-size: 0.82rem;
+    color: var(--white-30);
+    font-weight: 300;
+    margin-top: 0.75rem;
+  }
+
+  /* ── IMAGE PAIR ── */
+  .pair-wrap {
+    padding: 5rem var(--pad) 0;
+  }
+
+  .img-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .img-half {
+    aspect-ratio: 16 / 10;
+    background: rgba(255,255,255,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow: hidden;
+  }
+
+  .img-half img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .pair-captions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.75rem;
+  }
+
+  .pair-captions span {
+    font-size: 0.82rem;
+    color: var(--white-30);
+    font-weight: 300;
+  }
+
+  /* ── PLACEHOLDER LABEL ── */
+  .ph-label {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white-30);
+  }
+
+  .ph-hint {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.18);
+    font-weight: 300;
+  }
+
+  /* ── SHIPPED GRID ── */
+  .shipped-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--white-15);
+    border: 1px solid var(--white-15);
+    margin-top: 2rem;
+  }
+
+  .shipped-item {
+    background: rgba(30, 58, 138, 0.5);
+    padding: 1.5rem;
+  }
+
+  .shipped-partner {
+    font-size: 0.75rem;
+    color: var(--white-30);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .shipped-title {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .shipped-desc {
+    font-size: 0.9rem;
+    color: var(--white-60);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: rgba(255,255,255,0.06);
+    border-left: 2px solid var(--white-30);
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    color: var(--white-60);
+    line-height: 1.65;
+    font-weight: 300;
+    margin: 1.5rem 0;
+  }
+
+  /* ── OUTCOMES ── */
+  .outcomes {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--white-15);
+    border: 1px solid var(--white-15);
+    margin-top: 2rem;
+  }
+
+  .outcome {
+    background: rgba(30, 58, 138, 0.5);
+    padding: 1.25rem 1.5rem;
+    font-size: 1.05rem;
+    color: var(--white);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 3rem var(--pad) 4rem;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    border-top: 1px solid var(--white-15);
+    margin-top: 5rem;
+  }
+
+  footer a {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+
+  footer a:hover { opacity: 1; }
+
+  /* ── FADE ── */
+  .fade { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade.in { opacity: 1; transform: none; }
+
+  .skip-link {
+    position: absolute; top: -40px; left: 0;
+    background: #fff; color: #1e3a8a;
+    padding: 0.5rem 1rem; text-decoration: none;
+    font-family: var(--sans); font-size: 0.9rem;
+    z-index: 100;
+  }
+  .skip-link:focus { top: 0; }
+
+  a:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    :root { --pad: 1.5rem; }
+    .logo-mark { width: 40px; height: 40px; }
+    .logo-name { font-size: 0.95rem; }
+    .section { grid-template-columns: 1fr; gap: 1.5rem; }
+    .split-row, .split-row.flip { grid-template-columns: 1fr; gap: 2rem; }
+    .split-row.flip .split-text { order: 1; }
+    .split-row.flip .split-image { order: 2; }
+    .shipped-grid { grid-template-columns: 1fr; }
+    .img-pair, .pair-captions { grid-template-columns: 1fr; }
+    .hero-image { aspect-ratio: 4 / 3; }
+  }
+</style>
+<noscript><style>.fade { opacity: 1; transform: none; }</style></noscript>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- Logo — links back to portfolio -->
+<a href="index.html" class="logo-lockup" aria-label="Ashley Marie Quinn — home">
+<svg class="logo-mark" viewBox="0 0 255 255" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none">
+  <path style="fill:none;stroke:#ffffff;stroke-miterlimit:10;" d="M90.2,120.3l1.4,0.3c1.1,0.2,2.1,0.5,3.1,0.9c1.2,0.5,2.4,1.1,3.6,1.8c0,0,12.4,8.4,4.7,14.4
+    c-7.7,6-12.4-4.9-13.8-8.9c-1.3-4,0.3-7.8,1.4-10.5c0.9-1.9,2.3-3.5,4-4.7c14.1,2.5,27.7,23.4,10.2,31.8
+    c-16.8,8-30.7-19.7-21-32.2c10.1-13,29.6-4.2,35.1,9.2c6.4,15.8-5.7,33.7-22.4,31.9c-30.1-3.3-32.2-51.7-0.4-54.6
+    c21.2-1.9,35.7,21.2,30.7,40.4c-6.7,25.3-38.8,29.1-53.7,8.6c-25.6-35.2,19.2-76.6,51-45.8c35,34-13.8,90.4-51.9,56.1
+    c-36.3-32.8,1.5-93.3,45.9-70c36.9,19.3,31.8,81.8-11.6,88.2c-40.6,6.1-71-42.9-50.2-77.2c24.1-39.9,83.1-24.5,92.9,18.7
+    c9.3,41.4-29,80-70.3,63.4c-37.6-15.1-50.1-69.9-20.2-98.4c34.1-32.4,87.4-8.3,97.5,33.2c10.9,44.6-28.4,87.1-73.9,73.9
+    c-39.7-11.5-60-59.6-41.2-95.9c19.2-37.1,73.5-45.3,103-15.6c28.9,29.1,30.4,82.3-3.7,108.3c-35.2,26.8-82.1,10.8-103.9-24.1
+    C15.7,129.8,26.5,82,61.6,62.6c39.2-21.6,89.8-2.8,106.4,38.6c15.6,38.8-0.4,85.6-40.2,101.8c-43.4,17.6-87.3-8.6-104.2-49.5
+    C6.5,112.2,29.7,65.8,70.8,50.4c44.8-16.8,92.6,12.1,107.1,55.3c12.2,36.4-2.8,84.1-38.5,101.8c-40.2,19.9-94.5,5.2-116.2-35.3
+    S7.7,87.6,42.9,57.3c31.7-27.3,80.6-22.9,112.5,1.4c34.7,26.5,43.5,77.4,25,115.9c-19.1,39.6-60.3,57-101.9,46.6
+    c-41.7-10.4-71.7-47.3-76.5-90.1s30.5-89.3,72-97.8c46.1-9.5,89.3,8.2,112.5,49.9c0,0,12.1,22.2,13.2,38.8c0,0,0.5,20.7,2.1,27.5
+    c1.6,6.8,7.6,40.6,21,50c8.6,6.3,17.8,11.7,27.5,16l3.2,1.1l-3.2,6.5l-3.5-1.5c0,0-16.2-6-20.7-8.6c-4.5-2.6-17.1-13.1-19.4-18.3
+    c-2.4-5.3-10.3-26.7-11-30.8s-3.7-22.9-3.9-25.8c-0.3-3-1.9-10.9-1.9-10.9"/>
+</svg>
+  <span class="logo-name">Ashley Marie Quinn</span>
+</a>
+
+<!-- ── PAGE HERO ── -->
+<main id="main">
+<div class="page-hero fade">
+  <div class="page-meta">Zip · Design Lead · 2024–Present</div>
+  <h1 class="page-title">Supplier Relationships at Enterprise Scale</h1>
+  <p class="page-summary">Zip's supplier model was built for simplicity — one request, one vendor. As Zip moved upmarket, that model broke under the weight of real enterprise complexity. I drove this initiative end-to-end as the sole designer, spanning five product teams and seven surfaces.</p>
+</div>
+
+<!-- ── HERO IMAGE — immediately below title ── -->
+<div class="hero-image fade">
+  <span class="ph-label">Hero image</span>
+  <span class="ph-hint">Recommended: 2400 × 1030px — a wide composite of the key screens</span>
+</div>
+
+<!-- ── THE PROBLEM ── -->
+<div class="section fade">
+  <div class="section-left">
+    <h2 class="section-label">The problem</h2>
+  </div>
+  <div class="section-right">
+    <p class="body-text">Large enterprise customers operate with intricate vendor hierarchies: parent-child relationships, resellers, OEMs, contractor-agency structures, and multiple ERP-mapped supplier sites. Every customer has a distinct ERP setup — Oracle, SAP, and others — and how they ingest vendors directly shapes how relationships need to be modeled in Zip.</p>
+    <p class="body-text">The business signals were unambiguous: lost deals, churn risk from existing enterprise customers hitting hard limits, and rising support volume around vendor management.</p>
+    <div class="callout">Teams I worked across: Procurement Product Group · Requester Team · Approvals Team · Contract Orchestration · Advanced Payments</div>
+  </div>
+</div>
+
+<!-- ── SPLIT: My role — text left, image right ── -->
+<div class="split-row fade">
+  <div class="split-text">
+    <div class="split-label">My role</div>
+    <h3 class="split-title">Staff-level design across an entire product ecosystem</h3>
+    <p class="split-body">I drove this initiative end-to-end as the sole designer — from defining the problem space with customers and leadership through to launch. What made this Staff-level wasn't just the design complexity, it was the organizational scope. Vendor relationships touch nearly every surface in the product, which meant designing alongside four separate product teams simultaneously, ensuring what each team shipped connected into one coherent experience.</p>
+  </div>
+  <div class="split-image">
+    <span class="ph-label">Process image</span>
+    <span class="ph-hint">e.g. surface mapping diagram</span>
+  </div>
+</div>
+
+<!-- ── SPLIT: Approach — image left, text right ── -->
+<div class="split-row flip fade">
+  <div class="split-text">
+    <div class="split-label">Approach</div>
+    <h3 class="split-title">Mapping the system before designing any of it</h3>
+    <p class="split-body">Rather than diving into design, I started by mapping every product surface that vendor relationships touched. This cross-team map became the shared foundation all five teams aligned around — without it, each team would have solved their piece in isolation and shipped a fragmented experience.</p>
+    <p class="split-body">I also advocated early for an AI-powered intake question. Engineering pushed back on M0 scope; I held the position as customer evidence kept building. We ultimately designed and shipped it integrated with the Requester team's new AI capabilities.</p>
+  </div>
+  <div class="split-image">
+    <span class="ph-label">Process image</span>
+    <span class="ph-hint">e.g. early explorations / whiteboard</span>
+  </div>
+</div>
+
+<!-- ── FULL-WIDTH IMAGE — overview of the solution ── -->
+<div class="full-image-wrap fade">
+  <div class="full-image">
+    <span class="ph-label">Full-width image</span>
+    <span class="ph-hint">e.g. final designs overview composite — Recommended: 2160 × 945px</span>
+  </div>
+  <div class="img-caption">The connected system — vendor record, request model, supplier sites, and AI-powered intake working as one.</div>
+</div>
+
+<!-- ── WHAT WE SHIPPED ── -->
+<div class="section fade">
+  <div class="section-left">
+    <h2 class="section-label">What we shipped</h2>
+  </div>
+  <div class="section-right">
+  <p class="body-text">A connected system of changes across the procurement experience, spanning five product teams and seven product surfaces.</p>
+  <div class="shipped-grid">
+    <div class="shipped-item">
+      <div class="shipped-title">Vendor relationship taxonomy</div>
+      <p class="shipped-desc">A new model supporting parent-child, reseller-OEM, and contractor-agency structures — the foundational layer everything else built on.</p>
+    </div>
+    <div class="shipped-item">
+      <div class="shipped-partner">Partners: Approvals team</div>
+      <div class="shipped-title">Redesigned request details</div>
+      <p class="shipped-desc">Updated to reflect the new relationship model, ensuring approvers have the right context at the right moment.</p>
+    </div>
+    <div class="shipped-item">
+      <div class="shipped-title">Redesigned vendor record</div>
+      <p class="shipped-desc">Evolved to surface relationship complexity clearly — showing spend in context of how users actually interact with a vendor and its subsidiaries.</p>
+    </div>
+    <div class="shipped-item">
+      <div class="shipped-partner">Partners: Contract Orchestration, Approvals</div>
+      <div class="shipped-title">Document management</div>
+      <p class="shipped-desc">Updated to reflect the new relationship model, ensuring the right documents surface in the right context across the vendor hierarchy.</p>
+    </div>
+    <div class="shipped-item">
+      <div class="shipped-title">Expanded request model + supplier sites</div>
+      <p class="shipped-desc">Moved from one request → one vendor to supporting reseller relationships and multiple supplier sites. Critical for Oracle ERP customers routing payments to the correct subsidiary.</p>
+    </div>
+    <div class="shipped-item">
+      <div class="shipped-partner">Partners: Requester team</div>
+      <div class="shipped-title">AI-powered intake</div>
+      <p class="shipped-desc">Surfaces reseller recommendations at intake based on committed spend, purchase history, and vendor category knowledge — native to the experience, not added on.</p>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ── IMAGE PAIR — two key screens ── -->
+<div class="pair-wrap fade">
+  <div class="img-pair">
+    <div class="img-half">
+      <span class="ph-label">Screen image</span>
+      <span class="ph-hint">e.g. vendor record</span>
+    </div>
+    <div class="img-half">
+      <span class="ph-label">Screen image</span>
+      <span class="ph-hint">e.g. AI-powered intake</span>
+    </div>
+  </div>
+  <div class="pair-captions">
+    <span>Redesigned vendor record surfaces relationship complexity and spend context</span>
+    <span>AI-powered intake recommends reseller relationships at the point of request</span>
+  </div>
+</div>
+
+<!-- ── SPLIT: Outcomes — text left, image right ── -->
+<div class="split-row fade">
+  <div class="split-text">
+    <div class="split-label">Outcomes</div>
+    <h3 class="split-title">From demo-ready to deployment-ready</h3>
+    <p class="split-body">This work moved Zip from a product that could demo enterprise procurement to one that could actually support it at scale — unlocking deals and expansions that weren't possible before.</p>
+    <div class="outcomes" style="margin-top: 1.5rem;">
+      <div class="outcome">Unlocked enterprise deals and expansions including initial deployment with a major enterprise customer</div>
+      <div class="outcome">Design coherence across 5 teams and 7 surfaces — without hierarchical authority over any of them</div>
+      <div class="outcome">Established the vendor relationship foundation that Zip's entire upmarket strategy builds on</div>
+    </div>
+  </div>
+  <div class="split-image">
+    <span class="ph-label">Screen image</span>
+    <span class="ph-hint">e.g. supplier sites or request model</span>
+  </div>
+</div>
+
+<!-- ── WHAT I LEARNED ── -->
+<div class="section fade">
+  <div class="section-left">
+    <h2 class="section-label">What I learned</h2>
+  </div>
+  <div class="section-right">
+    <p class="body-text">The hardest part of Staff-level design isn't the design itself — it's maintaining a coherent vision across teams that each have their own priorities, timelines, and constraints. On this project that meant being the person who could see the whole system when everyone else was heads-down on their piece, and making enough of the right calls early — on scope, on sequencing, on the intake question — that teams around me could move fast without fragmenting the experience.</p>
+  </div>
+</div>
+
+</main>
+<footer class="fade">
+  <a href="mailto:hello@ashleymariequinn.com">Email</a>
+  <a href="https://www.linkedin.com/in/ashley-marie-quinn/" target="_blank" rel="noopener">LinkedIn</a>
+  <a href="https://cdn.prod.website-files.com/602b353625c89c0f7174454f/69cc0545c92c8b806f8bc15e_AshleyQuinn_Resume_2026.pdf" target="_blank" rel="noopener">Resume</a>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
