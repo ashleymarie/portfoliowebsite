@@ -6,7 +6,7 @@
 <title>Multi-Party Purchases — Ashley Quinn</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -20,7 +20,12 @@
     --sans: 'Jost', sans-serif;
     --max: 1080px;
     --pad: max(2rem, calc((100vw - var(--max)) / 2));
+    --gutter: 2rem;
     --text-max: 640px;
+    --media-max: 1075px;
+    --band: #f7f9ff;
+    --ink: #1a1a1a;
+    --accent: #234894;
   }
 
   html { scroll-behavior: smooth; }
@@ -55,7 +60,7 @@
     letter-spacing: 0.01em;
   }
 
-  /* ── PAGE HERO ── */
+  /* ── PAGE HERO (dark zone) ── */
   .page-hero { padding: 4rem var(--pad) 3rem; }
 
   .page-meta {
@@ -86,7 +91,7 @@
     max-width: var(--text-max);
   }
 
-  /* ── HERO IMAGE ── */
+  /* ── HERO IMAGE — full bleed ── */
   .hero-image {
     width: 100%;
     aspect-ratio: 21 / 9;
@@ -98,331 +103,148 @@
     gap: 0.5rem;
     overflow: hidden;
   }
-
   .hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  /* ── SECTION ── */
-  .section {
-    padding: 7rem var(--pad) 0;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 4rem;
-    align-items: start;
+  /* ── LIGHT CONTENT (everything below the hero image) ── */
+  .content-light {
+    background: #fff;
+    color: var(--ink);
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding-top: 80px;
   }
 
-  .section-left { padding-top: 0.2rem; }
-
-  .section-right { display: flex; flex-direction: column; gap: 0.75rem; }
-  .section-right .body-text { margin-bottom: 0; }
+  /* centered text column (~80ch) */
+  .section {
+    width: min(calc(100% - 2 * var(--gutter)), var(--text-max));
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
 
   .section-label {
     font-family: var(--serif);
-    font-size: clamp(1.2rem, 2vw, 1.75rem);
+    font-size: 1.75rem;
     font-weight: 400;
-    color: var(--white);
     line-height: 1.2;
+    color: var(--ink);
   }
+
+  .section-body { display: flex; flex-direction: column; }
 
   .body-text {
     font-size: 1.05rem;
-    color: var(--white);
     line-height: 1.8;
-    font-weight: 300;
-    max-width: var(--text-max);
+    font-weight: 400;
+    color: var(--ink);
     margin-bottom: 1.25rem;
   }
+  .body-text:last-child { margin-bottom: 0; }
+  .body-text strong { font-weight: 600; }
 
-  /* ── SPLIT ROW ── */
-  .split-row {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 4rem;
-    align-items: start;
-    padding: 7rem var(--pad) 0;
+  /* centered media band (up to 1075px) */
+  .figure {
+    width: min(calc(100% - 2 * var(--gutter)), var(--media-max));
+    margin-inline: auto;
   }
 
-  .split-row.flip { grid-template-columns: 1.4fr 1fr; }
-  .split-row.flip .split-text { order: 2; }
-  .split-row.flip .split-image { order: 1; }
-
-  .split-text { display: flex; flex-direction: column; gap: 1rem; padding-top: 0.5rem; }
-
-  .split-label {
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white-60);
-  }
-
-  .split-title {
-    font-family: var(--serif);
-    font-size: clamp(1.3rem, 2vw, 1.75rem);
-    font-weight: 400;
-    color: var(--white);
-    line-height: 1.2;
-  }
-
-  .split-body {
-    font-size: 1.05rem;
-    color: var(--white-60);
-    line-height: 1.8;
-    font-weight: 300;
-  }
-
-  .split-image {
+  .media {
     width: 100%;
-    aspect-ratio: 4 / 3;
-    background: rgba(255,255,255,0.07);
+    background: rgba(0,0,0,0.05);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
+    gap: 7px;
     overflow: hidden;
   }
+  .media.wide { aspect-ratio: 16 / 7; }
+  .media.tall { aspect-ratio: 4 / 3; }
+  .media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  .split-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  /* ── FULL-BLEED IMAGE ── */
-  .full-image-wrap { padding: 5rem var(--pad) 0; }
-
-  .full-image {
-    width: 100%;
-    aspect-ratio: 16 / 7;
-    background: rgba(255,255,255,0.07);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
-    overflow: hidden;
-  }
-
-  .full-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  .img-caption { font-size: 0.82rem; color: var(--white-30); font-weight: 300; margin-top: 0.75rem; }
-
-  /* ── IMAGE PAIR ── */
-  .pair-wrap { padding: 5rem var(--pad) 0; }
-
-  .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-  .img-half {
-    aspect-ratio: 16 / 10;
-    background: rgba(255,255,255,0.07);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
-    overflow: hidden;
-  }
-
-  .img-half img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  .pair-captions { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.75rem; }
-  .pair-captions span { font-size: 0.82rem; color: var(--white-30); font-weight: 300; }
-
-  /* ── CALLOUT ── */
-  .callout {
-    background: rgba(255,255,255,0.06);
-    border-left: 2px solid var(--white-30);
-    padding: 1rem 1.25rem;
-    font-size: 0.95rem;
-    color: var(--white-60);
-    line-height: 1.65;
-    font-weight: 300;
-    margin: 1.5rem 0;
-  }
-
-  /* ── THREE AXES ── */
-  .axes-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    background: var(--white-15);
-    border: 1px solid var(--white-15);
-    margin: 1.5rem 0;
-  }
-
-  .axis-row {
-    background: rgba(30, 58, 138, 0.5);
-    padding: 1.1rem 1.5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    align-items: start;
-  }
-
-  .axis-question {
-    font-size: 0.75rem;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--white-30);
-    margin-bottom: 0.35rem;
-  }
-
-  .axis-poles {
-    font-size: 1rem;
-    color: var(--white);
-    font-weight: 300;
-    line-height: 1.4;
-  }
-
-  .axis-left { border-right: 1px solid var(--white-15); padding-right: 1.5rem; }
-
-  /* ── DECISION PATH GRID ── */
-  .path-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--white-15);
-    border: 1px solid var(--white-15);
-    margin-top: 1.5rem;
-  }
-
-  .path-item {
-    background: rgba(30, 58, 138, 0.5);
-    padding: 1.25rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .path-item.selected { background: rgba(255,255,255,0.1); }
-
-  .path-num {
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white-30);
-  }
-
-  .path-item.selected .path-num { color: rgba(255,255,255,0.65); }
-
-  .path-name {
-    font-family: var(--serif);
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--white);
-    line-height: 1.3;
-  }
-
-  .path-desc {
-    font-size: 0.9rem;
-    color: var(--white-60);
-    line-height: 1.6;
-    font-weight: 300;
-    flex: 1;
-  }
-
-  .path-verdict {
-    font-size: 0.82rem;
-    color: var(--white-30);
-    margin-top: 0.5rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--white-15);
-    font-weight: 300;
-    font-style: italic;
-  }
-
-  .path-item.selected .path-verdict { color: rgba(255,255,255,0.6); }
-
-  /* ── MILESTONE BAR ── */
-  .milestone-bar {
-    display: flex;
-    gap: 0;
-    margin-top: 1.5rem;
-  }
-
-  .milestone-phase {
-    flex: 1;
-    padding: 1rem 1.25rem;
-    background: rgba(30, 58, 138, 0.4);
-    border: 1px solid var(--white-15);
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .milestone-phase + .milestone-phase { border-left: none; }
-  .milestone-phase.active { background: rgba(255,255,255,0.08); }
-
-  .milestone-tag {
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--white-30);
-  }
-
-  .milestone-name {
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--white);
-  }
-
-  .milestone-desc {
-    font-size: 0.85rem;
-    color: var(--white-60);
-    line-height: 1.55;
-    font-weight: 300;
-  }
-
-  /* ── OUTCOMES ── */
-  .outcomes {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    background: var(--white-15);
-    border: 1px solid var(--white-15);
-    margin-top: 1.5rem;
-  }
-
-  .outcome {
-    background: rgba(30, 58, 138, 0.5);
-    padding: 1.25rem 1.5rem;
-    font-size: 1.05rem;
-    color: var(--white);
-    line-height: 1.65;
-    font-weight: 300;
-  }
-
-  /* ── PLACEHOLDER LABELS ── */
   .ph-label {
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white-30);
+    font-size: 0.72rem; font-weight: 400; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(0,0,0,0.38);
+  }
+  .ph-hint { font-size: 0.72rem; font-weight: 300; color: rgba(0,0,0,0.3); text-align: center; padding: 0 1rem; }
+
+  .img-caption { font-size: 0.82rem; color: rgba(0,0,0,0.55); font-weight: 400; margin-top: 0.75rem; }
+
+  /* grouped white block (e.g. What we shipped + images) */
+  .cs-group { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+
+  /* banded group */
+  .cs-band {
+    background: var(--band);
+    padding-block: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
   }
 
-  .ph-hint { font-size: 0.72rem; color: rgba(255,255,255,0.18); font-weight: 300; text-align: center; max-width: 420px; line-height: 1.6; }
+  /* approach: centered text + full-width tabbed media */
+  .cs-approach {
+    width: min(calc(100% - 2 * var(--gutter)), var(--media-max));
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+  .cs-approach .section { width: 100%; max-width: var(--text-max); }
 
-  /* ── FOOTER ── */
+  .tabs-wrap { width: 100%; }
+  .tabs { display: flex; border-bottom: 1px solid rgba(0,0,0,0.12); }
+  .tab {
+    flex: 1; min-width: 0; padding: 24px 12px; text-align: center; cursor: pointer;
+    background: none; border: none; border-bottom: 3px solid transparent; margin-bottom: -1px;
+    font-family: var(--serif); font-size: 1.25rem; font-weight: 400; color: rgba(0,0,0,0.64);
+    transition: color .2s, border-color .2s;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.is-active { color: #000; border-bottom-color: var(--accent); }
+  .tab-panels { margin-top: 10px; }
+  .tab-panel { display: none; }
+  .tab-panel.is-active { display: block; }
+
+  /* callout */
+  .callout {
+    background: rgba(0,0,0,0.04);
+    border-left: 2px solid rgba(0,0,0,0.38);
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem; color: rgba(0,0,0,0.64); line-height: 1.65; font-weight: 400;
+    margin-top: 0.5rem;
+  }
+
+  /* outcomes */
+  .outcomes {
+    display: flex; flex-direction: column; gap: 1px;
+    background: rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.1);
+    margin-top: 0.5rem;
+  }
+  .outcome {
+    background: #fff; padding: 1.25rem 1.5rem;
+    font-size: 1.05rem; line-height: 1.7; font-weight: 400; color: var(--ink);
+  }
+
+  /* ── FOOTER (light) ── */
   footer {
     padding: 3rem var(--pad) 4rem;
     display: flex;
     justify-content: center;
     gap: 3rem;
-    border-top: 1px solid var(--white-15);
-    margin-top: 5rem;
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.1);
   }
-
   footer a {
-    font-size: 0.78rem;
-    font-weight: 400;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--white);
-    text-decoration: none;
-    opacity: 0.75;
-    transition: opacity 0.2s;
+    font-size: 0.78rem; font-weight: 400; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink); text-decoration: none;
+    opacity: 0.7; transition: opacity 0.2s;
   }
-
   footer a:hover { opacity: 1; }
 
   /* ── FADE ── */
@@ -438,8 +260,8 @@
   }
   .skip-link:focus { top: 0; }
 
-  a:focus-visible {
-    outline: 2px solid #fff;
+  a:focus-visible, .tab:focus-visible {
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -450,20 +272,15 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    :root { --pad: 1.5rem; }
+    :root { --pad: 1.5rem; --gutter: 1.5rem; }
     .logo-mark { width: 40px; height: 40px; }
     .logo-name { font-size: 0.95rem; }
-    .section { grid-template-columns: 1fr; gap: 1.5rem; }
-    .split-row, .split-row.flip { grid-template-columns: 1fr; gap: 2rem; }
-    .split-row.flip .split-text { order: 1; }
-    .split-row.flip .split-image { order: 2; }
-    .img-pair, .pair-captions { grid-template-columns: 1fr; }
     .hero-image { aspect-ratio: 4 / 3; }
-    .path-grid { grid-template-columns: 1fr; }
-    .axis-row { grid-template-columns: 1fr; gap: 0.5rem; }
-    .axis-left { border-right: none; padding-right: 0; border-bottom: 1px solid var(--white-15); padding-bottom: 0.75rem; }
-    .milestone-bar { flex-direction: column; }
-    .milestone-phase + .milestone-phase { border-left: 1px solid var(--white-15); border-top: none; }
+    .content-light { padding-top: 56px; gap: 40px; }
+    .cs-band { padding-block: 56px; gap: 40px; }
+    .cs-group, .cs-approach { gap: 32px; }
+    .section-label { font-size: 1.4rem; }
+    .tab { padding: 14px 8px; font-size: 1rem; }
   }
 </style>
 <noscript><style>.fade { opacity: 1; transform: none; }</style></noscript>
@@ -491,8 +308,9 @@
   <span class="logo-name">Ashley Marie Quinn</span>
 </a>
 
-<!-- ── PAGE HERO ── -->
 <main id="main">
+
+<!-- ── PAGE HERO ── -->
 <div class="page-hero fade">
   <div class="page-meta">Zip · Design Lead · 2024–Present</div>
   <h1 class="page-title">Multi-Party Purchases</h1>
@@ -505,266 +323,157 @@
   <span class="ph-hint">Recommended: 2400 × 1030px — composite of the tabbed dual-vendor RDP, the intake chat prototype, and the vendor record relationships tab</span>
 </div>
 
-<!-- ── THE PROBLEM ── -->
-<div class="section fade">
-  <div class="section-left">
+<div class="content-light">
+
+  <!-- ── THE PROBLEM ── -->
+  <section class="section fade">
     <h2 class="section-label">The problem</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">Zip was built on a simple assumption: one purchase request, one vendor. For most purchases, that's accurate enough. But enterprise software procurement is rarely that clean. A company buying Snowflake often pays AWS Marketplace. An organization contracting an individual contributor often pays the staffing agency. A vendor often routes payments through a third-party processor neither party chose. In each case, the entity you pay and the entity you're actually buying from are different — and Zip had no way to represent that relationship.</p>
-    <p class="body-text">Teams adapted with workarounds: duplicate requests, freetext comments, manual corrections by procurement after the fact. These weren't just friction points. As Zip moved upmarket they created real compliance and auditability gaps — the procurement system didn't reflect how money was actually moving.</p>
-    <div class="callout">Teams I worked across: Procurement Product Group · Requester Team · Platform Team</div>
-  </div>
-</div>
+    <div class="section-body">
+      <p class="body-text">Zip was built on a simple assumption: <strong>one purchase request, one vendor</strong>. For most purchases, that's accurate enough. But enterprise software procurement is rarely that clean. A company buying Snowflake often pays AWS Marketplace. An organization contracting an individual contributor often pays the staffing agency. A vendor often routes payments through a third-party processor neither party chose. In each case, the entity you pay and the entity you're actually buying from are different — and Zip had no way to represent that relationship.</p>
+      <p class="body-text">Teams adapted with workarounds: duplicate requests, freetext comments, manual corrections by procurement after the fact. These weren't just friction points. As Zip moved upmarket they created real compliance and auditability gaps — the procurement system didn't reflect how money was actually moving.</p>
+    </div>
+  </section>
 
-<!-- ── MY ROLE ── -->
-<div class="split-row fade">
-  <div class="split-text">
-    <div class="split-label">My role</div>
-    <h3 class="split-title">Lead designer across a multi-team initiative</h3>
-    <p class="split-body">I drove this initiative end to end as the sole designer — from defining the problem space through M1 implementation. What made this work Staff-level wasn't just the design complexity, it was the organizational complexity. Multi-party purchases touch nearly every surface in the product, which meant working alongside multiple product teams simultaneously and maintaining coherence across all of them without hierarchical authority over any.</p>
-    <p class="split-body">That required being the person who could see the whole system while everyone else was heads-down on their piece — and making the right calls early on scope, sequencing, and approach so the teams around me could move fast without fragmenting the experience.</p>
-  </div>
-  <div class="split-image">
-    <span class="ph-label">Diagram</span>
-    <span class="ph-hint">Surface area map showing every product area this initiative touched: Request Detail Page, Vendor Record, Agreements, Documents, Surveys, Approvals, Dashboard, ERP / Netsuite. Roughly 800 × 600px.</span>
-  </div>
-</div>
+  <!-- ── MY ROLE ── -->
+  <section class="section fade">
+    <h2 class="section-label">My role</h2>
+    <div class="section-body">
+      <p class="body-text">I drove this initiative end to end as the sole designer — from defining the problem space through M1 implementation. What made this work Staff-level wasn't just the design complexity, it was the organizational complexity. Multi-party purchases touch nearly every surface in the product, which meant working alongside multiple product teams simultaneously and maintaining coherence across all of them without hierarchical authority over any.</p>
+      <p class="body-text">That required being the person who could see the whole system while everyone else was heads-down on their piece — and making the right calls early on scope, sequencing, and approach so the teams around me could move fast without fragmenting the experience.</p>
+      <div class="callout">Teams I worked across: Procurement Product Group · Requester Team · Platform Team</div>
+    </div>
+  </section>
 
-<!-- ── THE COMPLEXITY ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">The complexity</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">What made this harder than it looked was that "multi-party purchase" means something different to every enterprise customer. After mapping the problem space, three distinct customer models emerged — each with legitimate but incompatible assumptions about how reseller relationships should work.</p>
-    <div class="axes-grid">
-      <div class="axis-row">
-        <div class="axis-left">
-          <div class="axis-question">Who decides the purchase channel?</div>
-          <div class="axis-poles">Requester-driven</div>
-        </div>
-        <div class="axis-right">
-          <div class="axis-question">&nbsp;</div>
-          <div class="axis-poles">Procurement-driven</div>
-        </div>
+  <!-- ── SURFACE-AREA DIAGRAM ── -->
+  <figure class="figure fade">
+    <div class="media wide">
+      <span class="ph-label">Diagram</span>
+      <span class="ph-hint">Surface-area map — every product area this initiative touched: Request Detail Page, Vendor Record, Agreements, Documents, Surveys, Approvals, Dashboard, ERP / Netsuite</span>
+    </div>
+    <figcaption class="img-caption">Multi-party purchases reach nearly every surface in the product.</figcaption>
+  </figure>
+
+  <!-- ── BAND: THE COMPLEXITY + THE APPROACH ── -->
+  <div class="cs-band fade">
+    <section class="section">
+      <h2 class="section-label">The complexity</h2>
+      <div class="section-body">
+        <p class="body-text">What made this harder than it looked was that "multi-party purchase" means something different to every enterprise customer. After mapping the problem space, three distinct customer models emerged — each with legitimate but incompatible assumptions about how reseller relationships should work. They diverged along three axes: <strong>who decides the purchase channel</strong> (requester-driven vs. procurement-driven), <strong>what role the reseller plays</strong> (payee only vs. active party), and <strong>how vendor information flows</strong> (independent vs. reseller-mediated).</p>
+        <p class="body-text">These weren't configuration options — they were fundamentally different operating models. A design that worked cleanly for one would break for another. Every decision in M0 and M1 had to hold up across the full spectrum.</p>
       </div>
-      <div class="axis-row">
-        <div class="axis-left">
-          <div class="axis-question">What role does the reseller play?</div>
-          <div class="axis-poles">Payee only</div>
+    </section>
+
+    <div class="cs-approach">
+      <section class="section">
+        <h2 class="section-label">The approach</h2>
+        <div class="section-body">
+          <p class="body-text">Rather than designing across all surfaces at once, we structured the work in phases — ground the data model first, then implement at depth. M0 was deliberately constrained: prove the model and secure a commitment. M1 was where the real surface-area complexity hit: intake, AI confidence, and scope no team had on its roadmap. M2 will close the loop with spend attribution and lifecycle management.</p>
         </div>
-        <div class="axis-right">
-          <div class="axis-question">&nbsp;</div>
-          <div class="axis-poles">Active party</div>
+      </section>
+      <div class="tabs-wrap">
+        <div class="tabs" role="tablist" aria-label="Approach">
+          <button class="tab is-active" role="tab" aria-selected="true" id="tab-model" aria-controls="panel-model">Grounding the model</button>
+          <button class="tab" role="tab" aria-selected="false" id="tab-intake" aria-controls="panel-intake">The intake question</button>
+          <button class="tab" role="tab" aria-selected="false" id="tab-confidence" aria-controls="panel-confidence">AI confidence design</button>
+          <button class="tab" role="tab" aria-selected="false" id="tab-discovery" aria-controls="panel-discovery">Cross-team discovery</button>
         </div>
-      </div>
-      <div class="axis-row">
-        <div class="axis-left">
-          <div class="axis-question">How does vendor information flow?</div>
-          <div class="axis-poles">Independent</div>
-        </div>
-        <div class="axis-right">
-          <div class="axis-question">&nbsp;</div>
-          <div class="axis-poles">Reseller-mediated</div>
+        <div class="tab-panels">
+          <figure class="tab-panel is-active" role="tabpanel" id="panel-model" aria-labelledby="tab-model">
+            <div class="media wide">
+              <span class="ph-label">Diagram</span>
+              <span class="ph-hint">M0 data model — a request carrying two vendors: service provider (who you buy from) and payee (who you pay through)</span>
+            </div>
+            <figcaption class="img-caption">M0 grounded the model: a request can carry a service provider and a payee, surfaced in a tabbed vendor section — additive only, for auditability.</figcaption>
+          </figure>
+          <figure class="tab-panel" role="tabpanel" id="panel-intake" aria-labelledby="tab-intake" hidden>
+            <div class="media wide">
+              <span class="ph-label">Prototype screenshot</span>
+              <span class="ph-hint">Intake prototype — AI chat with the purchase-channel suggestion: pills "Through AWS Marketplace / Direct purchase / I'm not sure" with reasoning text above</span>
+            </div>
+            <figcaption class="img-caption">A server-side hybrid: an inline prompt within the existing vendor question, working with or without AI and no admin setup — chosen for adoption, not technical simplicity.</figcaption>
+          </figure>
+          <figure class="tab-panel" role="tabpanel" id="panel-confidence" aria-labelledby="tab-confidence" hidden>
+            <div class="media wide">
+              <span class="ph-label">Diagram</span>
+              <span class="ph-hint">Signal → response flow: vendor selected → evaluate signals → strong (assert + reasoning), medium (show pills quietly), none (silent)</span>
+            </div>
+            <figcaption class="img-caption">The system only speaks when it has something useful to say — asserting on strong signals, staying silent when there's none.</figcaption>
+          </figure>
+          <figure class="tab-panel" role="tabpanel" id="panel-discovery" aria-labelledby="tab-discovery" hidden>
+            <div class="media wide">
+              <span class="ph-label">Before / after</span>
+              <span class="ph-hint">Left: the current blank AI-skill configuration screen. Right: the proposed pre-built reseller skill template, pre-populated and editable</span>
+            </div>
+            <figcaption class="img-caption">Cross-team discovery: a pre-built reseller skill template so admins can deploy without authoring from scratch — scope that wasn't on any roadmap.</figcaption>
+          </figure>
         </div>
       </div>
     </div>
-    <p class="body-text">These weren't configuration options — they were fundamentally different operating models. A design that worked cleanly for one would break for another. Every decision in M0 and M1 had to hold up across the full spectrum.</p>
   </div>
-</div>
 
-<!-- ── APPROACH ── -->
-<div class="split-row flip fade">
-  <div class="split-text">
-    <div class="split-label">Approach</div>
-    <h3 class="split-title">Ground the model first. Then implement at depth.</h3>
-    <p class="split-body">Rather than designing across all surfaces at once, we structured the work into phases. M0 was deliberately constrained — prove the core data model works, validate it with customers, and secure a commitment. M1 was where the real surface-area complexity hit: every intake surface, every edge case, the full procure-to-pay lifecycle. M2 will complete the picture with spend attribution and relationship lifecycle management.</p>
-    <div class="milestone-bar">
-      <div class="milestone-phase active">
-        <div class="milestone-tag">M0 — Complete</div>
-        <div class="milestone-name">Ground the model</div>
-        <div class="milestone-desc">Prove the data model, validate with customers, make the commitment</div>
+  <!-- ── WHAT WE SHIPPED ── -->
+  <div class="cs-group fade">
+    <section class="section">
+      <h2 class="section-label">What we shipped</h2>
+      <div class="section-body">
+        <p class="body-text">M0 shipped the foundational model; M1 implementation is in progress toward GA, extending the experience across intake, the vendor record, portal configuration, and admin setup. The model and decisions behind these are covered in the approach above — here's what shipped.</p>
       </div>
-      <div class="milestone-phase active">
-        <div class="milestone-tag">M1 — In progress</div>
-        <div class="milestone-name">Implement at depth</div>
-        <div class="milestone-desc">Full experience across every surface — intake, portals, ERP, AI</div>
+    </section>
+    <figure class="figure">
+      <div class="media tall">
+        <span class="ph-label">Before / after</span>
+        <span class="ph-hint">Left: existing single-vendor RDP with one portal send. Right: M0 tabbed dual-vendor RDP — Service Provider and Payee tabs, each with independent portal send status</span>
       </div>
-      <div class="milestone-phase">
-        <div class="milestone-tag">M2 — Planned</div>
-        <div class="milestone-name">Close the loop</div>
-        <div class="milestone-desc">Spend attribution, relationship lifecycle, renewal aggregation</div>
+      <figcaption class="img-caption">M0: a tabbed vendor section on the request detail page surfaces both relationships throughout the workflow, without collapsing them into one ambiguous view.</figcaption>
+    </figure>
+    <figure class="figure">
+      <div class="media tall">
+        <span class="ph-label">Product screen</span>
+        <span class="ph-hint">Intake prototype — purchase-channel suggestion surfaced inline after vendor selection, based on prior purchase history and vendor relationships</span>
       </div>
-    </div>
-  </div>
-  <div class="split-image">
-    <span class="ph-label">Process image</span>
-    <span class="ph-hint">Optional: early system map or FigJam exploration showing the scope of work across surfaces. Roughly 800 × 600px.</span>
-  </div>
-</div>
-
-<!-- ── M0: GROUNDING THE MODEL ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">M0: Grounding the model</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">M0 established the foundational data model: a purchase request could now carry two vendors — a service provider (the entity you're buying from) and a payee (the entity you're paying through). Before any UI work, I mapped what that model implied at every level: how vendor portals would split, how approvals would route, how the data would flow to ERP.</p>
-    <p class="body-text">Three design decisions defined M0. First, a tabbed vendor section on the request detail page — one tab per vendor, each with its own portal send status — kept the relationship visible throughout the workflow without collapsing both parties into a single ambiguous view. Second, relationships are additive only: once a reseller is linked to a request, that association cannot be removed. This was a deliberate data integrity decision, not a constraint — auditability of procurement decisions requires permanence. Third, the reseller's vendor portal is scoped to payment details, documents, and surveys only. Compliance information flows to the service provider directly.</p>
-    <p class="body-text">The outcome of M0 was customer validation and a strategic enterprise commitment that gave the team a real deadline. That constraint was valuable — it forced scope discipline and confirmed the model worked before we committed to full implementation.</p>
-  </div>
-</div>
-
-<!-- ── M0 BEFORE / AFTER ── -->
-<div class="pair-wrap fade">
-  <div class="img-pair">
-    <div class="img-half">
-      <span class="ph-label">Before</span>
-      <span class="ph-hint">Screenshot of the existing single-vendor Request Detail Page — vendor section with one vendor and a single portal send action. Roughly 1600 × 1000px.</span>
-    </div>
-    <div class="img-half">
-      <span class="ph-label">After — M0</span>
-      <span class="ph-hint">M0 Figma design — tabbed dual-vendor RDP showing Service Provider and Payee tabs, each with independent portal send status. Roughly 1600 × 1000px.</span>
-    </div>
-  </div>
-  <div class="pair-captions">
-    <span>Before: Zip's 1:1 model — one request, one vendor, one portal send</span>
-    <span>After: Tabbed vendor section surfaces both relationships throughout the workflow</span>
-  </div>
-</div>
-
-<!-- ── M1 OVERVIEW ── -->
-<div class="full-image-wrap fade">
-  <div class="full-image">
-    <span class="ph-label">Full-width image</span>
-    <span class="ph-hint">M1 surface overview — a wide composite showing 3–4 key M1 screens: the intake chat prototype, the vendor record relationships tab, admin configuration, and a request with both vendors shown. Recommended: 2160 × 945px.</span>
-  </div>
-  <div class="img-caption">M1: the full experience — intake, vendor record, portal configuration, and admin setup working as one connected system.</div>
-</div>
-
-<!-- ── INTAKE QUESTION ── -->
-<div class="split-row fade">
-  <div class="split-text">
-    <div class="split-label">M1 — The intake question</div>
-    <h3 class="split-title">One question. Three surfaces. Zero admin configuration.</h3>
-    <p class="split-body">M0 left a gap: reseller assignment happened post-intake, after procurement reviewed the request. M1 needed to move that decision earlier — to the requester, at the moment of submission. The constraint was that Zip's intake experience exists in three forms: a traditional multi-step form, an AI chat experience, and an emerging agentic intake flow. A solution that only worked for one would create divergence across the product.</p>
-    <p class="split-body">Three paths were on the table. A conditional form question admins could configure. An AI-only suggestion for customers with AI enabled. Or a hybrid approach using server-side signals — prior purchase history, existing vendor relationships — that works universally, with no admin setup required. We chose the hybrid.</p>
-    <p class="split-body">The deciding factor wasn't technical complexity. It was adoption. A standalone question admins had to discover and configure would follow the same pattern as every optional intake field before it — adopted slowly, unevenly, late. An inline follow-up within the existing vendor question, triggered automatically when signals are present, reaches every customer from day one.</p>
-    <div class="path-grid">
-      <div class="path-item">
-        <div class="path-num">Path A</div>
-        <div class="path-name">Conditional form question</div>
-        <div class="path-desc">A standalone question admins configure and add to their intake form</div>
-        <div class="path-verdict">Rejected — requires admin action, high adoption risk</div>
+      <figcaption class="img-caption">M1 intake: the purchase-channel suggestion surfaces inline after vendor selection, moving the decision to the requester at submission.</figcaption>
+    </figure>
+    <figure class="figure">
+      <div class="media tall">
+        <span class="ph-label">Design in progress</span>
+        <span class="ph-hint">Admin workflow builder — reseller portal configuration: payee-only vs. active-party toggle, portal section access per vendor role</span>
       </div>
-      <div class="path-item">
-        <div class="path-num">Path B</div>
-        <div class="path-name">AI-only suggestion</div>
-        <div class="path-desc">Surfaces only for customers with AI intake enabled</div>
-        <div class="path-verdict">Rejected — excludes non-AI customers, fragments the experience</div>
+      <figcaption class="img-caption">M1 admin configuration: portal defaults per vendor role support both reseller models — payee only or active party — with override at send time.</figcaption>
+    </figure>
+  </div>
+
+  <!-- ── BAND: OUTCOMES + WHAT'S NEXT + WHAT I LEARNED ── -->
+  <div class="cs-band fade">
+    <section class="section">
+      <h2 class="section-label">Outcomes</h2>
+      <div class="section-body">
+        <p class="body-text">Multi-party purchases shipped in M0 with a strategic enterprise commitment as the forcing function. M1 implementation is in progress toward GA.</p>
+        <div class="outcomes">
+          <div class="outcome">The #1 requested feature at Zip — 60+ customers actively requesting it before a single screen was designed</div>
+          <div class="outcome">M0 validated the core model with customers and secured a strategic enterprise commitment — proving the approach worked before committing to full implementation</div>
+          <div class="outcome">Design coherence maintained across five teams and seven product surfaces without hierarchical authority over any of them</div>
+          <div class="outcome">Cross-team discovery expanded scope in ways that will materially improve admin adoption of AI-powered intake</div>
+        </div>
       </div>
-      <div class="path-item selected">
-        <div class="path-num">Path C — Selected</div>
-        <div class="path-name">Server-side hybrid</div>
-        <div class="path-desc">Signal-based inline prompt within the existing vendor question — works with or without AI, no admin setup</div>
-        <div class="path-verdict">Reaches all customers automatically from day one</div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-label">What's next</h2>
+      <div class="section-body">
+        <p class="body-text">Admin configuration screens are being finalized and the skill templating work with the Platform team is in early definition. Together these close the last gap in the M1 experience — ensuring the system works not just for requesters, but for the admins configuring it.</p>
+        <p class="body-text">M2 will complete the picture: reseller-level renewal aggregation, spend attribution that separates OEM spend from reseller spend, and relationship lifecycle management — active/inactive status, preferred reseller designation — so that the data model established in M0 can fully power Zip's enterprise reporting capabilities.</p>
       </div>
-    </div>
-  </div>
-  <div class="split-image">
-    <span class="ph-label">Prototype screenshot</span>
-    <span class="ph-hint">Screenshot from the intake prototype showing the AI chat with the purchase channel suggestion visible — pills: "Through AWS Marketplace / Direct purchase / I'm not sure" — with reasoning text above. Roughly 800 × 600px.</span>
-  </div>
-</div>
+    </section>
 
-<!-- ── PROTOTYPE FULL WIDTH ── -->
-<div class="full-image-wrap fade">
-  <div class="full-image">
-    <span class="ph-label">Prototype image</span>
-    <span class="ph-hint">Full-width screenshot of the intake prototype — the "Review basic information" agentic card with the Purchase channel field and change chips, or the manual form showing the inline reseller suggestion within the vendor question. Recommended: 2160 × 945px.</span>
+    <section class="section">
+      <h2 class="section-label">What I learned</h2>
+      <div class="section-body">
+        <p class="body-text">The hardest call on this project wasn't a design decision — it was recognizing that adoption risk and technical risk are different things that require different responses. The standalone intake question was the technically lower-risk option: more modular, easier to scope, easier to test in isolation. But it would have required every admin to discover, understand, and add a new question to their workflow. Evidence from prior feature rollouts said that doesn't happen fast or broadly enough to matter. Choosing the inline approach meant taking on more technical complexity in exchange for eliminating the adoption bottleneck entirely. That tradeoff only became visible because we looked at rollout data from past features — not just the engineering considerations directly in front of us.</p>
+        <p class="body-text">The other lesson was about the value of going deep enough to find scope that isn't in anyone's brief. The skill templating gap, the confidence-level logic the Platform team had missed — neither were on a roadmap. They surfaced because I was close enough to the implementation to see them. At Staff level, that's part of the job: not just executing the defined work, but noticing what the defined work missed.</p>
+      </div>
+    </section>
   </div>
-  <div class="img-caption">The intake prototype — purchase channel suggestion surfaces inline after vendor selection, based on prior purchase history and vendor relationships.</div>
-</div>
 
-<!-- ── AI CONFIDENCE DESIGN ── -->
-<div class="split-row flip fade">
-  <div class="split-text">
-    <div class="split-label">M1 — AI confidence design</div>
-    <h3 class="split-title">The system should only speak when it has something useful to say</h3>
-    <p class="split-body">The inline prompt doesn't always appear. It fires based on signal strength — prior purchase history, existing vendor relationships on record. When signals are strong, it asserts with reasoning: "You've purchased Snowflake through AWS Marketplace before — would you like to do the same here?" When there's no signal, the UI stays silent. A prompt with no useful context would train requesters to ignore it.</p>
-    <p class="split-body">While pressure-testing the Platform team's implementation, I found they hadn't fully designed for the confidence spectrum — the early build treated all signals identically, with no differentiation between high-confidence assertions and low-confidence suggestions. Correction mattered too: suggestion chips that expand to alternative channels communicate implicitly that a different answer is reachable, without surfacing technical uncertainty to the user.</p>
-  </div>
-  <div class="split-image">
-    <span class="ph-label">Diagram</span>
-    <span class="ph-hint">Signal → response flow: vendor selected → evaluate signals → three branches: strong signal (assert + reasoning text), medium signal (show pills quietly), no signal (silent, no prompt shown). Simple flow diagram. Roughly 800 × 600px.</span>
-  </div>
-</div>
-
-<!-- ── CROSS-TEAM DISCOVERY ── -->
-<div class="split-row fade">
-  <div class="split-text">
-    <div class="split-label">M1 — Cross-team discovery</div>
-    <h3 class="split-title">Finding scope that wasn't on anyone's roadmap</h3>
-    <p class="split-body">While working through the intake implementation with the Platform team, I discovered a gap that wasn't on any team's radar. Enabling the reseller prompt requires admins to configure both an intake question and an AI chat skill. But today, skills start from a blank slate — no templates, no guidance, no indication of what a well-formed skill looks like for a procurement use case.</p>
-    <p class="split-body">Customers don't know how to write AI skills. A blank configuration screen is functionally a feature that won't get used — the same adoption logic that drove the inline intake decision applies here too. I'm working with the Platform team to define a templating structure so the reseller skill arrives pre-built: admins can deploy it immediately without authoring anything from scratch.</p>
-  </div>
-  <div class="split-image">
-    <span class="ph-label">Before / after</span>
-    <span class="ph-hint">Two states side by side: left shows the current blank AI skill configuration screen; right shows the proposed pre-built reseller skill template with fields pre-populated and editable. Roughly 800 × 600px.</span>
-  </div>
-</div>
-
-<!-- ── ADMIN CONFIGURATION ── -->
-<div class="split-row flip fade">
-  <div class="split-text">
-    <div class="split-label">M1 — Admin configuration</div>
-    <h3 class="split-title">Configuring portal behavior for two reseller models</h3>
-    <p class="split-body">Not all resellers play the same role. Some are payees only — they receive payment but have no active role in compliance or onboarding. Others are active parties who complete their own portal tasks alongside the service provider. The admin configuration needed to support both models without forcing every customer to understand the distinction before they encounter it.</p>
-    <p class="split-body">In the workflow builder, admins configure portal defaults per vendor role — which portal sections a reseller can access, and whether they're engaged as a payee or an active party. Buyers can override these defaults at send time. These screens are currently being finalized.</p>
-  </div>
-  <div class="split-image">
-    <span class="ph-label">Design in progress</span>
-    <span class="ph-hint">Admin workflow builder showing reseller portal configuration: toggle for reseller engagement model (payee only vs active party), portal section access controls per vendor role. Roughly 800 × 600px.</span>
-  </div>
-</div>
-
-<!-- ── WHAT'S NEXT ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">What's next</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">Admin configuration screens are being finalized and the skill templating work with the Platform team is in early definition. Together these close the last gap in the M1 experience — ensuring the system works not just for requesters, but for the admins configuring it.</p>
-    <p class="body-text">M2 will complete the picture: reseller-level renewal aggregation, spend attribution that separates OEM spend from reseller spend, and relationship lifecycle management — active/inactive status, preferred reseller designation — so that the data model established in M0 can fully power Zip's enterprise reporting capabilities.</p>
-  </div>
-</div>
-
-<!-- ── OUTCOMES ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">Outcomes</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">Multi-party purchases shipped in M0 with a strategic enterprise commitment as the forcing function. M1 implementation is in progress toward GA.</p>
-    <div class="outcomes">
-      <div class="outcome">The #1 requested feature at Zip — 60+ customers actively requesting it before a single screen was designed</div>
-      <div class="outcome">M0 validated the core model with customers and secured a strategic enterprise commitment — proving the approach worked before committing to full implementation</div>
-      <div class="outcome">Design coherence maintained across five teams and seven product surfaces without hierarchical authority over any of them</div>
-      <div class="outcome">Cross-team discovery expanded scope in ways that will materially improve admin adoption of AI-powered intake</div>
-    </div>
-  </div>
-</div>
-
-<!-- ── WHAT I LEARNED ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">What I learned</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">The hardest call on this project wasn't a design decision — it was recognizing that adoption risk and technical risk are different things that require different responses. The standalone intake question was the technically lower-risk option: more modular, easier to scope, easier to test in isolation. But it would have required every admin to discover, understand, and add a new question to their workflow. Evidence from prior feature rollouts said that doesn't happen fast or broadly enough to matter. Choosing the inline approach meant taking on more technical complexity in exchange for eliminating the adoption bottleneck entirely. That tradeoff only became visible because we looked at rollout data from past features — not just the engineering considerations directly in front of us.</p>
-    <p class="body-text">The other lesson was about the value of going deep enough to find scope that isn't in anyone's brief. The skill templating gap, the confidence-level logic the Platform team had missed — neither were on a roadmap. They surfaced because I was close enough to the implementation to see them. At Staff level, that's part of the job: not just executing the defined work, but noticing what the defined work missed.</p>
-  </div>
 </div>
 
 </main>
@@ -775,10 +484,26 @@
 </footer>
 
 <script>
+  // Fade-in on scroll
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+  // Tabbed carousels
+  document.querySelectorAll('.tabs').forEach(tablist => {
+    const tabs = Array.from(tablist.querySelectorAll('.tab'));
+    const panels = Array.from(tablist.parentElement.querySelectorAll('.tab-panel'));
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
+        panels.forEach(p => { p.classList.remove('is-active'); p.hidden = true; });
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-selected', 'true');
+        if (panels[i]) { panels[i].classList.add('is-active'); panels[i].hidden = false; }
+      });
+    });
+  });
 </script>
 </body>
 </html>

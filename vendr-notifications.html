@@ -6,7 +6,7 @@
 <title>Helping Customers Stay in the Know — Ashley Quinn</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -20,7 +20,12 @@
     --sans: 'Jost', sans-serif;
     --max: 1080px;
     --pad: max(2rem, calc((100vw - var(--max)) / 2));
+    --gutter: 2rem;
     --text-max: 640px;
+    --media-max: 1075px;
+    --band: #f7f9ff;
+    --ink: #1a1a1a;
+    --accent: #234894;
   }
 
   html { scroll-behavior: smooth; }
@@ -35,6 +40,7 @@
     font-weight: 300;
   }
 
+  /* ── LOGO LOCKUP ── */
   a.logo-lockup {
     display: flex;
     align-items: center;
@@ -54,7 +60,7 @@
     letter-spacing: 0.01em;
   }
 
-  /* ── HERO ── */
+  /* ── PAGE HERO (dark zone) ── */
   .page-hero { padding: 4rem var(--pad) 3rem; }
 
   .page-meta {
@@ -85,7 +91,7 @@
     max-width: var(--text-max);
   }
 
-  /* ── HERO IMAGE ── */
+  /* ── HERO IMAGE — full bleed ── */
   .hero-image {
     width: 100%;
     aspect-ratio: 21 / 9;
@@ -97,230 +103,151 @@
     gap: 0.5rem;
     overflow: hidden;
   }
-
   .hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  /* ── SECTION ── */
-  .section {
-    padding: 5rem var(--pad) 0;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 4rem;
-    align-items: start;
+  /* ── LIGHT CONTENT (everything below the hero image) ── */
+  .content-light {
+    background: #fff;
+    color: var(--ink);
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding-top: 80px;
   }
-  .section-left { padding-top: 0.2rem; }
-  .section-right { display: flex; flex-direction: column; gap: 0; }
+
+  /* centered text column (~80ch) */
+  .section {
+    width: min(calc(100% - 2 * var(--gutter)), var(--text-max));
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
 
   .section-label {
     font-family: var(--serif);
-    font-size: clamp(1.2rem, 2vw, 1.75rem);
+    font-size: 1.75rem;
     font-weight: 400;
-    color: var(--white);
     line-height: 1.2;
+    color: var(--ink);
   }
 
-  .divider {
-    border: none;
-    border-top: 1px solid var(--white-30);
-    margin-bottom: 2rem;
-  }
+  .section-body { display: flex; flex-direction: column; }
 
   .body-text {
     font-size: 1.05rem;
-    color: var(--white);
     line-height: 1.8;
-    font-weight: 300;
-    max-width: var(--text-max);
+    font-weight: 400;
+    color: var(--ink);
     margin-bottom: 1.25rem;
   }
+  .body-text:last-child { margin-bottom: 0; }
+  .body-text strong { font-weight: 600; }
 
-  /* ── SPLIT ROW ── */
-  .split-row {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 4rem;
-    align-items: start;
-    padding: 5rem var(--pad) 0;
+  /* centered media band (up to 1075px) */
+  .figure {
+    width: min(calc(100% - 2 * var(--gutter)), var(--media-max));
+    margin-inline: auto;
   }
 
-  .split-row.flip { grid-template-columns: 1.4fr 1fr; }
-  .split-row.flip .split-text { order: 2; }
-  .split-row.flip .split-image { order: 1; }
-
-  .split-text { display: flex; flex-direction: column; gap: 1rem; padding-top: 0.5rem; }
-
-  .split-label {
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white-60);
-  }
-
-  .split-title {
-    font-family: var(--serif);
-    font-size: clamp(1.3rem, 2vw, 1.75rem);
-    font-weight: 400;
-    color: var(--white);
-    line-height: 1.2;
-  }
-
-  .split-body {
-    font-size: 1.05rem;
-    color: var(--white-60);
-    line-height: 1.8;
-    font-weight: 300;
-  }
-
-  .split-image {
+  .media {
     width: 100%;
-    aspect-ratio: 4 / 3;
-    background: rgba(255,255,255,0.07);
+    background: rgba(0,0,0,0.05);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
+    gap: 7px;
     overflow: hidden;
   }
+  .media.wide { aspect-ratio: 16 / 7; }
+  .media.tall { aspect-ratio: 4 / 3; }
+  .media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  .split-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  /* ── FULL IMAGE ── */
-  .full-image-wrap { padding: 5rem var(--pad) 0; }
-
-  .full-image {
-    width: 100%;
-    aspect-ratio: 16 / 7;
-    background: rgba(255,255,255,0.07);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
-    overflow: hidden;
-  }
-
-  .full-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  .img-caption {
-    font-size: 0.82rem;
-    color: var(--white-30);
-    font-weight: 300;
-    margin-top: 0.75rem;
-  }
-
-  /* ── IMAGE PAIR ── */
-  .pair-wrap { padding: 5rem var(--pad) 0; }
-
-  .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-  .img-half {
-    aspect-ratio: 16 / 10;
-    background: rgba(255,255,255,0.07);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
-    overflow: hidden;
-  }
-
-  .img-half img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  .pair-captions { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.75rem; }
-  .pair-captions span { font-size: 0.82rem; color: var(--white-30); font-weight: 300; }
-
-  /* ── SHIPPED GRID ── */
-  .shipped-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--white-15);
-    border: 1px solid var(--white-15);
-    margin-top: 2rem;
-  }
-
-  .shipped-item { background: rgba(30, 58, 138, 0.5); padding: 1.5rem; }
-
-  .shipped-num {
-    font-size: 0.72rem;
-    color: var(--white-30);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
-
-  .shipped-title {
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--white);
-    margin-bottom: 0.5rem;
-  }
-
-  .shipped-desc { font-size: 0.9rem; color: var(--white-60); line-height: 1.65; font-weight: 300; }
-
-  /* ── OUTCOMES ── */
-  .outcomes-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--white-15);
-    border: 1px solid var(--white-15);
-    margin-top: 2rem;
-  }
-
-  .outcome-item { background: rgba(30, 58, 138, 0.5); padding: 1.5rem; }
-
-  .outcome-value {
-    font-family: var(--serif);
-    font-size: 2.8rem;
-    color: var(--white);
-    line-height: 1;
-    margin-bottom: 0.4rem;
-  }
-
-  .outcome-label {
-    font-size: 0.88rem;
-    color: var(--white-60);
-    line-height: 1.5;
-    font-weight: 300;
-  }
-
-  /* ── PLACEHOLDERS ── */
   .ph-label {
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white-30);
+    font-size: 0.72rem; font-weight: 400; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(0,0,0,0.38);
+  }
+  .ph-hint { font-size: 0.72rem; font-weight: 300; color: rgba(0,0,0,0.3); text-align: center; padding: 0 1rem; }
+
+  .img-caption { font-size: 0.82rem; color: rgba(0,0,0,0.55); font-weight: 400; margin-top: 0.75rem; }
+
+  /* grouped white block (e.g. What we shipped + images) */
+  .cs-group { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+
+  /* banded group */
+  .cs-band {
+    background: var(--band);
+    padding-block: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
   }
 
-  .ph-hint { font-size: 0.72rem; color: rgba(255,255,255,0.18); font-weight: 300; }
+  /* approach: centered text + full-width tabbed media */
+  .cs-approach {
+    width: min(calc(100% - 2 * var(--gutter)), var(--media-max));
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+  .cs-approach .section { width: 100%; max-width: var(--text-max); }
 
-  /* ── FOOTER ── */
+  .tabs-wrap { width: 100%; }
+  .tabs { display: flex; border-bottom: 1px solid rgba(0,0,0,0.12); }
+  .tab {
+    flex: 1; min-width: 0; padding: 24px 12px; text-align: center; cursor: pointer;
+    background: none; border: none; border-bottom: 3px solid transparent; margin-bottom: -1px;
+    font-family: var(--serif); font-size: 1.25rem; font-weight: 400; color: rgba(0,0,0,0.64);
+    transition: color .2s, border-color .2s;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.is-active { color: #000; border-bottom-color: var(--accent); }
+  .tab-panels { margin-top: 10px; }
+  .tab-panel { display: none; }
+  .tab-panel.is-active { display: block; }
+
+  /* callout */
+  .callout {
+    background: rgba(0,0,0,0.04);
+    border-left: 2px solid rgba(0,0,0,0.38);
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem; color: rgba(0,0,0,0.64); line-height: 1.65; font-weight: 400;
+    margin-top: 0.5rem;
+  }
+
+  /* outcomes */
+  .outcomes {
+    display: flex; flex-direction: column; gap: 1px;
+    background: rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.1);
+    margin-top: 0.5rem;
+  }
+  .outcome {
+    background: #fff; padding: 1.25rem 1.5rem;
+    font-size: 1.05rem; line-height: 1.7; font-weight: 400; color: var(--ink);
+  }
+
+  /* ── FOOTER (light) ── */
   footer {
     padding: 3rem var(--pad) 4rem;
     display: flex;
     justify-content: center;
     gap: 3rem;
-    border-top: 1px solid var(--white-15);
-    margin-top: 5rem;
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.1);
   }
-
   footer a {
-    font-size: 0.78rem;
-    font-weight: 400;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--white);
-    text-decoration: none;
-    opacity: 0.75;
-    transition: opacity 0.2s;
+    font-size: 0.78rem; font-weight: 400; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink); text-decoration: none;
+    opacity: 0.7; transition: opacity 0.2s;
   }
-
   footer a:hover { opacity: 1; }
 
+  /* ── FADE ── */
   .fade { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .fade.in { opacity: 1; transform: none; }
 
@@ -333,8 +260,8 @@
   }
   .skip-link:focus { top: 0; }
 
-  a:focus-visible {
-    outline: 2px solid #fff;
+  a:focus-visible, .tab:focus-visible {
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -343,17 +270,17 @@
     .fade { opacity: 1; transform: none; transition: none; }
   }
 
+  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    :root { --pad: 1.5rem; }
+    :root { --pad: 1.5rem; --gutter: 1.5rem; }
     .logo-mark { width: 40px; height: 40px; }
     .logo-name { font-size: 0.95rem; }
-    .section { grid-template-columns: 1fr; gap: 1.5rem; }
-    .split-row, .split-row.flip { grid-template-columns: 1fr; gap: 2rem; }
-    .split-row.flip .split-text { order: 1; }
-    .split-row.flip .split-image { order: 2; }
-    .shipped-grid, .outcomes-grid { grid-template-columns: 1fr; }
-    .img-pair, .pair-captions { grid-template-columns: 1fr; }
     .hero-image { aspect-ratio: 4 / 3; }
+    .content-light { padding-top: 56px; gap: 40px; }
+    .cs-band { padding-block: 56px; gap: 40px; }
+    .cs-group, .cs-approach { gap: 32px; }
+    .section-label { font-size: 1.4rem; }
+    .tab { padding: 14px 8px; font-size: 1rem; }
   }
 </style>
 <noscript><style>.fade { opacity: 1; transform: none; }</style></noscript>
@@ -361,6 +288,7 @@
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
 
+<!-- Logo — links back to portfolio -->
 <a href="index.html" class="logo-lockup" aria-label="Ashley Marie Quinn — home">
 <svg class="logo-mark" viewBox="0 0 255 255" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none">
   <path style="fill:none;stroke:#ffffff;stroke-miterlimit:10;" d="M90.2,120.3l1.4,0.3c1.1,0.2,2.1,0.5,3.1,0.9c1.2,0.5,2.4,1.1,3.6,1.8c0,0,12.4,8.4,4.7,14.4
@@ -380,8 +308,9 @@
   <span class="logo-name">Ashley Marie Quinn</span>
 </a>
 
-<!-- ── HERO ── -->
 <main id="main">
+
+<!-- ── PAGE HERO ── -->
 <div class="page-hero fade">
   <div class="page-meta">Vendr · Design Lead · 2023–2024</div>
   <h1 class="page-title">Helping Customers Stay in the Know</h1>
@@ -394,154 +323,134 @@
   <span class="ph-hint">Recommended: 2400 × 1030px — composite of email, in-app, and settings designs</span>
 </div>
 
-<!-- ── THE PROBLEM ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">The problem</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">For a product built around keeping buyers informed — renewals, approvals, tasks, contract deadlines — broken notifications meant broken trust. Six product teams were each handling notifications independently, which meant no consistency, no shared standards, and no visibility into what was being sent across the product.</p>
-    <p class="body-text">Users were receiving inconsistent, sometimes redundant messages across email and Slack with no way to manage their preferences in one place. There was no in-app notification experience at all. And with no catalog of what was being sent, the team had no way to know the scale of the problem before this project began.</p>
-  </div>
-</div>
+<div class="content-light">
 
-<!-- ── SPLIT: Audit — text left, image right ── -->
-<div class="split-row fade">
-  <div class="split-text">
-    <div class="split-label">Approach</div>
-    <h3 class="split-title">Auditing the full system before designing anything</h3>
-    <p class="split-body">My team and I took a multi-pronged approach to understanding the current state. We audited all existing email and Slack templates including their content, analyzed customer feedback, and organized sessions with each of the six product teams to understand their current and future notification needs.</p>
-    <p class="split-body">We cataloged every notification and its channels in one place — a process that also aligned with migrating our notifications infrastructure to Courier, a third-party tool that gave us proper visibility and tracking across what was being sent.</p>
-  </div>
-  <div class="split-image">
-    <span class="ph-label">Process image</span>
-    <span class="ph-hint">e.g. notification audit table / channel mapping</span>
-  </div>
-</div>
+  <!-- ── BACKGROUND / THE PROBLEM ── -->
+  <section class="section fade">
+    <h2 class="section-label">Background</h2>
+    <div class="section-body">
+      <p class="body-text">For a product built around keeping buyers informed — renewals, approvals, tasks, contract deadlines — broken notifications meant broken trust. Six product teams were each handling notifications independently, which meant no consistency, no shared standards, and no visibility into what was being sent across the product.</p>
+      <p class="body-text">Users were receiving inconsistent, sometimes redundant messages across email and Slack with no way to manage their preferences in one place. There was no in-app notification experience at all. And with no catalog of what was being sent, the team had no way to know the scale of the problem before this project began.</p>
+    </div>
+  </section>
 
-<!-- ── SPLIT: Competitive + cross-team — image left, text right ── -->
-<div class="split-row flip fade">
-  <div class="split-text">
-    <div class="split-label">Design direction</div>
-    <h3 class="split-title">Competitive analysis and cross-team alignment</h3>
-    <p class="split-body">I completed a competitive analysis of notification control centers, messaging patterns, and notification types across popular SaaS products. I then paired with designers from each of the other product teams to look at their notification designs and align on patterns and best practices that would work across the broadest range of use cases.</p>
-    <p class="split-body">This cross-team design alignment was as important as the visual design work itself — without it, each team would have continued solving notifications independently and the same inconsistencies would have returned.</p>
-  </div>
-  <div class="split-image">
-    <span class="ph-label">Process image</span>
-    <span class="ph-hint">e.g. competitive analysis / cross-team alignment session</span>
-  </div>
-</div>
+  <!-- ── BAND: THE PROBLEM + THE APPROACH ── -->
+  <div class="cs-band fade">
+    <section class="section">
+      <h2 class="section-label">The problem</h2>
+      <div class="section-body">
+        <p class="body-text">Notifications had grown organically across email and Slack without a coherent strategy. Templates were redundant, content was inconsistent, and there was no centralized way for users to manage their preferences — and no in-app notification experience at all.</p>
+        <p class="body-text">Because six product teams were each solving notifications on their own, the same inconsistencies kept reappearing. Without shared standards or visibility into what was being sent, fixing individual messages would never have been enough — the system itself needed a foundation.</p>
+      </div>
+    </section>
 
-<!-- ── FULL IMAGE: Updated designs overview ── -->
-<div class="full-image-wrap fade">
-  <div class="full-image">
-    <span class="ph-label">Full-width image</span>
-    <span class="ph-hint">e.g. updated email, Slack, and in-app designs side by side — Recommended: 2160 × 945px</span>
+    <div class="cs-approach">
+      <section class="section">
+        <h2 class="section-label">The approach</h2>
+        <div class="section-body">
+          <p class="body-text">Before designing anything, my team and I worked to understand the full system — auditing every existing notification, studying how leading products handle them, and aligning the six product teams on a shared set of patterns.</p>
+        </div>
+      </section>
+      <div class="tabs-wrap">
+        <div class="tabs" role="tablist" aria-label="Approach">
+          <button class="tab is-active" role="tab" aria-selected="true" id="tab-audit" aria-controls="panel-audit">Auditing the system</button>
+          <button class="tab" role="tab" aria-selected="false" id="tab-align" aria-controls="panel-align">Aligning the teams</button>
+        </div>
+        <div class="tab-panels">
+          <figure class="tab-panel is-active" role="tabpanel" id="panel-audit" aria-labelledby="tab-audit">
+            <div class="media wide">
+              <span class="ph-label">Process artifact</span>
+              <span class="ph-hint">Notification audit table / channel mapping across email and Slack</span>
+            </div>
+            <figcaption class="img-caption">We cataloged every notification and channel in one place — the audit that revealed the scale of the problem.</figcaption>
+          </figure>
+          <figure class="tab-panel" role="tabpanel" id="panel-align" aria-labelledby="tab-align" hidden>
+            <div class="media wide">
+              <span class="ph-label">Process artifact</span>
+              <span class="ph-hint">Competitive analysis of notification control centers / cross-team alignment session</span>
+            </div>
+            <figcaption class="img-caption">Competitive analysis plus cross-team alignment defined patterns that worked across the broadest range of use cases.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="img-caption">Updated designs across all channels — email, Slack, and in-app — unified by shared content standards.</div>
-</div>
 
-<!-- ── WHAT WE SHIPPED ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">What we shipped</h2>
+  <!-- ── WHAT WE SHIPPED ── -->
+  <div class="cs-group fade">
+    <section class="section">
+      <h2 class="section-label">What we shipped</h2>
+      <div class="section-body">
+        <p class="body-text">A connected overhaul of the notification experience — unified designs across email and Slack, an in-app inbox introduced for the first time, and the content standards that keep it all consistent. Here's what shipped.</p>
+      </div>
+    </section>
+    <figure class="figure">
+      <div class="media tall">
+        <span class="ph-label">Product screen</span>
+        <span class="ph-hint">Updated email &amp; Slack notification designs</span>
+      </div>
+      <figcaption class="img-caption">Updated email &amp; Slack designs — readable, actionable, and consistent, replacing the fragmented templates each team had shipped independently.</figcaption>
+    </figure>
+    <figure class="figure">
+      <div class="media tall">
+        <span class="ph-label">Product screen</span>
+        <span class="ph-hint">In-app notification inbox built on Courier</span>
+      </div>
+      <figcaption class="img-caption">In-app notification experience, built on Courier's inbox — a centralized place to receive notifications in-app for the first time, addressing a common customer request.</figcaption>
+    </figure>
+    <figure class="figure">
+      <div class="media tall">
+        <span class="ph-label">Product screen</span>
+        <span class="ph-hint">Notification inbox surfaced in the main navigation</span>
+      </div>
+      <figcaption class="img-caption">Updated navigation surfaced the inbox in the product's main nav — discoverable without disrupting the existing IA.</figcaption>
+    </figure>
+    <figure class="figure">
+      <div class="media tall">
+        <span class="ph-label">Design artifact</span>
+        <span class="ph-hint">Content design standards documented in the design system</span>
+      </div>
+      <figcaption class="img-caption">Content design standards, aligned across all teams and documented in the design system — the infrastructure that makes future consistency possible without central oversight.</figcaption>
+    </figure>
+    <figure class="figure">
+      <div class="media tall">
+        <span class="ph-label">Product screen</span>
+        <span class="ph-hint">Redesigned notification settings center</span>
+      </div>
+      <figcaption class="img-caption">Redesigned settings center — full per-channel control with category-level opt-in/out and sensible defaults built in.</figcaption>
+    </figure>
   </div>
-  <div class="section-right">
-  <div class="shipped-grid">
-    <div class="shipped-item">
-      <div class="shipped-num">01</div>
-      <div class="shipped-title">Updated email & Slack designs</div>
-      <p class="shipped-desc">Readable, actionable, and consistently following best practices across all templates — replacing the fragmented designs each team had shipped independently.</p>
-    </div>
-    <div class="shipped-item">
-      <div class="shipped-num">02</div>
-      <div class="shipped-title">In-app notification experience</div>
-      <p class="shipped-desc">Implemented using Courier's inbox — giving users a centralized place to receive and review notifications in-app for the first time. A common customer request finally addressed.</p>
-    </div>
-    <div class="shipped-item">
-      <div class="shipped-num">03</div>
-      <div class="shipped-title">Updated navigation</div>
-      <p class="shipped-desc">Surfaced the notification inbox in the product's main nav — making it discoverable without disrupting the existing information architecture.</p>
-    </div>
-    <div class="shipped-item">
-      <div class="shipped-num">04</div>
-      <div class="shipped-title">Content design standards</div>
-      <p class="shipped-desc">Aligned on notification content design across all teams and documented the standards in the design system — the infrastructure that makes future consistency possible without central oversight.</p>
-    </div>
-    <div class="shipped-item">
-      <div class="shipped-num">05</div>
-      <div class="shipped-title">Redesigned notification settings center</div>
-      <p class="shipped-desc">A robust, updated settings experience giving users full control over their preferences by channel — opt-in/out at the category level, with sensible defaults built in.</p>
-    </div>
-  </div>
-  </div>
-</div>
 
-<!-- ── IMPACT ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">Impact</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">Built to be democratized. By establishing shared standards and migrating to Courier, we gave all six product teams the foundation to iterate on notifications independently — without creating new inconsistencies.</p>
-  </div>
-</div>
+  <!-- ── BAND: IMPACT + OUTCOMES + WHAT I LEARNED ── -->
+  <div class="cs-band fade">
+    <section class="section">
+      <h2 class="section-label">Impact</h2>
+      <div class="section-body">
+        <p class="body-text">Built to be democratized. By establishing shared standards and migrating to Courier, we gave all six product teams the foundation to iterate on notifications independently — without creating new inconsistencies.</p>
+      </div>
+    </section>
 
-<!-- ── IMAGE PAIR: Before/after or two key screens ── -->
-<div class="pair-wrap fade">
-  <div class="img-pair">
-    <div class="img-half">
-      <span class="ph-label">Screen image</span>
-      <span class="ph-hint">e.g. in-app notification inbox</span>
-    </div>
-    <div class="img-half">
-      <span class="ph-label">Screen image</span>
-      <span class="ph-hint">e.g. notification settings center</span>
-    </div>
-  </div>
-  <div class="pair-captions">
-    <span>New in-app notification inbox — centralized, accessible from the main nav</span>
-    <span>Redesigned settings center — per-channel control with sensible defaults</span>
-  </div>
-</div>
+    <section class="section">
+      <h2 class="section-label">Outcomes</h2>
+      <div class="section-body">
+        <div class="outcomes">
+          <div class="outcome">19% increase in click rate for task-based emails</div>
+          <div class="outcome">74% of users engaged with the new notification settings on launch</div>
+          <div class="outcome">11 redundant templates deprecated — reducing noise and maintenance overhead</div>
+          <div class="outcome">6 product teams aligned on shared notification standards they now build on independently</div>
+        </div>
+      </div>
+    </section>
 
-<!-- ── OUTCOMES ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">Outcomes</h2>
+    <section class="section">
+      <h2 class="section-label">What I learned</h2>
+      <div class="section-body">
+        <p class="body-text">The most valuable thing this project produced wasn't the in-app notification experience — it was the standards. By democratizing the notification system and giving each product team clear guidelines, we made it possible for the whole org to iterate on notifications without creating new inconsistencies.</p>
+        <p class="body-text">That's the difference between solving a problem and building infrastructure that prevents the problem from recurring. The 74% settings engagement on launch was gratifying — but the fact that six teams can now ship notifications independently, consistently, is the outcome that scales.</p>
+      </div>
+    </section>
   </div>
-  <div class="section-right">
-  <div class="outcomes-grid">
-    <div class="outcome-item">
-      <div class="outcome-value">19%</div>
-      <div class="outcome-label">Increase in click rate for task-based emails</div>
-    </div>
-    <div class="outcome-item">
-      <div class="outcome-value">74%</div>
-      <div class="outcome-label">Of users engaged with the new notification settings on launch</div>
-    </div>
-    <div class="outcome-item">
-      <div class="outcome-value">11</div>
-      <div class="outcome-label">Redundant templates deprecated — reducing noise and maintenance overhead</div>
-    </div>
-    <div class="outcome-item">
-      <div class="outcome-value">6</div>
-      <div class="outcome-label">Product teams aligned on shared notification standards they now build on independently</div>
-    </div>
-  </div>
-  </div>
-</div>
 
-<!-- ── WHAT I LEARNED ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">What I learned</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">The most valuable thing this project produced wasn't the in-app notification experience — it was the standards. By democratizing the notification system and giving each product team clear guidelines, we made it possible for the whole org to iterate on notifications without creating new inconsistencies.</p>
-    <p class="body-text">That's the difference between solving a problem and building infrastructure that prevents the problem from recurring. The 74% settings engagement on launch was gratifying — but the fact that six teams can now ship notifications independently, consistently, is the outcome that scales.</p>
-  </div>
 </div>
 
 </main>
@@ -552,10 +461,26 @@
 </footer>
 
 <script>
+  // Fade-in on scroll
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+  // Tabbed carousels
+  document.querySelectorAll('.tabs').forEach(tablist => {
+    const tabs = Array.from(tablist.querySelectorAll('.tab'));
+    const panels = Array.from(tablist.parentElement.querySelectorAll('.tab-panel'));
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
+        panels.forEach(p => { p.classList.remove('is-active'); p.hidden = true; });
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-selected', 'true');
+        if (panels[i]) { panels[i].classList.add('is-active'); panels[i].hidden = false; }
+      });
+    });
+  });
 </script>
 </body>
 </html>

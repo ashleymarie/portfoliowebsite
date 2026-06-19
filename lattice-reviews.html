@@ -6,7 +6,7 @@
 <title>Reviews: From Strategy to Execution — Ashley Quinn</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -20,7 +20,12 @@
     --sans: 'Jost', sans-serif;
     --max: 1080px;
     --pad: max(2rem, calc((100vw - var(--max)) / 2));
+    --gutter: 2rem;
     --text-max: 640px;
+    --media-max: 1075px;
+    --band: #f7f9ff;
+    --ink: #1a1a1a;
+    --accent: #234894;
   }
 
   html { scroll-behavior: smooth; }
@@ -35,6 +40,7 @@
     font-weight: 300;
   }
 
+  /* ── LOGO LOCKUP ── */
   a.logo-lockup {
     display: flex;
     align-items: center;
@@ -54,7 +60,7 @@
     letter-spacing: 0.01em;
   }
 
-  /* ── HERO ── */
+  /* ── PAGE HERO (dark zone) ── */
   .page-hero { padding: 4rem var(--pad) 3rem; }
 
   .page-meta {
@@ -85,7 +91,7 @@
     max-width: var(--text-max);
   }
 
-  /* ── HERO IMAGE ── */
+  /* ── HERO IMAGE — full bleed ── */
   .hero-image {
     width: 100%;
     aspect-ratio: 21 / 9;
@@ -97,314 +103,151 @@
     gap: 0.5rem;
     overflow: hidden;
   }
-
   .hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  /* ── SECTION ── */
-  .section {
-    padding: 7rem var(--pad) 0;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 4rem;
-    align-items: start;
+  /* ── LIGHT CONTENT (everything below the hero image) ── */
+  .content-light {
+    background: #fff;
+    color: var(--ink);
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding-top: 80px;
   }
 
-  .section-left { padding-top: 0.2rem; }
-
-  .section-right { display: flex; flex-direction: column; gap: 0.75rem; }
-
-  .section-headline {
-    font-family: var(--serif);
-    font-size: clamp(1.2rem, 2vw, 1.6rem);
-    font-weight: 500;
-    color: var(--white);
-    line-height: 1.3;
+  /* centered text column (~80ch) */
+  .section {
+    width: min(calc(100% - 2 * var(--gutter)), var(--text-max));
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
 
   .section-label {
     font-family: var(--serif);
-    font-size: clamp(1.2rem, 2vw, 1.75rem);
+    font-size: 1.75rem;
     font-weight: 400;
-    color: var(--white);
     line-height: 1.2;
+    color: var(--ink);
   }
+
+  .section-body { display: flex; flex-direction: column; }
 
   .body-text {
     font-size: 1.05rem;
-    color: var(--white);
     line-height: 1.8;
-    font-weight: 300;
-    max-width: var(--text-max);
+    font-weight: 400;
+    color: var(--ink);
     margin-bottom: 1.25rem;
   }
+  .body-text:last-child { margin-bottom: 0; }
+  .body-text strong { font-weight: 600; }
 
-  .section-right .body-text { margin-bottom: 0; }
-
-  /* ── PROBLEM STATEMENTS ── */
-  .questions-wrap { padding: 2.5rem var(--pad) 0; }
-
-  .problem-statements {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--white-15);
-    border: 1px solid var(--white-15);
+  /* centered media band (up to 1075px) */
+  .figure {
+    width: min(calc(100% - 2 * var(--gutter)), var(--media-max));
+    margin-inline: auto;
   }
 
-  .problem-statement {
-    background: rgba(30, 58, 138, 0.5);
-    padding: 1.1rem 1.5rem;
-    font-size: 1.05rem;
-    color: var(--white);
-    line-height: 1.55;
-    font-weight: 300;
-    font-family: var(--serif);
-    font-style: italic;
-  }
-
-  /* ── SPLIT ROW ── */
-  .split-row {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 4rem;
-    align-items: start;
-    padding: 7rem var(--pad) 0;
-  }
-
-  .split-row.flip { grid-template-columns: 1.4fr 1fr; }
-  .split-row.flip .split-text { order: 2; }
-  .split-row.flip .split-image { order: 1; }
-
-  .split-text { display: flex; flex-direction: column; gap: 1rem; padding-top: 0.5rem; }
-
-  .split-label {
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white-60);
-  }
-
-  .split-title {
-    font-family: var(--serif);
-    font-size: clamp(1.3rem, 2vw, 1.75rem);
-    font-weight: 400;
-    color: var(--white);
-    line-height: 1.2;
-  }
-
-  .split-body {
-    font-size: 1.05rem;
-    color: var(--white-60);
-    line-height: 1.8;
-    font-weight: 300;
-  }
-
-  .split-body + .split-body { margin-top: 0.25rem; }
-
-  .split-image {
+  .media {
     width: 100%;
-    aspect-ratio: 4 / 3;
-    background: rgba(255,255,255,0.07);
+    background: rgba(0,0,0,0.05);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
+    gap: 7px;
     overflow: hidden;
   }
+  .media.wide { aspect-ratio: 16 / 7; }
+  .media.tall { aspect-ratio: 4 / 3; }
+  .media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  .split-image.tall { aspect-ratio: 3 / 4; }
-  .split-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  /* ── FULL IMAGE ── */
-  .full-image-wrap { padding: 5rem var(--pad) 0; }
-
-  .full-image {
-    width: 100%;
-    aspect-ratio: 16 / 7;
-    background: rgba(255,255,255,0.07);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
-    overflow: hidden;
-  }
-
-  .full-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  .img-caption {
-    font-size: 0.82rem;
-    color: var(--white-30);
-    font-weight: 300;
-    margin-top: 0.75rem;
-  }
-
-  /* ── IMAGE PAIR ── */
-  .pair-wrap { padding: 5rem var(--pad) 0; }
-
-  .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-  .img-half {
-    aspect-ratio: 16 / 10;
-    background: rgba(255,255,255,0.07);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
-    overflow: hidden;
-  }
-
-  .img-half img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  .pair-captions { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.75rem; }
-  .pair-captions span { font-size: 0.82rem; color: var(--white-30); font-weight: 300; }
-
-  /* ── CONCEPTS GRID ── */
-  .concepts-wrap { padding: 2.5rem var(--pad) 0; }
-
-  .concepts-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--white-15);
-    border: 1px solid var(--white-15);
-  }
-
-  .concept-item { background: rgba(30, 58, 138, 0.5); padding: 1.25rem; }
-
-  .concept-num {
-    font-size: 0.72rem;
-    color: var(--white-30);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
-
-  .concept-name {
-    font-size: 0.95rem;
-    font-weight: 400;
-    color: var(--white);
-    line-height: 1.3;
-    margin-bottom: 0.4rem;
-  }
-
-  .concept-desc {
-    font-size: 0.82rem;
-    color: var(--white-60);
-    line-height: 1.55;
-    font-weight: 300;
-  }
-
-  /* ── HEURISTICS ── */
-  .heuristics-wrap { padding: 2.5rem var(--pad) 0; }
-
-  .heuristics {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--white-15);
-    border: 1px solid var(--white-15);
-  }
-
-  .heuristic {
-    background: rgba(30, 58, 138, 0.5);
-    padding: 1rem 1.5rem;
-    font-size: 1.05rem;
-    color: var(--white);
-    line-height: 1.6;
-    font-weight: 300;
-  }
-
-  /* ── OUTCOMES ── */
-  .outcomes-wrap { padding: 2.5rem var(--pad) 0; }
-
-  .outcomes {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 1px;
-    background: var(--white-15);
-    border: 1px solid var(--white-15);
-  }
-
-  .outcome-stat {
-    background: rgba(30, 58, 138, 0.5);
-    padding: 2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .outcome-stat-label {
-    font-size: 1.05rem;
-    color: var(--white);
-    line-height: 1.65;
-    font-weight: 300;
-  }
-
-  .outcome-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    background: var(--white-15);
-  }
-
-  .outcome {
-    background: rgba(30, 58, 138, 0.5);
-    padding: 1.5rem;
-    font-size: 1.05rem;
-    color: var(--white);
-    line-height: 1.65;
-    font-weight: 300;
-    flex: 1;
-  }
-
-  /* ── STAT ── */
-  .stat-inline {
-    font-family: var(--serif);
-    font-size: 3rem;
-    color: var(--white);
-    line-height: 1;
-    display: block;
-    margin-bottom: 0.25rem;
-  }
-
-  /* ── PLACEHOLDERS ── */
   .ph-label {
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white-30);
+    font-size: 0.72rem; font-weight: 400; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(0,0,0,0.38);
+  }
+  .ph-hint { font-size: 0.72rem; font-weight: 300; color: rgba(0,0,0,0.3); text-align: center; padding: 0 1rem; }
+
+  .img-caption { font-size: 0.82rem; color: rgba(0,0,0,0.55); font-weight: 400; margin-top: 0.75rem; }
+
+  /* grouped white block (e.g. What we shipped + images) */
+  .cs-group { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+
+  /* banded group */
+  .cs-band {
+    background: var(--band);
+    padding-block: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
   }
 
-  .ph-hint { font-size: 0.72rem; color: rgba(255,255,255,0.18); font-weight: 300; }
+  /* approach: centered text + full-width tabbed media */
+  .cs-approach {
+    width: min(calc(100% - 2 * var(--gutter)), var(--media-max));
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+  .cs-approach .section { width: 100%; max-width: var(--text-max); }
 
-  /* ── FOOTER ── */
+  .tabs-wrap { width: 100%; }
+  .tabs { display: flex; border-bottom: 1px solid rgba(0,0,0,0.12); }
+  .tab {
+    flex: 1; min-width: 0; padding: 24px 12px; text-align: center; cursor: pointer;
+    background: none; border: none; border-bottom: 3px solid transparent; margin-bottom: -1px;
+    font-family: var(--serif); font-size: 1.25rem; font-weight: 400; color: rgba(0,0,0,0.64);
+    transition: color .2s, border-color .2s;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.is-active { color: #000; border-bottom-color: var(--accent); }
+  .tab-panels { margin-top: 10px; }
+  .tab-panel { display: none; }
+  .tab-panel.is-active { display: block; }
+
+  /* callout */
+  .callout {
+    background: rgba(0,0,0,0.04);
+    border-left: 2px solid rgba(0,0,0,0.38);
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem; color: rgba(0,0,0,0.64); line-height: 1.65; font-weight: 400;
+    margin-top: 0.5rem;
+  }
+
+  /* outcomes */
+  .outcomes {
+    display: flex; flex-direction: column; gap: 1px;
+    background: rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.1);
+    margin-top: 0.5rem;
+  }
+  .outcome {
+    background: #fff; padding: 1.25rem 1.5rem;
+    font-size: 1.05rem; line-height: 1.7; font-weight: 400; color: var(--ink);
+  }
+
+  /* ── FOOTER (light) ── */
   footer {
     padding: 3rem var(--pad) 4rem;
     display: flex;
     justify-content: center;
     gap: 3rem;
-    border-top: 1px solid var(--white-15);
-    margin-top: 5rem;
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.1);
   }
-
   footer a {
-    font-size: 0.78rem;
-    font-weight: 400;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--white);
-    text-decoration: none;
-    opacity: 0.75;
-    transition: opacity 0.2s;
+    font-size: 0.78rem; font-weight: 400; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink); text-decoration: none;
+    opacity: 0.7; transition: opacity 0.2s;
   }
-
   footer a:hover { opacity: 1; }
 
+  /* ── FADE ── */
   .fade { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .fade.in { opacity: 1; transform: none; }
 
@@ -417,8 +260,8 @@
   }
   .skip-link:focus { top: 0; }
 
-  a:focus-visible {
-    outline: 2px solid #fff;
+  a:focus-visible, .tab:focus-visible {
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -427,18 +270,17 @@
     .fade { opacity: 1; transform: none; transition: none; }
   }
 
+  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    :root { --pad: 1.5rem; }
+    :root { --pad: 1.5rem; --gutter: 1.5rem; }
     .logo-mark { width: 40px; height: 40px; }
     .logo-name { font-size: 0.95rem; }
-    .section { grid-template-columns: 1fr; gap: 1.5rem; }
-    .split-row, .split-row.flip { grid-template-columns: 1fr; gap: 2rem; }
-    .split-row.flip .split-text { order: 1; }
-    .split-row.flip .split-image { order: 2; }
-    .problem-statements, .heuristics, .outcomes { grid-template-columns: 1fr; }
-    .concepts-grid { grid-template-columns: repeat(2, 1fr); }
-    .img-pair, .pair-captions { grid-template-columns: 1fr; }
     .hero-image { aspect-ratio: 4 / 3; }
+    .content-light { padding-top: 56px; gap: 40px; }
+    .cs-band { padding-block: 56px; gap: 40px; }
+    .cs-group, .cs-approach { gap: 32px; }
+    .section-label { font-size: 1.4rem; }
+    .tab { padding: 14px 8px; font-size: 1rem; }
   }
 </style>
 <noscript><style>.fade { opacity: 1; transform: none; }</style></noscript>
@@ -446,6 +288,7 @@
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
 
+<!-- Logo — links back to portfolio -->
 <a href="index.html" class="logo-lockup" aria-label="Ashley Marie Quinn — home">
 <svg class="logo-mark" viewBox="0 0 255 255" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none">
   <path style="fill:none;stroke:#ffffff;stroke-miterlimit:10;" d="M90.2,120.3l1.4,0.3c1.1,0.2,2.1,0.5,3.1,0.9c1.2,0.5,2.4,1.1,3.6,1.8c0,0,12.4,8.4,4.7,14.4
@@ -465,8 +308,9 @@
   <span class="logo-name">Ashley Marie Quinn</span>
 </a>
 
-<!-- ── HERO ── -->
 <main id="main">
+
+<!-- ── PAGE HERO ── -->
 <div class="page-hero fade">
   <div class="page-meta">Lattice · Design Lead · 2021–2023</div>
   <h1 class="page-title">Reviews: From Strategy to Execution</h1>
@@ -478,206 +322,137 @@
   <img src="lattice_reviews_hero.png" alt="Image of many of the screens that were redesigned as part of the project" />
 </div>
 
-<!-- ── THE PROBLEM ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">The problem</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">Admins — the champions and advocates of Lattice at their organizations — were navigating a fragmented, overloaded interface to configure review cycles that only happen one to two times per year. The stakes were high: a confusing setup experience meant support tickets, churn risk, and erosion of trust in a product that organizations depend on for performance and compensation decisions.</p>
-    <p class="body-text">The Reviews setup process had accumulated UX debt as the product scaled. Information was scattered across multiple pages. Important decisions carried the same visual weight as minor ones. Admins had to hold the entire flow in their heads while configuring — with no way to see how choices across pages connected to each other.</p>
-  </div>
-</div>
+<div class="content-light">
 
-<!-- ── Research image — full width ── -->
-<div class="full-image-wrap fade">
-  <div class="full-image" style="aspect-ratio: 2160 / 637;">
-    <img src="lattice_reviews_ideation.png" alt="Ideation process" />
-  </div>
-</div>
+  <!-- ── BACKGROUND ── -->
+  <section class="section fade">
+    <h2 class="section-label">Background</h2>
+    <div class="section-body">
+      <p class="body-text">Reviews was Lattice's tent-pole product — the experience organizations depend on for performance and compensation decisions. But its setup and configuration experience hadn't kept pace with how the product had grown, accumulating UX debt as it scaled.</p>
+      <p class="body-text">Admins — the champions and advocates of Lattice at their organizations — were navigating a fragmented, overloaded interface to configure review cycles that only happen one to two times per year. The stakes were high: a confusing setup experience meant support tickets, churn risk, and erosion of trust in a product organizations rely on.</p>
+    </div>
+  </section>
 
-<!-- ── SECTION: Research & strategy ── -->
-<div class="section fade" style="padding-top: 3rem;">
-  <div class="section-left">
-    <h2 class="section-label">Research & strategy</h2>
-  </div>
-  <div class="section-right">
-    <p class="section-headline">14 interviews. 10 days. Three questions that shaped everything.</p>
-    <p class="body-text">My product partner and I conducted 14 stakeholder interviews over 10 days — talking to the internal teams who supported admins through the review setup process to understand where it was breaking down. From the synthesis, three guiding problem statements emerged.</p>
-  </div>
-</div>
+  <!-- ── MY ROLE ── -->
+  <section class="section fade">
+    <h2 class="section-label">My role</h2>
+    <div class="section-body">
+      <p class="body-text">I led this initiative across both halves — from the research and concept strategy that defined what the product needed to become, through to the complete redesign that shipped it. Leading both strategy and execution on a newly formed team meant defining the work and building the team's ways of working at the same time.</p>
+      <p class="body-text">Throughout, I partnered closely with my product partner on research, with engineering on the underlying information architecture, and piloted Lattice's burgeoning content design practice by pairing with their first content design hire across execution.</p>
+    </div>
+  </section>
 
-<!-- Problem statements — full width horizontal -->
-<div class="questions-wrap fade">
-  <div class="problem-statements">
-    <div class="problem-statement">How do I match my current review process to a reviews tool?</div>
-    <div class="problem-statement">How do I understand each option and configuration in Lattice and make sure it aligns with what I want my reviews process to be?</div>
-    <div class="problem-statement">How do I run reviews effectively?</div>
-  </div>
-</div>
+  <!-- ── PROBLEM DIAGRAM ── -->
+  <figure class="figure fade">
+    <div class="media wide" style="aspect-ratio: 2160 / 637;">
+      <img src="lattice_reviews_ideation.png" alt="Ideation process" />
+    </div>
+    <figcaption class="img-caption">Early ideation — mapping where the existing setup experience was breaking down.</figcaption>
+  </figure>
 
-<!-- ── The concepts: title + paragraph ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">The concepts</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">I designed and validated eight concepts through 11 rounds of concept testing with both customers and internal stakeholders — using dot voting and talk-aloud protocols to understand not just what resonated, but why.</p>
-  </div>
-</div>
+  <!-- ── BAND: THE PROBLEM + THE APPROACH ── -->
+  <div class="cs-band fade">
+    <section class="section">
+      <h2 class="section-label">The problem</h2>
+      <div class="section-body">
+        <p class="body-text">The Reviews setup process had accumulated UX debt as the product scaled. Information was scattered across multiple pages. Important decisions carried the same visual weight as minor ones. Admins had to hold the entire flow in their heads while configuring — with no way to see how choices across pages connected to each other.</p>
+        <p class="body-text">Three guiding problem statements emerged from research and framed the work:</p>
+        <div class="callout">How do I match my current review process to a reviews tool? · How do I understand each option and configuration in Lattice and make sure it aligns with what I want my reviews process to be? · How do I run reviews effectively?</div>
+      </div>
+    </section>
 
-<!-- ── FULL IMAGE: 8 concepts overview ── -->
-<div class="full-image-wrap fade">
-  <div class="full-image">
-    <img src="lattice_reviews_concepts.png" alt="Image of the 8 different concepts for testing" />
-  </div>
-  <div class="img-caption">Eight concepts tested — from guided flows and setup by direction to task lists, timelines, and review retros.</div>
-</div>
-
-<!-- ── CONCEPTS GRID — full width ── -->
-<div class="concepts-wrap fade">
-  <div class="concepts-grid">
-    <div class="concept-item">
-      <div class="concept-num">01</div>
-      <div class="concept-name">Guided flow</div>
-      <p class="concept-desc">Lattice guides admins through key questions to find the right settings</p>
-    </div>
-    <div class="concept-item">
-      <div class="concept-num">02 — Selected</div>
-      <div class="concept-name">Setup by direction</div>
-      <p class="concept-desc">Setup organized around review directions, grouping all related settings together</p>
-    </div>
-    <div class="concept-item">
-      <div class="concept-num">03</div>
-      <div class="concept-name">Popular configurations</div>
-      <p class="concept-desc">Pre-packaged configurations based on what similar organizations actually use</p>
-    </div>
-    <div class="concept-item">
-      <div class="concept-num">04</div>
-      <div class="concept-name">Preview as...</div>
-      <p class="concept-desc">See the review cycle as it will look to managers and employees before launching</p>
-    </div>
-    <div class="concept-item">
-      <div class="concept-num">05</div>
-      <div class="concept-name">Lattice best practices</div>
-      <p class="concept-desc">Contextual guidance surfacing benchmark data and best practice advice inline</p>
-    </div>
-    <div class="concept-item">
-      <div class="concept-num">06</div>
-      <div class="concept-name">Reviews task list</div>
-      <p class="concept-desc">A unified task view for tracking and completing review cycle setup steps</p>
-    </div>
-    <div class="concept-item">
-      <div class="concept-num">07</div>
-      <div class="concept-name">Timeline</div>
-      <p class="concept-desc">A visual timeline showing what happens at each stage of the review cycle</p>
-    </div>
-    <div class="concept-item">
-      <div class="concept-num">08</div>
-      <div class="concept-name">Review retro</div>
-      <p class="concept-desc">Post-cycle reflection prompts to help teams improve their next review</p>
+    <div class="cs-approach">
+      <section class="section">
+        <h2 class="section-label">The approach</h2>
+        <div class="section-body">
+          <p class="body-text">The work moved through three phases — researching where setup broke down, designing and validating concepts to find the right direction, then executing a complete redesign grounded in a new information architecture.</p>
+        </div>
+      </section>
+      <div class="tabs-wrap">
+        <div class="tabs" role="tablist" aria-label="Approach">
+          <button class="tab is-active" role="tab" aria-selected="true" id="tab-research" aria-controls="panel-research">Research &amp; strategy</button>
+          <button class="tab" role="tab" aria-selected="false" id="tab-concepts" aria-controls="panel-concepts">The concepts</button>
+          <button class="tab" role="tab" aria-selected="false" id="tab-execution" aria-controls="panel-execution">Execution</button>
+        </div>
+        <div class="tab-panels">
+          <figure class="tab-panel is-active" role="tabpanel" id="panel-research" aria-labelledby="tab-research">
+            <div class="media wide">
+              <span class="ph-label">Process artifact</span>
+              <span class="ph-hint">Research synthesis — 14 interviews over 10 days</span>
+            </div>
+            <figcaption class="img-caption">14 interviews. 10 days. Three problem statements that shaped everything.</figcaption>
+          </figure>
+          <figure class="tab-panel" role="tabpanel" id="panel-concepts" aria-labelledby="tab-concepts" hidden>
+            <div class="media wide">
+              <img src="lattice_reviews_concepts.png" alt="Image of the 8 different concepts for testing" />
+            </div>
+            <figcaption class="img-caption">Eight concepts, 11 rounds of testing — from guided flows and setup by direction to task lists, timelines, and review retros.</figcaption>
+          </figure>
+          <figure class="tab-panel" role="tabpanel" id="panel-execution" aria-labelledby="tab-execution" hidden>
+            <div class="media wide">
+              <img src="lattice_reviews_buildingblocks.png" alt="Information architecture building blocks" />
+            </div>
+            <figcaption class="img-caption">Restructuring the IA first — mapping content blocks to new flow steps across 11+ pages.</figcaption>
+          </figure>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- ── SPLIT: Winning concept — image left, text right ── -->
-<div class="split-row flip fade">
-  <div class="split-text">
-    <div class="split-label">The winning concept</div>
-    <h3 class="split-title">Setup by direction — a fundamental rethinking of the IA</h3>
-    <p class="split-body">Concept #2 emerged clearly from testing. Rather than presenting admins with a flat list of settings scattered across multiple pages, Setup by Direction reorganized the entire experience around review directions — downward, upward, peer, self — grouping all related settings together so dependencies were immediately visible.</p>
-    <p class="split-body">This wasn't a visual refresh. It was a rethinking of the underlying information architecture, aligning the setup experience with how admins actually think about reviews.</p>
+  <!-- ── WHAT SHIPPED ── -->
+  <div class="cs-group fade">
+    <section class="section">
+      <h2 class="section-label">What shipped</h2>
+      <div class="section-body">
+        <p class="body-text">A complete redesign of the review cycle creation experience across more than 11 distinct pages, organized around <strong>Setup by Direction</strong> — the winning concept from testing. Rather than a flat list of settings scattered across pages, the experience reorganized around review directions — downward, upward, peer, self — grouping related settings so dependencies were immediately visible. This wasn't a visual refresh; it was a rethinking of the underlying information architecture to match how admins actually think about reviews.</p>
+      </div>
+    </section>
+    <figure class="figure">
+      <div class="media tall">
+        <img src="lattice_reviews_conceptselection.png" alt="Image of the selected concept, Reviews by Direction" />
+      </div>
+      <figcaption class="img-caption">Setup by Direction — the winning concept, a fundamental rethinking of the IA validated through testing.</figcaption>
+    </figure>
+    <figure class="figure">
+      <div class="media tall">
+        <img src="lattice_reviews_buildingblocks.png" alt="Image of the restructured information architecture building blocks" />
+      </div>
+      <figcaption class="img-caption">IA restructured before any visual design — content blocks mapped to new flow steps, with engineering resolving cross-page dependencies.</figcaption>
+    </figure>
+    <figure class="figure">
+      <div class="media tall" style="aspect-ratio: unset; height: auto; overflow: visible; display: block;">
+        <video autoplay loop muted playsinline style="width: 100%; height: auto; display: block;">
+          <source src="lattice_reviews_finalfinal.mp4" type="video/mp4">
+        </video>
+      </div>
+      <figcaption class="img-caption">The shipped experience — review cycle setup redesigned across 11+ pages, organized by direction, validated through eight usability tests.</figcaption>
+    </figure>
   </div>
-  <div class="split-image">
-    <img src="lattice_reviews_conceptselection.png" alt="Image of the selected concept, Reivews by Direction" />
-  </div>
-</div>
 
-<!-- ── SECTION: Execution ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">Execution</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">With the concept validated, I moved into a complete redesign of the review cycle creation experience across more than 11 distinct pages. My first step was a heuristic analysis of the existing flows — organized against Jakob Nielsen's 10 principles — which surfaced three problems that shaped the execution work:</p>
-  </div>
-</div>
+  <!-- ── BAND: OUTCOMES + WHAT I LEARNED ── -->
+  <div class="cs-band fade">
+    <section class="section">
+      <h2 class="section-label">Outcomes</h2>
+      <div class="section-body">
+        <p class="body-text">Before launch, we established a CSAT baseline with the data team and monitored it closely post-launch. The results reflected the investment made upfront in getting the strategy right before building.</p>
+        <div class="outcomes">
+          <div class="outcome">22% increase in Admin CSAT — measured against a baseline established before launch</div>
+          <div class="outcome">Meaningful reduction in time spent by Customer Support assisting customers with review creation</div>
+          <div class="outcome">Established the foundation for the Reviews Admin team's future roadmap</div>
+          <div class="outcome">Piloted Lattice's content design practice — a model that extended to other teams</div>
+        </div>
+      </div>
+    </section>
 
-<!-- Heuristics — full width horizontal -->
-<div class="heuristics-wrap fade">
-  <div class="heuristics">
-    <div class="heuristic">Users needed exceptional recall to remember past decisions across a long, fragmented flow</div>
-    <div class="heuristic">Users had significant flexibility of choice but no efficient way to exercise it</div>
-    <div class="heuristic">Information wasn't prioritized by importance — causing decision paralysis at critical moments</div>
+    <section class="section">
+      <h2 class="section-label">What I learned</h2>
+      <div class="section-body">
+        <p class="body-text">The strategy half of this project was as important as the execution half — maybe more so. Investing in eight concepts and 11 rounds of testing before committing to a direction meant that when we built, we built the right thing. The 22% CSAT lift wasn't luck — it was the result of knowing exactly what problem we were solving before touching a single production screen.</p>
+        <p class="body-text">Leading both strategy and execution on a newly formed team simultaneously also meant defining the work and building the team's ways of working at the same time. That's a different kind of challenge than either alone.</p>
+      </div>
+    </section>
   </div>
-</div>
 
-<!-- ── SPLIT: IA work — text left, image right ── -->
-<div class="split-row fade">
-  <div class="split-text">
-    <div class="split-label">Information architecture</div>
-    <h3 class="split-title">Restructuring before designing</h3>
-    <p class="split-body">I restructured the information architecture first — mapping content blocks to new flow steps and evaluating each of the 11+ existing pages before touching visual design. I kept early explorations deliberately low-fidelity so the team could build familiarity and give meaningful feedback before getting into detail.</p>
-    <p class="split-body">Input from engineering was critical here. The existing flow had numerous cross-page dependencies that needed to be identified and resolved before the new IA could work.</p>
-  </div>
-  <div class="split-image">
-    <img src="lattice_reviews_buildingblocks.png" alt="Image of the selected concept, Reivews by Direction" />
-  </div>
-</div>
-
-<!-- ── SECTION: Validation ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">Validation and launch</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">After iterating across all 11+ pages, I built full prototypes of the complete experience and ran four usability tests with customers and four with internal stakeholders — participants navigating as they would during a real review cycle setup, thinking aloud throughout. </p> <p>A notable collaboration: we piloted Lattice's burgeoning content design practice by pairing with their first content design hire throughout execution — fine-tuning copywriting and IA together to ensure the highest quality experience across every step of the flow.</p>
-  </div></div>
-</div>
-
-<!-- ── FULL IMAGE: Final designs ── -->
-<div class="full-image-wrap fade">
-  <div class="full-image" style="aspect-ratio: unset; height: auto; overflow: visible; display: block;">
-    <video autoplay loop muted playsinline style="width: 100%; height: auto; display: block;">
-      <source src="lattice_reviews_finalfinal.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="img-caption">The shipped experience — review cycle setup redesigned across 11+ pages, organized by direction.</div>
-</div>
-
-<!-- ── OUTCOMES ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">Outcomes</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">Before launch, we established a CSAT baseline with the data team and monitored it closely post-launch. The results reflected the investment made upfront in getting the strategy right before building.</p>
-  </div>
-</div>
-
-<div class="outcomes-wrap fade">
-  <div class="outcomes">
-    <div class="outcome-stat">
-      <span class="stat-inline">22%</span>
-      <span class="outcome-stat-label">Increase in Admin CSAT — measured against baseline established before launch</span>
-    </div>
-    <div class="outcome-list">
-      <div class="outcome">Meaningful reduction in time spent by Customer Support assisting customers with review creation</div>
-      <div class="outcome">Established the foundation for the Reviews Admin team's future roadmap</div>
-      <div class="outcome">Piloted Lattice's content design practice — a model that extended to other teams</div>
-    </div>
-  </div>
-</div>
-
-<!-- ── WHAT I LEARNED ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">What I learned</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">The strategy half of this project was as important as the execution half — maybe more so. Investing in eight concepts and 11 rounds of testing before committing to a direction meant that when we built, we built the right thing. The 22% CSAT lift wasn't luck — it was the result of knowing exactly what problem we were solving before touching a single production screen.</p>
-    <p class="body-text">Leading both strategy and execution on a newly formed team simultaneously also meant defining the work and building the team's ways of working at the same time. That's a different kind of challenge than either alone.</p>
-  </div>
 </div>
 
 </main>
@@ -688,10 +463,26 @@
 </footer>
 
 <script>
+  // Fade-in on scroll
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+  // Tabbed carousels
+  document.querySelectorAll('.tabs').forEach(tablist => {
+    const tabs = Array.from(tablist.querySelectorAll('.tab'));
+    const panels = Array.from(tablist.parentElement.querySelectorAll('.tab-panel'));
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
+        panels.forEach(p => { p.classList.remove('is-active'); p.hidden = true; });
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-selected', 'true');
+        if (panels[i]) { panels[i].classList.add('is-active'); panels[i].hidden = false; }
+      });
+    });
+  });
 </script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 <title>Designing for Inclusion: Pronouns at Lattice — Ashley Quinn</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -20,7 +20,12 @@
     --sans: 'Jost', sans-serif;
     --max: 1080px;
     --pad: max(2rem, calc((100vw - var(--max)) / 2));
+    --gutter: 2rem;
     --text-max: 640px;
+    --media-max: 1075px;
+    --band: #f7f9ff;
+    --ink: #1a1a1a;
+    --accent: #234894;
   }
 
   html { scroll-behavior: smooth; }
@@ -35,6 +40,7 @@
     font-weight: 300;
   }
 
+  /* ── LOGO LOCKUP ── */
   a.logo-lockup {
     display: flex;
     align-items: center;
@@ -54,7 +60,7 @@
     letter-spacing: 0.01em;
   }
 
-  /* ── HERO ── */
+  /* ── PAGE HERO (dark zone) ── */
   .page-hero { padding: 4rem var(--pad) 3rem; }
 
   .page-meta {
@@ -85,7 +91,7 @@
     max-width: var(--text-max);
   }
 
-  /* ── HERO IMAGE ── */
+  /* ── HERO IMAGE — full bleed ── */
   .hero-image {
     width: 100%;
     aspect-ratio: 21 / 9;
@@ -97,287 +103,151 @@
     gap: 0.5rem;
     overflow: hidden;
   }
-
   .hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  /* ── SECTION ── */
-  .section {
-    padding: 5rem var(--pad) 0;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 4rem;
-    align-items: start;
+  /* ── LIGHT CONTENT (everything below the hero image) ── */
+  .content-light {
+    background: #fff;
+    color: var(--ink);
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding-top: 80px;
   }
-  .section-left { padding-top: 0.2rem; }
-  .section-right { display: flex; flex-direction: column; gap: 0; }
+
+  /* centered text column (~80ch) */
+  .section {
+    width: min(calc(100% - 2 * var(--gutter)), var(--text-max));
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
 
   .section-label {
     font-family: var(--serif);
-    font-size: clamp(1.2rem, 2vw, 1.75rem);
+    font-size: 1.75rem;
     font-weight: 400;
-    color: var(--white);
     line-height: 1.2;
+    color: var(--ink);
   }
 
-  .divider {
-    border: none;
-    border-top: 1px solid var(--white-30);
-    margin-bottom: 2rem;
-  }
+  .section-body { display: flex; flex-direction: column; }
 
   .body-text {
     font-size: 1.05rem;
-    color: var(--white);
     line-height: 1.8;
-    font-weight: 300;
-    max-width: var(--text-max);
+    font-weight: 400;
+    color: var(--ink);
     margin-bottom: 1.25rem;
   }
+  .body-text:last-child { margin-bottom: 0; }
+  .body-text strong { font-weight: 600; }
 
-  /* ── QUOTE ── */
-  .pull-quote {
-    border-left: 2px solid rgba(255,255,255,0.4);
-    padding: 1rem 1.5rem;
-    margin: 2rem 0;
+  /* centered media band (up to 1075px) */
+  .figure {
+    width: min(calc(100% - 2 * var(--gutter)), var(--media-max));
+    margin-inline: auto;
   }
 
-  .pull-quote p {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 1.15rem;
-    color: var(--white);
-    line-height: 1.65;
-    margin-bottom: 0.6rem;
-  }
-
-  .pull-quote cite {
-    font-size: 0.82rem;
-    color: var(--white-60);
-    font-style: normal;
-    letter-spacing: 0.04em;
-  }
-
-  /* ── SPLIT ROW ── */
-  .split-row {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 4rem;
-    align-items: start;
-    padding: 5rem var(--pad) 0;
-  }
-
-  .split-row.flip { grid-template-columns: 1.4fr 1fr; }
-  .split-row.flip .split-text { order: 2; }
-  .split-row.flip .split-image { order: 1; }
-
-  .split-text { display: flex; flex-direction: column; gap: 1rem; padding-top: 0.5rem; }
-
-  .split-label {
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white-60);
-  }
-
-  .split-title {
-    font-family: var(--serif);
-    font-size: clamp(1.3rem, 2vw, 1.75rem);
-    font-weight: 400;
-    color: var(--white);
-    line-height: 1.2;
-  }
-
-  .split-body {
-    font-size: 1.05rem;
-    color: var(--white-60);
-    line-height: 1.8;
-    font-weight: 300;
-  }
-
-  .split-image {
+  .media {
     width: 100%;
-    aspect-ratio: 4 / 3;
-    background: rgba(255,255,255,0.07);
+    background: rgba(0,0,0,0.05);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
+    gap: 7px;
     overflow: hidden;
   }
+  .media.wide { aspect-ratio: 16 / 7; }
+  .media.tall { aspect-ratio: 4 / 3; }
+  .media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  .split-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  /* ── FULL IMAGE ── */
-  .full-image-wrap { padding: 5rem var(--pad) 0; }
-
-  .full-image {
-    width: 100%;
-    aspect-ratio: 16 / 7;
-    background: rgba(255,255,255,0.07);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
-    overflow: hidden;
-  }
-
-  .full-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  .img-caption {
-    font-size: 0.82rem;
-    color: var(--white-30);
-    font-weight: 300;
-    margin-top: 0.75rem;
-  }
-
-  /* ── IMAGE PAIR ── */
-  .pair-wrap { padding: 5rem var(--pad) 0; }
-
-  .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-  .img-half {
-    aspect-ratio: 16 / 10;
-    background: rgba(255,255,255,0.07);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
-    overflow: hidden;
-  }
-
-  .img-half img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  .pair-captions { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.75rem; }
-  .pair-captions span { font-size: 0.82rem; color: var(--white-30); font-weight: 300; }
-
-  /* ── PRINCIPLES GRID ── */
-  .principles-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--white-15);
-    border: 1px solid var(--white-15);
-    margin-top: 2rem;
-  }
-
-  .principle-item { background: rgba(30, 58, 138, 0.5); padding: 1.5rem; }
-
-  .principle-title {
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--white);
-    margin-bottom: 0.5rem;
-  }
-
-  .principle-desc {
-    font-size: 0.9rem;
-    color: var(--white-60);
-    line-height: 1.65;
-    font-weight: 300;
-  }
-
-  /* ── OUTCOMES ── */
-  .outcomes {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    background: var(--white-15);
-    border: 1px solid var(--white-15);
-    margin-top: 2rem;
-  }
-
-  .outcome {
-    background: rgba(30, 58, 138, 0.5);
-    padding: 1.25rem 1.5rem;
-    font-size: 1.05rem;
-    color: var(--white);
-    line-height: 1.65;
-    font-weight: 300;
-  }
-
-  /* ── EXTERNAL LINK ── */
-  .article-links {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    background: var(--white-15);
-    border: 1px solid var(--white-15);
-    margin-top: 2rem;
-  }
-
-  .article-link {
-    background: rgba(30, 58, 138, 0.5);
-    padding: 1.25rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-
-  .article-link:hover { background: rgba(30, 58, 138, 0.8); }
-
-  .article-link-label {
-    font-size: 0.75rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white-30);
-    margin-bottom: 0.25rem;
-  }
-
-  .article-link-title {
-    font-size: 0.95rem;
-    color: var(--white);
-    font-weight: 400;
-    line-height: 1.4;
-  }
-
-  .article-link-arrow {
-    font-size: 1rem;
-    color: var(--white-30);
-    flex-shrink: 0;
-  }
-
-  /* ── PLACEHOLDERS ── */
   .ph-label {
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white-30);
+    font-size: 0.72rem; font-weight: 400; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(0,0,0,0.38);
+  }
+  .ph-hint { font-size: 0.72rem; font-weight: 300; color: rgba(0,0,0,0.3); text-align: center; padding: 0 1rem; }
+
+  .img-caption { font-size: 0.82rem; color: rgba(0,0,0,0.55); font-weight: 400; margin-top: 0.75rem; }
+
+  /* grouped white block (e.g. What we shipped + images) */
+  .cs-group { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+
+  /* banded group */
+  .cs-band {
+    background: var(--band);
+    padding-block: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
   }
 
-  .ph-hint { font-size: 0.72rem; color: rgba(255,255,255,0.18); font-weight: 300; }
+  /* approach: centered text + full-width tabbed media */
+  .cs-approach {
+    width: min(calc(100% - 2 * var(--gutter)), var(--media-max));
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+  .cs-approach .section { width: 100%; max-width: var(--text-max); }
 
-  /* ── FOOTER ── */
+  .tabs-wrap { width: 100%; }
+  .tabs { display: flex; border-bottom: 1px solid rgba(0,0,0,0.12); }
+  .tab {
+    flex: 1; min-width: 0; padding: 24px 12px; text-align: center; cursor: pointer;
+    background: none; border: none; border-bottom: 3px solid transparent; margin-bottom: -1px;
+    font-family: var(--serif); font-size: 1.25rem; font-weight: 400; color: rgba(0,0,0,0.64);
+    transition: color .2s, border-color .2s;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.is-active { color: #000; border-bottom-color: var(--accent); }
+  .tab-panels { margin-top: 10px; }
+  .tab-panel { display: none; }
+  .tab-panel.is-active { display: block; }
+
+  /* callout */
+  .callout {
+    background: rgba(0,0,0,0.04);
+    border-left: 2px solid rgba(0,0,0,0.38);
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem; color: rgba(0,0,0,0.64); line-height: 1.65; font-weight: 400;
+    margin-top: 0.5rem;
+  }
+
+  /* outcomes */
+  .outcomes {
+    display: flex; flex-direction: column; gap: 1px;
+    background: rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.1);
+    margin-top: 0.5rem;
+  }
+  .outcome {
+    background: #fff; padding: 1.25rem 1.5rem;
+    font-size: 1.05rem; line-height: 1.7; font-weight: 400; color: var(--ink);
+  }
+
+  /* ── FOOTER (light) ── */
   footer {
     padding: 3rem var(--pad) 4rem;
     display: flex;
     justify-content: center;
     gap: 3rem;
-    border-top: 1px solid var(--white-15);
-    margin-top: 5rem;
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.1);
   }
-
   footer a {
-    font-size: 0.78rem;
-    font-weight: 400;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--white);
-    text-decoration: none;
-    opacity: 0.75;
-    transition: opacity 0.2s;
+    font-size: 0.78rem; font-weight: 400; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink); text-decoration: none;
+    opacity: 0.7; transition: opacity 0.2s;
   }
-
   footer a:hover { opacity: 1; }
 
+  /* ── FADE ── */
   .fade { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .fade.in { opacity: 1; transform: none; }
 
@@ -390,8 +260,8 @@
   }
   .skip-link:focus { top: 0; }
 
-  a:focus-visible {
-    outline: 2px solid #fff;
+  a:focus-visible, .tab:focus-visible {
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -400,17 +270,17 @@
     .fade { opacity: 1; transform: none; transition: none; }
   }
 
+  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    :root { --pad: 1.5rem; }
+    :root { --pad: 1.5rem; --gutter: 1.5rem; }
     .logo-mark { width: 40px; height: 40px; }
     .logo-name { font-size: 0.95rem; }
-    .section { grid-template-columns: 1fr; gap: 1.5rem; }
-    .split-row, .split-row.flip { grid-template-columns: 1fr; gap: 2rem; }
-    .split-row.flip .split-text { order: 1; }
-    .split-row.flip .split-image { order: 2; }
-    .principles-grid { grid-template-columns: 1fr; }
-    .img-pair, .pair-captions { grid-template-columns: 1fr; }
     .hero-image { aspect-ratio: 4 / 3; }
+    .content-light { padding-top: 56px; gap: 40px; }
+    .cs-band { padding-block: 56px; gap: 40px; }
+    .cs-group, .cs-approach { gap: 32px; }
+    .section-label { font-size: 1.4rem; }
+    .tab { padding: 14px 8px; font-size: 1rem; }
   }
 </style>
 <noscript><style>.fade { opacity: 1; transform: none; }</style></noscript>
@@ -418,6 +288,7 @@
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
 
+<!-- Logo — links back to portfolio -->
 <a href="index.html" class="logo-lockup" aria-label="Ashley Marie Quinn — home">
 <svg class="logo-mark" viewBox="0 0 255 255" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none">
   <path style="fill:none;stroke:#ffffff;stroke-miterlimit:10;" d="M90.2,120.3l1.4,0.3c1.1,0.2,2.1,0.5,3.1,0.9c1.2,0.5,2.4,1.1,3.6,1.8c0,0,12.4,8.4,4.7,14.4
@@ -437,8 +308,9 @@
   <span class="logo-name">Ashley Marie Quinn</span>
 </a>
 
-<!-- ── HERO ── -->
 <main id="main">
+
+<!-- ── PAGE HERO ── -->
 <div class="page-hero fade">
   <div class="page-meta">Lattice · Senior Product Designer · 2021</div>
   <h1 class="page-title">Designing for Inclusion: Pronouns at Lattice</h1>
@@ -451,142 +323,132 @@
   <span class="ph-hint">Recommended: 2400 × 1030px — pronouns displayed across key product surfaces</span>
 </div>
 
-<!-- ── CONTEXT ── -->
-<div class="section fade">
-  <div class="section-left">
+<div class="content-light">
+
+  <!-- ── CONTEXT ── -->
+  <section class="section fade">
     <h2 class="section-label">Context</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">The Pronouns feature originated as a Lattice hack week project — driven by engineers, product managers, and designers who cared about building a more inclusive platform. Early discovery interviews and internal enthusiasm showed real value, and the feature was added to the Platform team's roadmap for the subsequent quarter.</p>
-    <p class="body-text">The work was divided between teams. The Identity team owned the data model and the editing UI — how users set and update their pronouns in account settings and during registration. My focus was the display layer: how and where pronouns should appear across the product so that they were visible when they actually mattered.</p>
-
-    <div class="pull-quote">
-      <p>"As a manager, knowing what pronouns people identify themselves with is essential. Building trust is foundational to any manager-report relationship. It will be tough for me to build trust if I don't consider the core attributes of my teammates' identities."</p>
-      <cite>Joan Roig, Engineering Manager at Lattice</cite>
+    <div class="section-body">
+      <p class="body-text">The Pronouns feature originated as a Lattice hack week project — driven by engineers, product managers, and designers who cared about building a more inclusive platform. Early discovery interviews and internal enthusiasm showed real value, and the feature was added to the Platform team's roadmap for the subsequent quarter.</p>
+      <p class="body-text">The work was divided between teams. The Identity team owned the data model and the editing UI — how users set and update their pronouns in account settings and during registration. My focus was the display layer: how and where pronouns should appear across the product so that they were visible when they actually mattered.</p>
+      <div class="callout">"As a manager, knowing what pronouns people identify themselves with is essential. Building trust is foundational to any manager-report relationship. It will be tough for me to build trust if I don't consider the core attributes of my teammates' identities." — Joan Roig, Engineering Manager at Lattice</div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- ── SPLIT: The design problem — text left, image right ── -->
-<div class="split-row fade">
-  <div class="split-text">
-    <div class="split-label">The design problem</div>
-    <h3 class="split-title">Where pronouns appear matters as much as whether they appear</h3>
-    <p class="split-body">Pronouns are most valuable when they're visible at the moment someone is being referred to — when writing feedback, conducting a review, nominating a peer. Surfacing them in the wrong places would create noise; missing the right places would make the feature fail its purpose.</p>
-    <p class="split-body">The challenge was mapping this across a product with many surfaces — feedback tools, reviews, goals, 1:1s, people directories — and identifying which contexts were genuinely high-stakes moments where a colleague would want to refer to someone by name.</p>
-  </div>
-  <div class="split-image">
-    <span class="ph-label">Process image</span>
-    <span class="ph-hint">e.g. product surface mapping / display audit</span>
-  </div>
-</div>
-
-<!-- ── SPLIT: Design decisions — image left, text right ── -->
-<div class="split-row flip fade">
-  <div class="split-text">
-    <div class="split-label">Design decisions</div>
-    <h3 class="split-title">Consistent display without being intrusive</h3>
-    <p class="split-body">The input pattern used an autocomplete control — making it accessible and open-ended, since any finite list of pronouns would inevitably exclude someone. Unlike other employee attributes that admins can edit, pronouns are exclusively editable by the employee themselves. That design decision was intentional: it's not about putting people into boxes, it's about creating space for every individual to define who they are.</p>
-    <p class="split-body">For display, the Identity team built a shared pronouns component that all product teams could use — so that once pronouns were fetched from the GraphQL layer, rendering them consistently was straightforward. My role included defining the display rules: where the component should appear, how it should be positioned relative to names, and how it should adapt across different layout contexts.</p>
-  </div>
-  <div class="split-image">
-    <span class="ph-label">Screen image</span>
-    <span class="ph-hint">e.g. pronouns input component / autocomplete field</span>
-  </div>
-</div>
-
-<!-- ── PRINCIPLES ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">Design principles</h2>
-  </div>
-  <div class="section-right">
-  <p class="body-text">Three principles guided the display decisions across the product.</p>
-  <div class="principles-grid">
-    <div class="principle-item">
-      <div class="principle-title">Show up at the right moment</div>
-      <p class="principle-desc">Pronouns appear in contexts where a colleague is being referred to directly — feedback, reviews, goal collaborators, people profiles. Not in navigation or administrative views where the user isn't relevant to the task.</p>
+  <!-- ── PROBLEM DIAGRAM ── -->
+  <figure class="figure fade">
+    <div class="media wide">
+      <span class="ph-label">Process artifact</span>
+      <span class="ph-hint">Product surface map — where pronouns should and shouldn't appear across feedback, reviews, goals, 1:1s, people directories</span>
     </div>
-    <div class="principle-item">
-      <div class="principle-title">Employee-controlled, always</div>
-      <p class="principle-desc">Unlike other profile attributes, pronouns can only be set and changed by the employee themselves — never by an admin. The feature is about self-definition, not categorization.</p>
-    </div>
-    <div class="principle-item">
-      <div class="principle-title">Consistent across teams</div>
-      <p class="principle-desc">A shared display component meant all product teams could implement pronouns correctly without each solving the same visual and accessibility problems independently. Consistency was baked in by design.</p>
-    </div>
-  </div>
-  </div>
-</div>
+    <figcaption class="img-caption">Mapping where pronouns matter across the product's many surfaces.</figcaption>
+  </figure>
 
-<!-- ── IMAGE PAIR: Two surfaces ── -->
-<div class="pair-wrap fade">
-  <div class="img-pair">
-    <div class="img-half">
-      <span class="ph-label">Screen image</span>
-      <span class="ph-hint">e.g. pronouns in the feedback tool</span>
-    </div>
-    <div class="img-half">
-      <span class="ph-label">Screen image</span>
-      <span class="ph-hint">e.g. pronouns in profile / account settings</span>
-    </div>
-  </div>
-  <div class="pair-captions">
-    <span>Pronouns surfaced in the feedback tool — visible when writing about a colleague</span>
-    <span>Pronoun field in account settings — open-ended autocomplete, editable only by the employee</span>
-  </div>
-</div>
-
-<!-- ── FULL IMAGE ── -->
-<div class="full-image-wrap fade">
-  <div class="full-image">
-    <span class="ph-label">Full-width image</span>
-    <span class="ph-hint">e.g. pronouns across multiple product surfaces — Recommended: 2160 × 945px</span>
-  </div>
-  <div class="img-caption">Pronouns displayed consistently across relevant surfaces — feedback, reviews, goals, and people profiles.</div>
-</div>
-
-<!-- ── OUTCOMES ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">Outcomes</h2>
-  </div>
-  <div class="section-right">
-  <div class="outcomes">
-    <div class="outcome">Tens of thousands of Lattice users set their pronouns after launch</div>
-    <div class="outcome">Positive client feedback — the feature addressed real, direct requests from customers</div>
-    <div class="outcome">Featured in an all-hands presentation at Lattice in early 2022 as an example of the company's commitment to inclusive design</div>
-    <div class="outcome">Lattice published both a design deep-dive and a broader piece on why pronouns matter — the work became part of the company's external voice on inclusion</div>
-  </div>
-
-  <div class="article-links" style="margin-top: 2.5rem;">
-    <a href="https://design.lattice.com/articles/how-we-designed-the-pronouns-feature-within-lattice" target="_blank" rel="noopener" class="article-link">
-      <div>
-        <div class="article-link-label">Lattice Design Newsletter</div>
-        <div class="article-link-title">How We Designed the Pronouns Feature within Lattice</div>
+  <!-- ── BAND: THE PROBLEM + THE APPROACH ── -->
+  <div class="cs-band fade">
+    <section class="section">
+      <h2 class="section-label">The problem</h2>
+      <div class="section-body">
+        <p class="body-text">Pronouns are most valuable when they're visible at the moment someone is being referred to — when writing feedback, conducting a review, nominating a peer. Surfacing them in the wrong places would create noise; missing the right places would make the feature fail its purpose.</p>
+        <p class="body-text">The challenge was mapping this across a product with many surfaces — feedback tools, reviews, goals, 1:1s, people directories — and identifying which contexts were genuinely high-stakes moments where a colleague would want to refer to someone by name. <strong>Where pronouns appear matters as much as whether they appear.</strong></p>
       </div>
-      <span class="article-link-arrow">↗</span>
-    </a>
-    <a href="https://lattice.com/articles/why-were-proud-of-pronouns-at-lattice" target="_blank" rel="noopener" class="article-link">
-      <div>
-        <div class="article-link-label">Lattice Library</div>
-        <div class="article-link-title">Why We're Proud of Pronouns at Lattice</div>
-      </div>
-      <span class="article-link-arrow">↗</span>
-    </a>
-  </div>
-  </div>
-</div>
+    </section>
 
-<!-- ── WHAT I LEARNED ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">What I learned</h2>
+    <div class="cs-approach">
+      <section class="section">
+        <h2 class="section-label">The approach</h2>
+        <div class="section-body">
+          <p class="body-text">Three moves shaped the work — mapping the display problem across surfaces, defining the input and display decisions that kept the feature respectful, and setting the principles that let every product team implement it consistently.</p>
+        </div>
+      </section>
+      <div class="tabs-wrap">
+        <div class="tabs" role="tablist" aria-label="Approach">
+          <button class="tab is-active" role="tab" aria-selected="true" id="tab-problem" aria-controls="panel-problem">The display problem</button>
+          <button class="tab" role="tab" aria-selected="false" id="tab-decisions" aria-controls="panel-decisions">Design decisions</button>
+          <button class="tab" role="tab" aria-selected="false" id="tab-principles" aria-controls="panel-principles">Design principles</button>
+        </div>
+        <div class="tab-panels">
+          <figure class="tab-panel is-active" role="tabpanel" id="panel-problem" aria-labelledby="tab-problem">
+            <div class="media wide">
+              <span class="ph-label">Process artifact</span>
+              <span class="ph-hint">Display audit — high-stakes surfaces where a colleague refers to someone by name</span>
+            </div>
+            <figcaption class="img-caption">Identifying the high-stakes moments where pronouns genuinely matter.</figcaption>
+          </figure>
+          <figure class="tab-panel" role="tabpanel" id="panel-decisions" aria-labelledby="tab-decisions" hidden>
+            <div class="media wide">
+              <span class="ph-label">Product screen</span>
+              <span class="ph-hint">Pronouns input — open-ended autocomplete, editable only by the employee</span>
+            </div>
+            <figcaption class="img-caption">An open-ended autocomplete input — and a shared display component for consistent rendering.</figcaption>
+          </figure>
+          <figure class="tab-panel" role="tabpanel" id="panel-principles" aria-labelledby="tab-principles" hidden>
+            <div class="media wide">
+              <span class="ph-label">Diagram</span>
+              <span class="ph-hint">Three display principles guiding placement across the product</span>
+            </div>
+            <figcaption class="img-caption">Show up at the right moment, employee-controlled always, consistent across teams.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="section-right">
-    <p class="body-text">This project is a reminder that design impact isn't proportional to project size. The display decisions for pronouns were relatively contained — but getting them right meant the difference between a feature that genuinely helped people feel seen in the product and one that felt like an afterthought.</p>
-    <p class="body-text">It also reinforced how much design systems thinking matters for features that touch the whole product. Building a shared display component that all teams could use wasn't just an engineering convenience — it was what made the feature coherent and trustworthy at scale.</p>
+
+  <!-- ── WHAT WE SHIPPED ── -->
+  <div class="cs-group fade">
+    <section class="section">
+      <h2 class="section-label">What we shipped</h2>
+      <div class="section-body">
+        <p class="body-text">A consistent pronouns display layer across the product's high-stakes surfaces, built on a shared component all product teams could adopt. The input pattern used an autocomplete control — open-ended, since any finite list of pronouns would inevitably exclude someone — and, unlike other employee attributes, pronouns are editable only by the employee themselves. It's not about putting people into boxes; it's about creating space for every individual to define who they are.</p>
+      </div>
+    </section>
+    <figure class="figure">
+      <div class="media tall">
+        <span class="ph-label">Product screen</span>
+        <span class="ph-hint">Pronouns in the feedback tool</span>
+      </div>
+      <figcaption class="img-caption">Pronouns surfaced in the feedback tool — visible when writing about a colleague.</figcaption>
+    </figure>
+    <figure class="figure">
+      <div class="media tall">
+        <span class="ph-label">Product screen</span>
+        <span class="ph-hint">Pronoun field in account settings</span>
+      </div>
+      <figcaption class="img-caption">Pronoun field in account settings — open-ended autocomplete, editable only by the employee.</figcaption>
+    </figure>
+    <figure class="figure">
+      <div class="media tall">
+        <span class="ph-label">Product screen</span>
+        <span class="ph-hint">Pronouns across multiple surfaces</span>
+      </div>
+      <figcaption class="img-caption">Pronouns displayed consistently across feedback, reviews, goals, and people profiles.</figcaption>
+    </figure>
   </div>
+
+  <!-- ── BAND: OUTCOMES + WHAT I LEARNED ── -->
+  <div class="cs-band fade">
+    <section class="section">
+      <h2 class="section-label">Outcomes</h2>
+      <div class="section-body">
+        <div class="outcomes">
+          <div class="outcome">Tens of thousands of Lattice users set their pronouns after launch</div>
+          <div class="outcome">Positive client feedback — the feature addressed real, direct requests from customers</div>
+          <div class="outcome">Featured in an all-hands presentation at Lattice in early 2022 as an example of the company's commitment to inclusive design</div>
+          <div class="outcome">Lattice published both a design deep-dive and a broader piece on why pronouns matter — the work became part of the company's external voice on inclusion</div>
+        </div>
+        <div class="callout"><a href="https://design.lattice.com/articles/how-we-designed-the-pronouns-feature-within-lattice" target="_blank" rel="noopener">How We Designed the Pronouns Feature within Lattice ↗</a> · <a href="https://lattice.com/articles/why-were-proud-of-pronouns-at-lattice" target="_blank" rel="noopener">Why We're Proud of Pronouns at Lattice ↗</a></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-label">What I learned</h2>
+      <div class="section-body">
+        <p class="body-text">This project is a reminder that design impact isn't proportional to project size. The display decisions for pronouns were relatively contained — but getting them right meant the difference between a feature that genuinely helped people feel seen in the product and one that felt like an afterthought.</p>
+        <p class="body-text">It also reinforced how much design systems thinking matters for features that touch the whole product. Building a shared display component that all teams could use wasn't just an engineering convenience — it was what made the feature coherent and trustworthy at scale.</p>
+      </div>
+    </section>
+  </div>
+
 </div>
 
 </main>
@@ -597,10 +459,26 @@
 </footer>
 
 <script>
+  // Fade-in on scroll
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+  // Tabbed carousels
+  document.querySelectorAll('.tabs').forEach(tablist => {
+    const tabs = Array.from(tablist.querySelectorAll('.tab'));
+    const panels = Array.from(tablist.parentElement.querySelectorAll('.tab-panel'));
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
+        panels.forEach(p => { p.classList.remove('is-active'); p.hidden = true; });
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-selected', 'true');
+        if (panels[i]) { panels[i].classList.add('is-active'); panels[i].hidden = false; }
+      });
+    });
+  });
 </script>
 </body>
 </html>

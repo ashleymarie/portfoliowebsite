@@ -6,7 +6,7 @@
 <title>Supplier Relationships at Enterprise Scale — Ashley Quinn</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -20,7 +20,12 @@
     --sans: 'Jost', sans-serif;
     --max: 1080px;
     --pad: max(2rem, calc((100vw - var(--max)) / 2));
+    --gutter: 2rem;
     --text-max: 640px;
+    --media-max: 1075px;
+    --band: #f7f9ff;
+    --ink: #1a1a1a;
+    --accent: #234894;
   }
 
   html { scroll-behavior: smooth; }
@@ -44,12 +49,7 @@
     text-decoration: none;
   }
 
-  .logo-mark {
-    display: block;
-    width: 52px;
-    height: 52px;
-    flex-shrink: 0;
-  }
+  .logo-mark { display: block; width: 52px; height: 52px; flex-shrink: 0; }
 
   .logo-name {
     font-family: var(--serif);
@@ -60,10 +60,8 @@
     letter-spacing: 0.01em;
   }
 
-  /* ── PAGE HERO ── */
-  .page-hero {
-    padding: 4rem var(--pad) 3rem;
-  }
+  /* ── PAGE HERO (dark zone) ── */
+  .page-hero { padding: 4rem var(--pad) 3rem; }
 
   .page-meta {
     font-size: 0.8rem;
@@ -93,7 +91,7 @@
     max-width: var(--text-max);
   }
 
-  /* ── HERO IMAGE — full bleed, right below title ── */
+  /* ── HERO IMAGE — full bleed ── */
   .hero-image {
     width: 100%;
     aspect-ratio: 21 / 9;
@@ -105,290 +103,148 @@
     gap: 0.5rem;
     overflow: hidden;
   }
+  .hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  .hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+  /* ── LIGHT CONTENT (everything below the hero image) ── */
+  .content-light {
+    background: #fff;
+    color: var(--ink);
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding-top: 80px;
   }
 
-  /* ── SECTION — padded text block ── */
+  /* centered text column (~80ch) */
   .section {
-    padding: 5rem var(--pad) 0;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 4rem;
-    align-items: start;
+    width: min(calc(100% - 2 * var(--gutter)), var(--text-max));
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
-  .section-left { padding-top: 0.2rem; }
-  .section-right { display: flex; flex-direction: column; gap: 0; }
 
   .section-label {
     font-family: var(--serif);
-    font-size: clamp(1.2rem, 2vw, 1.75rem);
+    font-size: 1.75rem;
     font-weight: 400;
-    color: var(--white);
     line-height: 1.2;
+    color: var(--ink);
   }
 
-  .divider {
-    border: none;
-    border-top: 1px solid var(--white-30);
-    margin-bottom: 2rem;
-  }
+  .section-body { display: flex; flex-direction: column; }
 
   .body-text {
     font-size: 1.05rem;
-    color: var(--white);
     line-height: 1.8;
-    font-weight: 300;
-    max-width: var(--text-max);
+    font-weight: 400;
+    color: var(--ink);
     margin-bottom: 1.25rem;
   }
+  .body-text:last-child { margin-bottom: 0; }
+  .body-text strong { font-weight: 600; }
 
-  /* ── ALTERNATING ROW: text left, image right ── */
-  .split-row {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 4rem;
-    align-items: start;
-    padding: 5rem var(--pad) 0;
+  /* centered media band (up to 1075px) */
+  .figure {
+    width: min(calc(100% - 2 * var(--gutter)), var(--media-max));
+    margin-inline: auto;
   }
 
-  .split-row.flip {
-    grid-template-columns: 1.4fr 1fr;
-  }
-
-  .split-row.flip .split-text { order: 2; }
-  .split-row.flip .split-image { order: 1; }
-
-  .split-text {
+  .media {
+    width: 100%;
+    background: rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    padding-top: 0.5rem;
-  }
-
-  .split-label {
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white-60);
-  }
-
-  .split-title {
-    font-family: var(--serif);
-    font-size: clamp(1.3rem, 2vw, 1.75rem);
-    font-weight: 400;
-    color: var(--white);
-    line-height: 1.2;
-  }
-
-  .split-body {
-    font-size: 1.05rem;
-    color: var(--white-60);
-    line-height: 1.8;
-    font-weight: 300;
-  }
-
-  .split-image {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    background: rgba(255,255,255,0.07);
-    display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
+    gap: 7px;
     overflow: hidden;
   }
+  .media.wide { aspect-ratio: 16 / 7; }
+  .media.tall { aspect-ratio: 4 / 3; }
+  .media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  .split-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  /* ── FULL-BLEED IMAGE ── */
-  .full-image-wrap {
-    padding: 5rem var(--pad) 0;
-  }
-
-  .full-image {
-    width: 100%;
-    aspect-ratio: 16 / 7;
-    background: rgba(255,255,255,0.07);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
-    overflow: hidden;
-  }
-
-  .full-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .img-caption {
-    font-size: 0.82rem;
-    color: var(--white-30);
-    font-weight: 300;
-    margin-top: 0.75rem;
-  }
-
-  /* ── IMAGE PAIR ── */
-  .pair-wrap {
-    padding: 5rem var(--pad) 0;
-  }
-
-  .img-pair {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .img-half {
-    aspect-ratio: 16 / 10;
-    background: rgba(255,255,255,0.07);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
-    overflow: hidden;
-  }
-
-  .img-half img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .pair-captions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-top: 0.75rem;
-  }
-
-  .pair-captions span {
-    font-size: 0.82rem;
-    color: var(--white-30);
-    font-weight: 300;
-  }
-
-  /* ── PLACEHOLDER LABEL ── */
   .ph-label {
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white-30);
+    font-size: 0.72rem; font-weight: 400; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(0,0,0,0.38);
   }
+  .ph-hint { font-size: 0.72rem; font-weight: 300; color: rgba(0,0,0,0.3); text-align: center; padding: 0 1rem; }
 
-  .ph-hint {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.18);
-    font-weight: 300;
-  }
+  .img-caption { font-size: 0.82rem; color: rgba(0,0,0,0.55); font-weight: 400; margin-top: 0.75rem; }
 
-  /* ── SHIPPED GRID ── */
-  .shipped-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--white-15);
-    border: 1px solid var(--white-15);
-    margin-top: 2rem;
-  }
+  /* grouped white block (e.g. What we shipped + images) */
+  .cs-group { display: flex; flex-direction: column; align-items: center; gap: 48px; }
 
-  .shipped-item {
-    background: rgba(30, 58, 138, 0.5);
-    padding: 1.5rem;
-  }
-
-  .shipped-partner {
-    font-size: 0.75rem;
-    color: var(--white-30);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
-
-  .shipped-title {
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--white);
-    margin-bottom: 0.5rem;
-  }
-
-  .shipped-desc {
-    font-size: 0.9rem;
-    color: var(--white-60);
-    line-height: 1.65;
-    font-weight: 300;
-  }
-
-  /* ── CALLOUT ── */
-  .callout {
-    background: rgba(255,255,255,0.06);
-    border-left: 2px solid var(--white-30);
-    padding: 1rem 1.25rem;
-    font-size: 0.95rem;
-    color: var(--white-60);
-    line-height: 1.65;
-    font-weight: 300;
-    margin: 1.5rem 0;
-  }
-
-  /* ── OUTCOMES ── */
-  .outcomes {
+  /* banded group */
+  .cs-band {
+    background: var(--band);
+    padding-block: 80px;
     display: flex;
     flex-direction: column;
-    gap: 1px;
-    background: var(--white-15);
-    border: 1px solid var(--white-15);
-    margin-top: 2rem;
+    align-items: center;
+    gap: 48px;
   }
 
+  /* approach: centered text + full-width tabbed media */
+  .cs-approach {
+    width: min(calc(100% - 2 * var(--gutter)), var(--media-max));
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+  .cs-approach .section { width: 100%; max-width: var(--text-max); }
+
+  .tabs-wrap { width: 100%; }
+  .tabs { display: flex; border-bottom: 1px solid rgba(0,0,0,0.12); }
+  .tab {
+    flex: 1; min-width: 0; padding: 24px 12px; text-align: center; cursor: pointer;
+    background: none; border: none; border-bottom: 3px solid transparent; margin-bottom: -1px;
+    font-family: var(--serif); font-size: 1.25rem; font-weight: 400; color: rgba(0,0,0,0.64);
+    transition: color .2s, border-color .2s;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.is-active { color: #000; border-bottom-color: var(--accent); }
+  .tab-panels { margin-top: 10px; }
+  .tab-panel { display: none; }
+  .tab-panel.is-active { display: block; }
+
+  /* callout */
+  .callout {
+    background: rgba(0,0,0,0.04);
+    border-left: 2px solid rgba(0,0,0,0.38);
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem; color: rgba(0,0,0,0.64); line-height: 1.65; font-weight: 400;
+    margin-top: 0.5rem;
+  }
+
+  /* outcomes */
+  .outcomes {
+    display: flex; flex-direction: column; gap: 1px;
+    background: rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.1);
+    margin-top: 0.5rem;
+  }
   .outcome {
-    background: rgba(30, 58, 138, 0.5);
-    padding: 1.25rem 1.5rem;
-    font-size: 1.05rem;
-    color: var(--white);
-    line-height: 1.65;
-    font-weight: 300;
+    background: #fff; padding: 1.25rem 1.5rem;
+    font-size: 1.05rem; line-height: 1.7; font-weight: 400; color: var(--ink);
   }
 
-  /* ── FOOTER ── */
+  /* ── FOOTER (light) ── */
   footer {
     padding: 3rem var(--pad) 4rem;
     display: flex;
     justify-content: center;
     gap: 3rem;
-    border-top: 1px solid var(--white-15);
-    margin-top: 5rem;
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.1);
   }
-
   footer a {
-    font-size: 0.78rem;
-    font-weight: 400;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--white);
-    text-decoration: none;
-    opacity: 0.75;
-    transition: opacity 0.2s;
+    font-size: 0.78rem; font-weight: 400; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink); text-decoration: none;
+    opacity: 0.7; transition: opacity 0.2s;
   }
-
   footer a:hover { opacity: 1; }
 
   /* ── FADE ── */
@@ -404,8 +260,8 @@
   }
   .skip-link:focus { top: 0; }
 
-  a:focus-visible {
-    outline: 2px solid #fff;
+  a:focus-visible, .tab:focus-visible {
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -416,16 +272,15 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    :root { --pad: 1.5rem; }
+    :root { --pad: 1.5rem; --gutter: 1.5rem; }
     .logo-mark { width: 40px; height: 40px; }
     .logo-name { font-size: 0.95rem; }
-    .section { grid-template-columns: 1fr; gap: 1.5rem; }
-    .split-row, .split-row.flip { grid-template-columns: 1fr; gap: 2rem; }
-    .split-row.flip .split-text { order: 1; }
-    .split-row.flip .split-image { order: 2; }
-    .shipped-grid { grid-template-columns: 1fr; }
-    .img-pair, .pair-captions { grid-template-columns: 1fr; }
     .hero-image { aspect-ratio: 4 / 3; }
+    .content-light { padding-top: 56px; gap: 40px; }
+    .cs-band { padding-block: 56px; gap: 40px; }
+    .cs-group, .cs-approach { gap: 32px; }
+    .section-label { font-size: 1.4rem; }
+    .tab { padding: 14px 8px; font-size: 1rem; }
   }
 </style>
 <noscript><style>.fade { opacity: 1; transform: none; }</style></noscript>
@@ -453,194 +308,163 @@
   <span class="logo-name">Ashley Marie Quinn</span>
 </a>
 
-<!-- ── PAGE HERO ── -->
 <main id="main">
+
+<!-- ── PAGE HERO ── -->
 <div class="page-hero fade">
   <div class="page-meta">Zip · Design Lead · Jan 2026 – March 2026</div>
   <h1 class="page-title">Supplier Relationships at Enterprise Scale</h1>
   <p class="page-summary">Zip's request model assumed every purchase was simple: one team, one vendor, one payment. As Zip moved upmarket, that assumption became its #1 customer pain — and I led the redesign that fixed it, end-to-end across five product teams and seven surfaces.</p>
 </div>
 
-<!-- ── HERO IMAGE — immediately below title ── -->
+<!-- ── HERO IMAGE ── -->
 <div class="hero-image fade">
   <span class="ph-label">Hero image</span>
   <span class="ph-hint">Recommended: 2400 × 1030px — a wide composite of the key screens</span>
 </div>
 
-<!-- ── BACKGROUND ── -->
-<div class="section fade">
-  <div class="section-left">
+<div class="content-light">
+
+  <!-- ── BACKGROUND ── -->
+  <section class="section fade">
     <h2 class="section-label">Background</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">Zip is a procurement orchestration platform: the system companies use to request, approve, and pay for everything they buy, giving procurement and finance teams a single place to manage suppliers, spend, and budgets. One construct shaped that system from the start: <strong>one request = one supplier = one payment</strong>. That simplicity is what made Zip fast to adopt, but it carried a hidden assumption — that the supplier on the request is always the supplier who gets paid.</p>
-    <p class="body-text">As Zip moved upmarket, that assumption broke. The clearest case was software bought through a <strong>reseller</strong>, where the vendor a team contracts with often isn't the vendor that's ultimately paid. The same shape showed up everywhere once we looked, from agencies working through contractors to OEMs working through suppliers. A request was still tied to a single supplier, but <em>who gets requested</em> and <em>who gets paid</em> were increasingly two different things. It became Zip's #1 customer pain.</p>
-  </div>
-</div>
+    <div class="section-body">
+      <p class="body-text">Zip is a procurement orchestration platform: the system companies use to request, approve, and pay for everything they buy, giving procurement and finance teams a single place to manage suppliers, spend, and budgets. One construct shaped that system from the start: <strong>one request = one supplier = one payment</strong>. That simplicity is what made Zip fast to adopt, but it carried a hidden assumption — that the supplier on the request is always the supplier who gets paid.</p>
+      <p class="body-text">As Zip moved upmarket, that assumption broke. The clearest case was software bought through a <strong>reseller</strong>, where the vendor a team contracts with often isn't the vendor that's ultimately paid. The same shape showed up everywhere once we looked, from agencies working through contractors to OEMs working through suppliers. A request was still tied to a single supplier, but <em>who gets requested</em> and <em>who gets paid</em> were increasingly two different things. It became Zip's #1 customer pain.</p>
+    </div>
+  </section>
 
-<!-- ── MY ROLE ── -->
-<div class="section fade">
-  <div class="section-left">
+  <!-- ── MY ROLE ── -->
+  <section class="section fade">
     <h2 class="section-label">My role</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">As design lead for the Supplier team, I drove this initiative end-to-end, from defining the problem space with customers and leadership through to launch. My goal wasn't just to support these relationships, but to make sure the expanded capability was considered across the <em>entire</em> supplier lifecycle and every surface it touched.</p>
-    <p class="body-text">Because vendor relationships reach nearly every part of the product, the work extended well beyond my own team. I was hands-on designing solutions across multiple product areas at once and coordinating closely with the teams that own them so that every change fit their surface and the direction they were already heading. The hardest part was the breadth it demanded: understanding the entire product deeply enough to trace how multi-party purchases would ripple into each area, and getting ahead of those impacts before they became gaps.</p>
-  </div>
-</div>
-
-<!-- ── THE PROBLEM ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">The problem</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">Large enterprise customers operate with intricate vendor hierarchies — parent-child relationships, resellers, OEMs, contractor-agency structures, and multiple ERP-mapped supplier sites. Every customer also runs a distinct ERP setup (Oracle, SAP, and others), and how they ingest vendors on their side directly shapes how relationships need to be modeled in Zip.</p>
-    <p class="body-text">The business signals were unambiguous: lost deals, churn risk from enterprise customers hitting hard limits, and rising support volume around vendor management.</p>
-    <p class="body-text">Underneath the business case was a design tension. These new relationships added complexity to a system that was already dense. The real challenge wasn't just <em>supporting</em> them — it was doing so while keeping the experience light, intuitive, and even delightful.</p>
-    <div class="callout">Teams I worked across: Procurement Product Group · Requester Team · Approvals Team · Contract Orchestration · Advanced Payments</div>
-  </div>
-</div>
-
-<!-- ── PROBLEM DIAGRAM ── -->
-<div class="full-image-wrap fade">
-  <div class="full-image">
-    <span class="ph-label">Diagram</span>
-    <span class="ph-hint">Vendor-hierarchy complexity — parent-child, reseller, OEM, contractor-agency, ERP supplier sites</span>
-  </div>
-  <div class="img-caption">Enterprise vendor relationships rarely map one-to-one.</div>
-</div>
-
-<!-- ── APPROACH 1: Mapping — text left, image right ── -->
-<div class="split-row fade">
-  <div class="split-text">
-    <div class="split-label">Approach</div>
-    <h3 class="split-title">Mapping the system before designing any of it</h3>
-    <p class="split-body">Rather than diving into screens, I started by mapping every product surface vendor relationships touched — vendor records, request creation, approvals, invoice and document management, supplier sites, and spend insights. That map became the shared foundation all five teams aligned around; without it, each team would have solved its slice in isolation and we'd have shipped a fragmented experience.</p>
-    <p class="split-body">I acted as the connective thread across them — designing alongside the Advanced Payments, Approvals, Contract Orchestration, and Requester teams as a peer, keeping every decision tied back to the same underlying model and experience vision.</p>
-  </div>
-  <div class="split-image">
-    <span class="ph-label">Process artifact</span>
-    <span class="ph-hint">The cross-team surface map</span>
-  </div>
-</div>
-
-<!-- ── APPROACH 2: Model — image left, text right ── -->
-<div class="split-row flip fade">
-  <div class="split-text">
-    <div class="split-label">Approach</div>
-    <h3 class="split-title">Defining the model: purchase channels</h3>
-    <p class="split-body">Everyone pointed to the same example — the reseller — but reseller was only one shape of a broader pattern. Designing for "resellers" would have shipped a narrow, one-off feature, so before touching any surface I worked with my PM to define the shared language the whole effort would build on. I introduced <strong>purchase channels</strong> as the connecting concept: a single way to describe any arrangement where the vendor being <em>requested</em> differs from the vendor being <em>paid</em> — one model that could absorb resellers, OEMs, agencies, and structures we hadn't mapped yet.</p>
-    <p class="split-body">From there, the <strong>vendor relationship taxonomy</strong> — parent-child, reseller-OEM, contractor-agency — was deliberately mapped to how customers' ERPs actually represent vendors, so the model would survive contact with real enterprise data rather than just demo cleanly.</p>
-  </div>
-  <div class="split-image">
-    <span class="ph-label">Diagram</span>
-    <span class="ph-hint">The purchase-channels model / taxonomy</span>
-  </div>
-</div>
-
-<!-- ── APPROACH 3: Intake — text left, image right ── -->
-<div class="split-row fade">
-  <div class="split-text">
-    <div class="split-label">Approach</div>
-    <h3 class="split-title">Advocating for AI-powered intake</h3>
-    <p class="split-body">Early research suggested requesters often know up front whether they're in a reseller situation — but only about half the time. I proposed surfacing an intake question at the very start of the request anyway. Engineering pushed back on M0 scope and product deferred; I held the position as customer evidence kept building.</p>
-    <p class="split-body">The unlock was pairing the question with the Requester team's new AI capabilities — so instead of depending on the requester to always know, the system could infer the channel from context. That made the flow intuitive for the half who didn't know, and effortless for everyone else.</p>
-  </div>
-  <div class="split-image">
-    <span class="ph-label">Product screen</span>
-    <span class="ph-hint">AI-powered intake in the request flow</span>
-  </div>
-</div>
-
-<!-- ── FULL-WIDTH TRANSITION IMAGE ── -->
-<div class="full-image-wrap fade">
-  <div class="full-image">
-    <span class="ph-label">Full-width image</span>
-    <span class="ph-hint">The connected system — vendor record, request model, supplier sites, and AI intake — Recommended: 2160 × 945px</span>
-  </div>
-  <div class="img-caption">One coherent, enterprise-ready experience.</div>
-</div>
-
-<!-- ── WHAT WE SHIPPED ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">What we shipped</h2>
-  </div>
-  <div class="section-right">
-  <p class="body-text">A connected system of product changes across the procurement experience, spanning five product teams and seven surfaces. The model and taxonomy that made them possible are covered in the approach above — here's what shipped.</p>
-  <div class="shipped-grid">
-    <div class="shipped-item">
-      <div class="shipped-partner">Partners: Approvals team</div>
-      <div class="shipped-title">RDP rejuvenation — redesigned request details</div>
-      <p class="shipped-desc">A ground-up rejuvenation of the request details page, updated to reflect the new relationship model so approvers have the right context at the right moment.</p>
+    <div class="section-body">
+      <p class="body-text">As design lead for the Supplier team, I drove this initiative end-to-end, from defining the problem space with customers and leadership through to launch. My goal wasn't just to support these relationships, but to make sure the expanded capability was considered across the <em>entire</em> supplier lifecycle and every surface it touched.</p>
+      <p class="body-text">Because vendor relationships reach nearly every part of the product, the work extended well beyond my own team. I was hands-on designing solutions across multiple product areas at once and coordinating closely with the teams that own them so that every change fit their surface and the direction they were already heading. The hardest part was the breadth it demanded: understanding the entire product deeply enough to trace how multi-party purchases would ripple into each area, and getting ahead of those impacts before they became gaps.</p>
+      <div class="callout">Teams I worked across: Procurement Product Group · Requester Team · Approvals Team · Contract Orchestration · Advanced Payments</div>
     </div>
-    <div class="shipped-item">
-      <div class="shipped-partner">Partners: Requester team</div>
-      <div class="shipped-title">AI-powered intake</div>
-      <p class="shipped-desc">Surfaces purchase-channel recommendations at intake based on committed spend, purchase history, and vendor category knowledge — native to the request flow rather than bolted on.</p>
+  </section>
+
+  <!-- ── PROBLEM DIAGRAM ── -->
+  <figure class="figure fade">
+    <div class="media wide">
+      <span class="ph-label">Diagram</span>
+      <span class="ph-hint">Vendor-hierarchy complexity — parent-child, reseller, OEM, contractor-agency, ERP supplier sites</span>
     </div>
-    <div class="shipped-item">
-      <div class="shipped-partner">Partners: Advanced Payments</div>
-      <div class="shipped-title">Supplier relationships at every object</div>
-      <p class="shipped-desc">Introduced supplier relationships not just on the vendor record, but at the PO and invoice level too — so users see spend in the context of how they actually transact with a vendor and its subsidiaries.</p>
+    <figcaption class="img-caption">Enterprise vendor relationships rarely map one-to-one.</figcaption>
+  </figure>
+
+  <!-- ── BAND: THE PROBLEM + THE APPROACH ── -->
+  <div class="cs-band fade">
+    <section class="section">
+      <h2 class="section-label">The problem</h2>
+      <div class="section-body">
+        <p class="body-text">Large enterprise customers operate with intricate vendor hierarchies — parent-child relationships, resellers, OEMs, contractor-agency structures, and multiple ERP-mapped supplier sites. Every customer also runs a distinct ERP setup (Oracle, SAP, and others), and how they ingest vendors on their side directly shapes how relationships need to be modeled in Zip.</p>
+        <p class="body-text">The business signals were unambiguous: lost deals, churn risk from enterprise customers hitting hard limits, and rising support volume around vendor management.</p>
+        <p class="body-text">Underneath the business case was a design tension. These new relationships added complexity to a system that was already dense. The real challenge wasn't just <em>supporting</em> them — it was doing so while keeping the experience light, intuitive, and even delightful.</p>
+      </div>
+    </section>
+
+    <div class="cs-approach">
+      <section class="section">
+        <h2 class="section-label">The approach</h2>
+        <div class="section-body">
+          <p class="body-text">Three moves shaped the work — mapping every surface vendor relationships touched, defining <strong>purchase channels</strong> as the model that unified them, and advocating for an AI-assisted intake so requesters never have to know the difference.</p>
+        </div>
+      </section>
+      <div class="tabs-wrap">
+        <div class="tabs" role="tablist" aria-label="Approach">
+          <button class="tab is-active" role="tab" aria-selected="true" id="tab-map" aria-controls="panel-map">Mapping the system</button>
+          <button class="tab" role="tab" aria-selected="false" id="tab-model" aria-controls="panel-model">Defining the model</button>
+          <button class="tab" role="tab" aria-selected="false" id="tab-intake" aria-controls="panel-intake">Advocating for the requester</button>
+        </div>
+        <div class="tab-panels">
+          <figure class="tab-panel is-active" role="tabpanel" id="panel-map" aria-labelledby="tab-map">
+            <div class="media wide">
+              <span class="ph-label">Process artifact</span>
+              <span class="ph-hint">The cross-team surface map</span>
+            </div>
+            <figcaption class="img-caption">The cross-team surface map that aligned five teams.</figcaption>
+          </figure>
+          <figure class="tab-panel" role="tabpanel" id="panel-model" aria-labelledby="tab-model" hidden>
+            <div class="media wide">
+              <span class="ph-label">Diagram</span>
+              <span class="ph-hint">The purchase-channels model / taxonomy</span>
+            </div>
+            <figcaption class="img-caption">Purchase channels: one model for any requested-vs-paid arrangement.</figcaption>
+          </figure>
+          <figure class="tab-panel" role="tabpanel" id="panel-intake" aria-labelledby="tab-intake" hidden>
+            <div class="media wide">
+              <span class="ph-label">Product screen</span>
+              <span class="ph-hint">AI-powered intake in the request flow</span>
+            </div>
+            <figcaption class="img-caption">AI infers the channel at intake when the requester isn't sure.</figcaption>
+          </figure>
+        </div>
+      </div>
     </div>
   </div>
-  </div>
-</div>
 
-<!-- ── IMAGE PAIR — key screens ── -->
-<div class="pair-wrap fade">
-  <div class="img-pair">
-    <div class="img-half">
-      <span class="ph-label">Screen image</span>
-      <span class="ph-hint">e.g. redesigned vendor record</span>
-    </div>
-    <div class="img-half">
-      <span class="ph-label">Screen image</span>
-      <span class="ph-hint">e.g. AI-powered intake</span>
-    </div>
+  <!-- ── WHAT WE SHIPPED ── -->
+  <div class="cs-group fade">
+    <section class="section">
+      <h2 class="section-label">What we shipped</h2>
+      <div class="section-body">
+        <p class="body-text">A connected system of product changes across the procurement experience, spanning five product teams and seven surfaces. The model and taxonomy that made them possible are covered in the approach above — here's what shipped.</p>
+      </div>
+    </section>
+    <figure class="figure">
+      <div class="media tall">
+        <span class="ph-label">Product screen</span>
+        <span class="ph-hint">Redesigned request details</span>
+      </div>
+      <figcaption class="img-caption">A redesigned request details experience — the relationship model in context for approvers.</figcaption>
+    </figure>
+    <figure class="figure">
+      <div class="media tall">
+        <span class="ph-label">Product screen</span>
+        <span class="ph-hint">AI-powered intake</span>
+      </div>
+      <figcaption class="img-caption">AI-powered intake recommends the purchase channel at the point of request.</figcaption>
+    </figure>
+    <figure class="figure">
+      <div class="media tall">
+        <span class="ph-label">Product screen</span>
+        <span class="ph-hint">Supplier relationships across objects</span>
+      </div>
+      <figcaption class="img-caption">Supplier relationships surfaced across the vendor record, PO, and invoice.</figcaption>
+    </figure>
   </div>
-  <div class="pair-captions">
-    <span>Relationship context surfaced on the vendor record, PO, and invoice</span>
-    <span>AI-powered intake recommends the purchase channel at the point of request</span>
-  </div>
-</div>
 
-<!-- ── OUTCOMES ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">Outcomes</h2>
-  </div>
-  <div class="section-right">
-  <p class="body-text">This work moved Zip from a product that could demo enterprise procurement to one that could actually support it at scale — directly unlocking deals and expansions that weren't possible before.</p>
-  <div class="outcomes">
-    <div class="outcome">Unlocked enterprise deals and expansions, including initial deployment with a major enterprise customer</div>
-    <div class="outcome">Design coherence maintained across 5 product teams and 7 surfaces simultaneously — without hierarchical authority over any of them</div>
-    <div class="outcome">Established the vendor relationship foundation that Zip's entire upmarket strategy now builds on</div>
-  </div>
-  </div>
-</div>
+  <!-- ── BAND: OUTCOMES + WHAT'S NEXT + WHAT I LEARNED ── -->
+  <div class="cs-band fade">
+    <section class="section">
+      <h2 class="section-label">Outcomes</h2>
+      <div class="section-body">
+        <p class="body-text">This work moved Zip from a product that could demo enterprise procurement to one that could actually support it at scale — directly unlocking deals and expansions that weren't possible before.</p>
+        <div class="outcomes">
+          <div class="outcome">Unlocked enterprise deals and expansions, including initial deployment with a major enterprise customer</div>
+          <div class="outcome">Design coherence maintained across 5 product teams and 7 surfaces simultaneously — without hierarchical authority over any of them</div>
+          <div class="outcome">Established the vendor relationship foundation that Zip's entire upmarket strategy now builds on</div>
+        </div>
+      </div>
+    </section>
 
-<!-- ── WHAT'S NEXT ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">What's next</h2>
-  </div>
-  <div class="section-right">
-    <p class="body-text">The full surface mapping didn't just shape the design — it shaped the roadmap. With every affected area visible, my PM and I deliberately scoped the highest-impact, most-needed work into the first release. From there we planned M1 as a fast follow, extending multi-party purchases into the contract and invoice layers. Because purchase channels already exist as shared infrastructure, that release builds on the model rather than reopening it.</p>
-  </div>
-</div>
+    <section class="section">
+      <h2 class="section-label">What's next</h2>
+      <div class="section-body">
+        <p class="body-text">The full surface mapping didn't just shape the design — it shaped the roadmap. With every affected area visible, my PM and I deliberately scoped the highest-impact, most-needed work into the first release. From there we planned M1 as a fast follow, extending multi-party purchases into the contract and invoice layers. Because purchase channels already exist as shared infrastructure, that release builds on the model rather than reopening it.</p>
+      </div>
+    </section>
 
-<!-- ── WHAT I LEARNED ── -->
-<div class="section fade">
-  <div class="section-left">
-    <h2 class="section-label">What I learned</h2>
+    <section class="section">
+      <h2 class="section-label">What I learned</h2>
+      <div class="section-body">
+        <p class="body-text">When work spans this many surfaces, it's easy for a detail to slip through the cracks. The job became being the person who could see the whole system while everyone else was heads-down on their piece — and making enough of the right calls early, on scope, on sequencing, on the intake question, that the teams around me could move fast without fragmenting the experience.</p>
+        <p class="body-text">That's the difference between shipping a feature and establishing a foundation: the model we defined here is what Zip's upmarket strategy keeps building on.</p>
+      </div>
+    </section>
   </div>
-  <div class="section-right">
-    <p class="body-text">When work spans this many surfaces, it's easy for a detail to slip through the cracks. The job became being the person who could see the whole system while everyone else was heads-down on their piece — and making enough of the right calls early, on scope, on sequencing, on the intake question, that the teams around me could move fast without fragmenting the experience.</p>
-    <p class="body-text">That's the difference between shipping a feature and establishing a foundation: the model we defined here is what Zip's upmarket strategy keeps building on.</p>
-  </div>
+
 </div>
 
 </main>
@@ -651,10 +475,26 @@
 </footer>
 
 <script>
+  // Fade-in on scroll
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+  // Tabbed carousels
+  document.querySelectorAll('.tabs').forEach(tablist => {
+    const tabs = Array.from(tablist.querySelectorAll('.tab'));
+    const panels = Array.from(tablist.parentElement.querySelectorAll('.tab-panel'));
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
+        panels.forEach(p => { p.classList.remove('is-active'); p.hidden = true; });
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-selected', 'true');
+        if (panels[i]) { panels[i].classList.add('is-active'); panels[i].hidden = false; }
+      });
+    });
+  });
 </script>
 </body>
 </html>

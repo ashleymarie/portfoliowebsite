@@ -34,12 +34,44 @@
     font-weight: 300;
   }
 
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1rem var(--pad);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
   .logo-lockup {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 2rem var(--pad) 0;
+    padding: 0;
   }
+
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: 2.25rem;
+  }
+
+  .header-nav a {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+
+  .header-nav a:hover { opacity: 1; }
 
   .logo-mark {
     display: block;
@@ -58,7 +90,11 @@
   }
 
   .hero {
-    padding: 4rem var(--pad) 80px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem var(--pad) 80px;
   }
 
   .hero-intro {
@@ -235,7 +271,8 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     padding: 0 var(--pad) 3rem;
-    margin-top: -1rem;
+    margin-top: 0;
+    scroll-margin-top: 96px;
   }
 
   .carousel-track-wrap::-webkit-scrollbar { display: none; }
@@ -386,11 +423,13 @@
 
   @media (max-width: 640px) {
     :root { --pad: 1.5rem; }
-    .hero { padding-top: 100px; }
+    .hero { padding-top: 96px; }
     .logo-mark { width: 40px; height: 40px; }
     .logo-name { font-size: 0.95rem; }
+    .site-header { gap: 1rem; padding: 0.85rem var(--pad); }
+    .header-nav { gap: 1.1rem; }
+    .header-nav a { font-size: 0.68rem; letter-spacing: 0.1em; }
     .case-metrics-row { gap: 1.5rem; }
-    footer { gap: 2rem; }
   }
 </style>
 <noscript><style>.fade { opacity: 1; transform: none; }</style></noscript>
@@ -398,6 +437,7 @@
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
 
+<header class="site-header">
 <div class="logo-lockup">
 <svg class="logo-mark" viewBox="0 0 255 255" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none">
   <path style="fill:none;stroke:#ffffff;stroke-miterlimit:10;" d="M90.2,120.3l1.4,0.3c1.1,0.2,2.1,0.5,3.1,0.9c1.2,0.5,2.4,1.1,3.6,1.8c0,0,12.4,8.4,4.7,14.4
@@ -416,16 +456,21 @@
 </svg>
   <span class="logo-name">Ashley Marie Quinn</span>
 </div>
+  <nav class="header-nav" aria-label="Primary">
+    <a href="mailto:hello@ashleymariequinn.com">Email</a>
+    <a href="https://www.linkedin.com/in/ashley-marie-quinn/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://cdn.prod.website-files.com/602b353625c89c0f7174454f/69cc0545c92c8b806f8bc15e_AshleyQuinn_Resume_2026.pdf" target="_blank" rel="noopener">Resume</a>
+  </nav>
+</header>
 
 <div class="hero fade" id="main">
   <p class="hero-intro">Designer focused on strategy and systems. I thrive on complexity.</p>
   <div class="hero-links">
-    <a href="mailto:hello@ashleymariequinn.com" class="hero-link">Get in touch</a>
-    <a href="https://cdn.prod.website-files.com/602b353625c89c0f7174454f/69cc0545c92c8b806f8bc15e_AshleyQuinn_Resume_2026.pdf" target="_blank" rel="noopener" class="hero-link">View my resume</a>
+    <a href="#work" class="hero-link">View recent work</a>
   </div>
 </div>
 
-<div class="carousel-track-wrap">
+<div class="carousel-track-wrap" id="work">
   <div class="carousel-track">
 
     <a href="zip-supplier-relationships.html" class="card">
@@ -490,12 +535,6 @@
     </div>
   </div>
 </div>
-
-<footer class="fade">
-  <a href="mailto:hello@ashleymariequinn.com">Email</a>
-  <a href="https://www.linkedin.com/in/ashley-marie-quinn/" target="_blank" rel="noopener">LinkedIn</a>
-  <a href="https://cdn.prod.website-files.com/602b353625c89c0f7174454f/69cc0545c92c8b806f8bc15e_AshleyQuinn_Resume_2026.pdf" target="_blank" rel="noopener">Resume</a>
-</footer>
 
 <script>
   const obs = new IntersectionObserver(entries => {
