@@ -456,9 +456,9 @@
 <!-- ── PAGE HERO ── -->
 <main id="main">
 <div class="page-hero fade">
-  <div class="page-meta">Zip · Design Lead · 2024–Present</div>
+  <div class="page-meta">Zip · Design Lead · Jan 2026 – March 2026</div>
   <h1 class="page-title">Supplier Relationships at Enterprise Scale</h1>
-  <p class="page-summary">Zip's supplier model was built for simplicity — one request, one vendor. As Zip moved upmarket, that model broke under the weight of real enterprise complexity. I drove this initiative end-to-end as the sole designer, spanning five product teams and seven surfaces.</p>
+  <p class="page-summary">Zip's request model assumed every purchase was simple: one team, one vendor, one payment. As Zip moved upmarket, that assumption became its #1 customer pain — and I led the redesign that fixed it, end-to-end across five product teams and seven surfaces.</p>
 </div>
 
 <!-- ── HERO IMAGE — immediately below title ── -->
@@ -467,52 +467,99 @@
   <span class="ph-hint">Recommended: 2400 × 1030px — a wide composite of the key screens</span>
 </div>
 
+<!-- ── BACKGROUND ── -->
+<div class="section fade">
+  <div class="section-left">
+    <h2 class="section-label">Background</h2>
+  </div>
+  <div class="section-right">
+    <p class="body-text">Zip is a procurement orchestration platform: the system companies use to request, approve, and pay for everything they buy, giving procurement and finance teams a single place to manage suppliers, spend, and budgets. One construct shaped that system from the start: <strong>one request = one supplier = one payment</strong>. That simplicity is what made Zip fast to adopt, but it carried a hidden assumption — that the supplier on the request is always the supplier who gets paid.</p>
+    <p class="body-text">As Zip moved upmarket, that assumption broke. The clearest case was software bought through a <strong>reseller</strong>, where the vendor a team contracts with often isn't the vendor that's ultimately paid. The same shape showed up everywhere once we looked, from agencies working through contractors to OEMs working through suppliers. A request was still tied to a single supplier, but <em>who gets requested</em> and <em>who gets paid</em> were increasingly two different things. It became Zip's #1 customer pain.</p>
+  </div>
+</div>
+
+<!-- ── MY ROLE ── -->
+<div class="section fade">
+  <div class="section-left">
+    <h2 class="section-label">My role</h2>
+  </div>
+  <div class="section-right">
+    <p class="body-text">As design lead for the Supplier team, I drove this initiative end-to-end, from defining the problem space with customers and leadership through to launch. My goal wasn't just to support these relationships, but to make sure the expanded capability was considered across the <em>entire</em> supplier lifecycle and every surface it touched.</p>
+    <p class="body-text">Because vendor relationships reach nearly every part of the product, the work extended well beyond my own team. I was hands-on designing solutions across multiple product areas at once and coordinating closely with the teams that own them so that every change fit their surface and the direction they were already heading. The hardest part was the breadth it demanded: understanding the entire product deeply enough to trace how multi-party purchases would ripple into each area, and getting ahead of those impacts before they became gaps.</p>
+  </div>
+</div>
+
 <!-- ── THE PROBLEM ── -->
 <div class="section fade">
   <div class="section-left">
     <h2 class="section-label">The problem</h2>
   </div>
   <div class="section-right">
-    <p class="body-text">Large enterprise customers operate with intricate vendor hierarchies: parent-child relationships, resellers, OEMs, contractor-agency structures, and multiple ERP-mapped supplier sites. Every customer has a distinct ERP setup — Oracle, SAP, and others — and how they ingest vendors directly shapes how relationships need to be modeled in Zip.</p>
-    <p class="body-text">The business signals were unambiguous: lost deals, churn risk from existing enterprise customers hitting hard limits, and rising support volume around vendor management.</p>
+    <p class="body-text">Large enterprise customers operate with intricate vendor hierarchies — parent-child relationships, resellers, OEMs, contractor-agency structures, and multiple ERP-mapped supplier sites. Every customer also runs a distinct ERP setup (Oracle, SAP, and others), and how they ingest vendors on their side directly shapes how relationships need to be modeled in Zip.</p>
+    <p class="body-text">The business signals were unambiguous: lost deals, churn risk from enterprise customers hitting hard limits, and rising support volume around vendor management.</p>
+    <p class="body-text">Underneath the business case was a design tension. These new relationships added complexity to a system that was already dense. The real challenge wasn't just <em>supporting</em> them — it was doing so while keeping the experience light, intuitive, and even delightful.</p>
     <div class="callout">Teams I worked across: Procurement Product Group · Requester Team · Approvals Team · Contract Orchestration · Advanced Payments</div>
   </div>
 </div>
 
-<!-- ── SPLIT: My role — text left, image right ── -->
-<div class="split-row fade">
-  <div class="split-text">
-    <div class="split-label">My role</div>
-    <h3 class="split-title">Staff-level design across an entire product ecosystem</h3>
-    <p class="split-body">I drove this initiative end-to-end as the sole designer — from defining the problem space with customers and leadership through to launch. What made this Staff-level wasn't just the design complexity, it was the organizational scope. Vendor relationships touch nearly every surface in the product, which meant designing alongside four separate product teams simultaneously, ensuring what each team shipped connected into one coherent experience.</p>
+<!-- ── PROBLEM DIAGRAM ── -->
+<div class="full-image-wrap fade">
+  <div class="full-image">
+    <span class="ph-label">Diagram</span>
+    <span class="ph-hint">Vendor-hierarchy complexity — parent-child, reseller, OEM, contractor-agency, ERP supplier sites</span>
   </div>
-  <div class="split-image">
-    <span class="ph-label">Process image</span>
-    <span class="ph-hint">e.g. surface mapping diagram</span>
-  </div>
+  <div class="img-caption">Enterprise vendor relationships rarely map one-to-one.</div>
 </div>
 
-<!-- ── SPLIT: Approach — image left, text right ── -->
-<div class="split-row flip fade">
+<!-- ── APPROACH 1: Mapping — text left, image right ── -->
+<div class="split-row fade">
   <div class="split-text">
     <div class="split-label">Approach</div>
     <h3 class="split-title">Mapping the system before designing any of it</h3>
-    <p class="split-body">Rather than diving into design, I started by mapping every product surface that vendor relationships touched. This cross-team map became the shared foundation all five teams aligned around — without it, each team would have solved their piece in isolation and shipped a fragmented experience.</p>
-    <p class="split-body">I also advocated early for an AI-powered intake question. Engineering pushed back on M0 scope; I held the position as customer evidence kept building. We ultimately designed and shipped it integrated with the Requester team's new AI capabilities.</p>
+    <p class="split-body">Rather than diving into screens, I started by mapping every product surface vendor relationships touched — vendor records, request creation, approvals, invoice and document management, supplier sites, and spend insights. That map became the shared foundation all five teams aligned around; without it, each team would have solved its slice in isolation and we'd have shipped a fragmented experience.</p>
+    <p class="split-body">I acted as the connective thread across them — designing alongside the Advanced Payments, Approvals, Contract Orchestration, and Requester teams as a peer, keeping every decision tied back to the same underlying model and experience vision.</p>
   </div>
   <div class="split-image">
-    <span class="ph-label">Process image</span>
-    <span class="ph-hint">e.g. early explorations / whiteboard</span>
+    <span class="ph-label">Process artifact</span>
+    <span class="ph-hint">The cross-team surface map</span>
   </div>
 </div>
 
-<!-- ── FULL-WIDTH IMAGE — overview of the solution ── -->
+<!-- ── APPROACH 2: Model — image left, text right ── -->
+<div class="split-row flip fade">
+  <div class="split-text">
+    <div class="split-label">Approach</div>
+    <h3 class="split-title">Defining the model: purchase channels</h3>
+    <p class="split-body">Everyone pointed to the same example — the reseller — but reseller was only one shape of a broader pattern. Designing for "resellers" would have shipped a narrow, one-off feature, so before touching any surface I worked with my PM to define the shared language the whole effort would build on. I introduced <strong>purchase channels</strong> as the connecting concept: a single way to describe any arrangement where the vendor being <em>requested</em> differs from the vendor being <em>paid</em> — one model that could absorb resellers, OEMs, agencies, and structures we hadn't mapped yet.</p>
+    <p class="split-body">From there, the <strong>vendor relationship taxonomy</strong> — parent-child, reseller-OEM, contractor-agency — was deliberately mapped to how customers' ERPs actually represent vendors, so the model would survive contact with real enterprise data rather than just demo cleanly.</p>
+  </div>
+  <div class="split-image">
+    <span class="ph-label">Diagram</span>
+    <span class="ph-hint">The purchase-channels model / taxonomy</span>
+  </div>
+</div>
+
+<!-- ── APPROACH 3: Intake — text left, image right ── -->
+<div class="split-row fade">
+  <div class="split-text">
+    <div class="split-label">Approach</div>
+    <h3 class="split-title">Advocating for AI-powered intake</h3>
+    <p class="split-body">Early research suggested requesters often know up front whether they're in a reseller situation — but only about half the time. I proposed surfacing an intake question at the very start of the request anyway. Engineering pushed back on M0 scope and product deferred; I held the position as customer evidence kept building.</p>
+    <p class="split-body">The unlock was pairing the question with the Requester team's new AI capabilities — so instead of depending on the requester to always know, the system could infer the channel from context. That made the flow intuitive for the half who didn't know, and effortless for everyone else.</p>
+  </div>
+  <div class="split-image">
+    <span class="ph-label">Product screen</span>
+    <span class="ph-hint">AI-powered intake in the request flow</span>
+  </div>
+</div>
+
+<!-- ── FULL-WIDTH TRANSITION IMAGE ── -->
 <div class="full-image-wrap fade">
   <div class="full-image">
     <span class="ph-label">Full-width image</span>
-    <span class="ph-hint">e.g. final designs overview composite — Recommended: 2160 × 945px</span>
+    <span class="ph-hint">The connected system — vendor record, request model, supplier sites, and AI intake — Recommended: 2160 × 945px</span>
   </div>
-  <div class="img-caption">The connected system — vendor record, request model, supplier sites, and AI-powered intake working as one.</div>
+  <div class="img-caption">One coherent, enterprise-ready experience.</div>
 </div>
 
 <!-- ── WHAT WE SHIPPED ── -->
@@ -521,45 +568,33 @@
     <h2 class="section-label">What we shipped</h2>
   </div>
   <div class="section-right">
-  <p class="body-text">A connected system of changes across the procurement experience, spanning five product teams and seven product surfaces.</p>
+  <p class="body-text">A connected system of product changes across the procurement experience, spanning five product teams and seven surfaces. The model and taxonomy that made them possible are covered in the approach above — here's what shipped.</p>
   <div class="shipped-grid">
     <div class="shipped-item">
-      <div class="shipped-title">Vendor relationship taxonomy</div>
-      <p class="shipped-desc">A new model supporting parent-child, reseller-OEM, and contractor-agency structures — the foundational layer everything else built on.</p>
-    </div>
-    <div class="shipped-item">
       <div class="shipped-partner">Partners: Approvals team</div>
-      <div class="shipped-title">Redesigned request details</div>
-      <p class="shipped-desc">Updated to reflect the new relationship model, ensuring approvers have the right context at the right moment.</p>
-    </div>
-    <div class="shipped-item">
-      <div class="shipped-title">Redesigned vendor record</div>
-      <p class="shipped-desc">Evolved to surface relationship complexity clearly — showing spend in context of how users actually interact with a vendor and its subsidiaries.</p>
-    </div>
-    <div class="shipped-item">
-      <div class="shipped-partner">Partners: Contract Orchestration, Approvals</div>
-      <div class="shipped-title">Document management</div>
-      <p class="shipped-desc">Updated to reflect the new relationship model, ensuring the right documents surface in the right context across the vendor hierarchy.</p>
-    </div>
-    <div class="shipped-item">
-      <div class="shipped-title">Expanded request model + supplier sites</div>
-      <p class="shipped-desc">Moved from one request → one vendor to supporting reseller relationships and multiple supplier sites. Critical for Oracle ERP customers routing payments to the correct subsidiary.</p>
+      <div class="shipped-title">RDP rejuvenation — redesigned request details</div>
+      <p class="shipped-desc">A ground-up rejuvenation of the request details page, updated to reflect the new relationship model so approvers have the right context at the right moment.</p>
     </div>
     <div class="shipped-item">
       <div class="shipped-partner">Partners: Requester team</div>
       <div class="shipped-title">AI-powered intake</div>
-      <p class="shipped-desc">Surfaces reseller recommendations at intake based on committed spend, purchase history, and vendor category knowledge — native to the experience, not added on.</p>
+      <p class="shipped-desc">Surfaces purchase-channel recommendations at intake based on committed spend, purchase history, and vendor category knowledge — native to the request flow rather than bolted on.</p>
+    </div>
+    <div class="shipped-item">
+      <div class="shipped-partner">Partners: Advanced Payments</div>
+      <div class="shipped-title">Supplier relationships at every object</div>
+      <p class="shipped-desc">Introduced supplier relationships not just on the vendor record, but at the PO and invoice level too — so users see spend in the context of how they actually transact with a vendor and its subsidiaries.</p>
     </div>
   </div>
   </div>
 </div>
 
-<!-- ── IMAGE PAIR — two key screens ── -->
+<!-- ── IMAGE PAIR — key screens ── -->
 <div class="pair-wrap fade">
   <div class="img-pair">
     <div class="img-half">
       <span class="ph-label">Screen image</span>
-      <span class="ph-hint">e.g. vendor record</span>
+      <span class="ph-hint">e.g. redesigned vendor record</span>
     </div>
     <div class="img-half">
       <span class="ph-label">Screen image</span>
@@ -567,26 +602,33 @@
     </div>
   </div>
   <div class="pair-captions">
-    <span>Redesigned vendor record surfaces relationship complexity and spend context</span>
-    <span>AI-powered intake recommends reseller relationships at the point of request</span>
+    <span>Relationship context surfaced on the vendor record, PO, and invoice</span>
+    <span>AI-powered intake recommends the purchase channel at the point of request</span>
   </div>
 </div>
 
-<!-- ── SPLIT: Outcomes — text left, image right ── -->
-<div class="split-row fade">
-  <div class="split-text">
-    <div class="split-label">Outcomes</div>
-    <h3 class="split-title">From demo-ready to deployment-ready</h3>
-    <p class="split-body">This work moved Zip from a product that could demo enterprise procurement to one that could actually support it at scale — unlocking deals and expansions that weren't possible before.</p>
-    <div class="outcomes" style="margin-top: 1.5rem;">
-      <div class="outcome">Unlocked enterprise deals and expansions including initial deployment with a major enterprise customer</div>
-      <div class="outcome">Design coherence across 5 teams and 7 surfaces — without hierarchical authority over any of them</div>
-      <div class="outcome">Established the vendor relationship foundation that Zip's entire upmarket strategy builds on</div>
-    </div>
+<!-- ── OUTCOMES ── -->
+<div class="section fade">
+  <div class="section-left">
+    <h2 class="section-label">Outcomes</h2>
   </div>
-  <div class="split-image">
-    <span class="ph-label">Screen image</span>
-    <span class="ph-hint">e.g. supplier sites or request model</span>
+  <div class="section-right">
+  <p class="body-text">This work moved Zip from a product that could demo enterprise procurement to one that could actually support it at scale — directly unlocking deals and expansions that weren't possible before.</p>
+  <div class="outcomes">
+    <div class="outcome">Unlocked enterprise deals and expansions, including initial deployment with a major enterprise customer</div>
+    <div class="outcome">Design coherence maintained across 5 product teams and 7 surfaces simultaneously — without hierarchical authority over any of them</div>
+    <div class="outcome">Established the vendor relationship foundation that Zip's entire upmarket strategy now builds on</div>
+  </div>
+  </div>
+</div>
+
+<!-- ── WHAT'S NEXT ── -->
+<div class="section fade">
+  <div class="section-left">
+    <h2 class="section-label">What's next</h2>
+  </div>
+  <div class="section-right">
+    <p class="body-text">The full surface mapping didn't just shape the design — it shaped the roadmap. With every affected area visible, my PM and I deliberately scoped the highest-impact, most-needed work into the first release. From there we planned M1 as a fast follow, extending multi-party purchases into the contract and invoice layers. Because purchase channels already exist as shared infrastructure, that release builds on the model rather than reopening it.</p>
   </div>
 </div>
 
@@ -596,7 +638,8 @@
     <h2 class="section-label">What I learned</h2>
   </div>
   <div class="section-right">
-    <p class="body-text">The hardest part of Staff-level design isn't the design itself — it's maintaining a coherent vision across teams that each have their own priorities, timelines, and constraints. On this project that meant being the person who could see the whole system when everyone else was heads-down on their piece, and making enough of the right calls early — on scope, on sequencing, on the intake question — that teams around me could move fast without fragmenting the experience.</p>
+    <p class="body-text">When work spans this many surfaces, it's easy for a detail to slip through the cracks. The job became being the person who could see the whole system while everyone else was heads-down on their piece — and making enough of the right calls early, on scope, on sequencing, on the intake question, that the teams around me could move fast without fragmenting the experience.</p>
+    <p class="body-text">That's the difference between shipping a feature and establishing a foundation: the model we defined here is what Zip's upmarket strategy keeps building on.</p>
   </div>
 </div>
 
